@@ -2,11 +2,11 @@
 
 ## Content
 
-- [Archlinux](/archlinux)
-- [DNS](/dns)
-- [**P**luggable **A**uthentication **M**odule](/pam)
-- [Raspberry Pi](/raspberrypi)
-- [Talks](/talks)
+- [Archlinux](/archlinux.md)
+- [DNS](/dns.md)
+- [**P**luggable **A**uthentication **M**odule](/pam.md)
+- [Raspberry Pi](/raspberrypi.md)
+- [Talks](/talks.md)
 
 ## ToDo
 
