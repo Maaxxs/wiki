@@ -16,11 +16,12 @@
       - [Generate Grub configuration](#generate-grub-configuration)
     - [Systemd Boot on UEFI systems](#systemd-boot-on-uefi-systems)
       - [Install](#install-1)
-      - [Create boot entries - configurations](#create-boot-entries---configurations)
+      - [Create boot entries and the loader configuration](#create-boot-entries-and-the-loader-configuration)
   - [Exit and Reboot](#exit-and-reboot)
   - [Check internet connection](#check-internet-connection)
   - [Install basic services](#install-basic-services)
   - [Video Driver](#video-driver)
+    - [Intel](#intel)
     - [Nvidia](#nvidia)
     - [Open Source Nvidia Driver Nouveau](#open-source-nvidia-driver-nouveau)
     - [Virtualbox](#virtualbox)
@@ -242,7 +243,7 @@ pacman -S efibootmgr dosfstools gptfdisk
 bootctl install
 ```
 
-##### Create boot entries - configurations 
+##### Create boot entries and the loader configuration
 
 The options line:
 ```
@@ -331,6 +332,12 @@ date
 ```
 
 ### Video Driver
+
+#### Intel
+
+```
+pacman -S xf86-video-intel
+```
 
 #### Nvidia
 
