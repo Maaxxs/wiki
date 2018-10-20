@@ -1,9 +1,70 @@
 # Archlinux
 
-## Content
-
 - [Install Archlinux](#install-archlinux)
+  - [Create filesystem](#create-filesystem)
+  - [Mount all partitions](#mount-all-partitions)
+  - [Install Base system](#install-base-system)
+  - [Generate File system Table](#generate-file-system-table)
+  - [Enter your system](#enter-your-system)
+  - [Set some basic stuff](#set-some-basic-stuff)
+  - [Add a user](#add-a-user)
+  - [Allow members of group wheel to gain root priviliges](#allow-members-of-group-wheel-to-gain-root-priviliges)
+  - [Edit and generate the locales](#edit-and-generate-the-locales)
+  - [Bootloader](#bootloader)
+    - [Grub on BIOS - Legacy systems](#grub-on-bios---legacy-systems)
+      - [Install](#install)
+      - [Generate Grub configuration](#generate-grub-configuration)
+    - [Systemd Boot on UEFI systems](#systemd-boot-on-uefi-systems)
+      - [Install](#install-1)
+      - [Create boot entries - configurations](#create-boot-entries---configurations)
+  - [Exit and Reboot](#exit-and-reboot)
+  - [Check internet connection](#check-internet-connection)
+  - [Install basic services](#install-basic-services)
+  - [Video Driver](#video-driver)
+    - [Nvidia](#nvidia)
+    - [Open Source Nvidia Driver Nouveau](#open-source-nvidia-driver-nouveau)
+    - [Virtualbox](#virtualbox)
+  - [Install XFCE4 as Desktop](#install-xfce4-as-desktop)
+  - [Reboot](#reboot)
+- [Archlinux Tweaks](#archlinux-tweaks)
+  - [i3 as Desktop](#i3-as-desktop)
+  - [Keyboard](#keyboard)
+  - [Install AUR Helper Trizen](#install-aur-helper-trizen)
+  - [Themes, Icons, Fonts](#themes-icons-fonts)
+    - [Official Repo Themes](#official-repo-themes)
+    - [AUR Themes](#aur-themes)
+  - [Steam](#steam)
+  - [XFCE Logout](#xfce-logout)
+  - [Add custom fonts](#add-custom-fonts)
+  - [Grub Customization](#grub-customization)
+  - [LightDM GTK Greeter Configuration](#lightdm-gtk-greeter-configuration)
+  - [SSD Trim](#ssd-trim)
+  - [No f*cking beep](#no-fcking-beep)
+  - [Don't save session on Exit](#dont-save-session-on-exit)
+  - [FireFox Fix GTK dark Theme](#firefox-fix-gtk-dark-theme)
+  - [FireFox Default Zoom Level](#firefox-default-zoom-level)
+  - [Pacman Commands](#pacman-commands)
+  - [Gitg to English](#gitg-to-english)
+  - [Telegram](#telegram)
+  - [Use all cores when compressing](#use-all-cores-when-compressing)
+  - [Powerline Bash](#powerline-bash)
+  - [Compton Start on all screens](#compton-start-on-all-screens)
+  - [Grep](#grep)
+  - [Redshift Bug with Geoclue](#redshift-bug-with-geoclue)
+  - [Laptop change brightness in smaller steps](#laptop-change-brightness-in-smaller-steps)
+- [Programs](#programs)
+  - [Official Repo Programs](#official-repo-programs)
+  - [AUR Programs](#aur-programs)
+- [Visual Studio Code (vscode)](#visual-studio-code-vscode)
+  - [Autocomplete for GOject (Gtk, Gio, Gdk, ...)](#autocomplete-for-goject-gtk-gio-gdk)
+  - [Markdown PDF Extension](#markdown-pdf-extension)
 - [Pacman Hooks](#pacman-hooks)
+  - [Auszug aus dem Manual zu alpm Hooks (oben verlinkt)](#auszug-aus-dem-manual-zu-alpm-hooks-oben-verlinkt)
+  - [Example](#example)
+- [Security](#security)
+  - [Umask](#umask)
+  - [Programs for Security](#programs-for-security)
+  - [Firewall](#firewall)
 
 ## Install Archlinux
 
@@ -24,10 +85,9 @@ Partition your drive. Assumend drive throughout is `/dev/sda`
 
 ```
 fdisk /dev/sda
-
-
-
 ```
+
+[TODO]: Refactor-that-stuff
 
 - BIOS – Legacy – DOS  
 o --> dos table  
@@ -764,4 +824,6 @@ change umask in `/etc/profile` to
 TODO: Get some configuration here.
 
 - nftables
-- iptables 
+- iptables
+
+

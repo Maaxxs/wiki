@@ -2,7 +2,7 @@
 
 ## Content
 
-- [Reconnect to WiFi and start SSH after installing](#wifi-and-ssh)
+- [Connect to WiFi and start SSH after installing](#wifi-and-ssh)
 
 ### WiFi and SSH
 
