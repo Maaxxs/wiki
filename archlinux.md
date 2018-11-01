@@ -667,6 +667,12 @@ Alt+Shift+< = light -S 1
 pacman -S arduino arduino-avr-core
 ```
 
+### Install XFCE4 Dev Dependencies
+
+```
+pacman -S xfce4-dev-tools
+```
+
 ## Programs
 
 ### Official Repo Programs
