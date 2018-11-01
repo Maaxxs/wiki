@@ -31,6 +31,7 @@
   - [i3 as Desktop](#i3-as-desktop)
   - [Keyboard](#keyboard)
   - [Install AUR Helper Trizen](#install-aur-helper-trizen)
+  - [Printer Configuration](#printer-configuration)
   - [Themes, Icons, Fonts](#themes-icons-fonts)
     - [Official Repo Themes](#official-repo-themes)
     - [AUR Themes](#aur-themes)
@@ -53,6 +54,7 @@
   - [Grep](#grep)
   - [Redshift Bug with Geoclue](#redshift-bug-with-geoclue)
   - [Laptop change brightness in smaller steps](#laptop-change-brightness-in-smaller-steps)
+  - [Install Arduino](#install-arduino)
 - [Programs](#programs)
   - [Official Repo Programs](#official-repo-programs)
   - [AUR Programs](#aur-programs)
@@ -198,6 +200,7 @@ passwd
 ```
 
 ### Allow members of group wheel to gain root priviliges
+
 ```
 EDITOR=nano visudo
 
@@ -206,6 +209,7 @@ EDITOR=nano visudo
 ```
 
 ### Edit and generate the locales
+
 ```
 # eg: remove '#' in front of all 'de_DE' or 'en_US' entries
 nano /etc/locale.gen
@@ -428,6 +432,15 @@ makepkg -rsi
 cd .. && rm -rf trizen/
 ```
 
+### Printer Configuration
+
+```
+pacman -S system-config-printer cups-pk-helper
+```
+
+Everything else can be managed by the GUI Printer Settings
+
+
 ### Themes, Icons, Fonts
 
 Good to install, needed by a lot of packages: `gtk-engine-murrine`
@@ -636,15 +649,22 @@ users=
 
 ```
 trizen -S light
+
 ```
 
-Exampel configuration
+Exampel configuration as keyboard shortcuts
 
 ```
 Alt+. = light -U 5
 Alt+, = light -A 5
 Alt+Shift+> = light -S 100
 Alt+Shift+< = light -S 1
+```
+
+### Install Arduino
+
+```
+pacman -S arduino arduino-avr-core
 ```
 
 ## Programs
@@ -657,10 +677,10 @@ firefox firefox-i18n-de
 qt4 vlc
 libreoffice-fresh libreoffice-fresh-de   hunspell-de
 thunderbird thunderbird-i18n-de
-catfish 
+catfish
 gvfs ntfs-3g gvfs-smb gvfs-mtp gvfs-nfs gvfs-gphoto2 sshfs
 openconnect networkmanager-openconnect
-wget 
+wget
 git
 gparted dosfstools
 most
@@ -743,6 +763,7 @@ vim-gruvbox-git
 
 (Python!) [Github Fakegir](https://github.com/strycore/fakegir)  
 in VS Code Settings:
+
 ```
     "python.autoComplete.extraPaths": [
         "/home/max/.cache/fakegir/"
