@@ -57,6 +57,7 @@
   - [Install Arduino](#install-arduino)
   - [Install XFCE4 Dev Dependencies](#install-xfce4-dev-dependencies)
   - [Patch the awesome Hack Font](#patch-the-awesome-hack-font)
+  - [NeoVim fuzzy search](#neovim-fuzzy-search)
 - [Programs](#programs)
   - [Official Repo Programs](#official-repo-programs)
   - [AUR Programs](#aur-programs)
@@ -681,6 +682,22 @@ See [Github Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 
 ```
 trizen -S nerd-fonts-hack
+```
+
+### NeoVim fuzzy search
+
+Use [fzf](https://github.com/junegunn/fzf)
+To use `:Ag` install
+
+```
+pacman -S the_silver_searcher
+```
+
+Coresponding part in `init.vim`
+
+```
+Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+Plug 'junegunn/fzf.vim'
 ```
 
 ## Programs
