@@ -673,6 +673,14 @@ pacman -S arduino arduino-avr-core
 pacman -S xfce4-dev-tools
 ```
 
+### Patch the awesome Hack Font
+
+See [Github Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+
+```
+trizen -S nerd-fonts-hack
+```
+
 ## Programs
 
 ### Official Repo Programs
