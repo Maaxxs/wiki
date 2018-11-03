@@ -55,6 +55,8 @@
   - [Redshift Bug with Geoclue](#redshift-bug-with-geoclue)
   - [Laptop change brightness in smaller steps](#laptop-change-brightness-in-smaller-steps)
   - [Install Arduino](#install-arduino)
+  - [Install XFCE4 Dev Dependencies](#install-xfce4-dev-dependencies)
+  - [Patch the awesome Hack Font](#patch-the-awesome-hack-font)
 - [Programs](#programs)
   - [Official Repo Programs](#official-repo-programs)
   - [AUR Programs](#aur-programs)
