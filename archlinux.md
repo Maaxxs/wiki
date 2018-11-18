@@ -58,6 +58,10 @@
   - [Install XFCE4 Dev Dependencies](#install-xfce4-dev-dependencies)
   - [Patch the awesome Hack Font](#patch-the-awesome-hack-font)
   - [NeoVim fuzzy search](#neovim-fuzzy-search)
+  - [Firefox Customization](#firefox-customization)
+    - [Good Scrolling with Touchpads](#good-scrolling-with-touchpads)
+    - [about:config](#aboutconfig)
+    - [No Titlebar](#no-titlebar)
 - [Programs](#programs)
   - [Official Repo Programs](#official-repo-programs)
   - [AUR Programs](#aur-programs)
@@ -699,6 +703,22 @@ Coresponding part in `init.vim`
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 ```
+
+### Firefox Customization
+
+#### Good Scrolling with Touchpads
+
+Add this environment variable `env MOZ_USE_XINPUT2=1` to disable the conversion
+from touchpad to mousewheel movement.  
+
+#### about:config
+
+`layers.acceleration.force-enabled` -> True. (enable OpenGL based compositing which for smooth scrolling)  
+`layers.omtp.enabled` -> True  further improve performance for scrolling
+
+#### No Titlebar
+
+Main menu -> Customize -> Uncheck 'Title Bar' Box in the bottom left corner.
 
 ## Programs
 
