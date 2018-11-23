@@ -62,6 +62,7 @@
     - [Good Scrolling with Touchpads](#good-scrolling-with-touchpads)
     - [about:config](#aboutconfig)
     - [No Titlebar](#no-titlebar)
+  - [Wireshark](#wireshark)
 - [Programs](#programs)
   - [Official Repo Programs](#official-repo-programs)
   - [AUR Programs](#aur-programs)
@@ -719,6 +720,15 @@ from touchpad to mousewheel movement.
 #### No Titlebar
 
 Main menu -> Customize -> Uncheck 'Title Bar' Box in the bottom left corner.
+
+### Wireshark
+
+```
+pacman -S wireshark-qt
+# this file must be executable by root and users in the group wireshark
+sudo chmod root:wireshark /usr/bin/dumpcap
+useradd -aG wireshark username
+```
 
 ## Programs
 
