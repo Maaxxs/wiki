@@ -581,16 +581,28 @@ Default is -1, which respects system settings
 
 ### Pacman Commands
 
+Get all explicitly installed packages
+
+```
+pacman -Qeq
+```
+
 Get explicitly installed packages of official respository
 
 ```
-pacman -Qne | awk '{print $1}'
+pacman -Qneq
 ```
 
 Get explicitly installed packages of AUR
 
 ```
-pacman -Qme | awk '{print $1}'
+pacman -Qmeq
+```
+
+Show all Orphans
+
+```
+pacman -Qtdq
 ```
 
 ### Gitg to English
