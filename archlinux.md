@@ -63,6 +63,7 @@
     - [about:config](#aboutconfig)
     - [No Titlebar](#no-titlebar)
   - [Wireshark](#wireshark)
+  - [Powertop](#powertop)
 - [Programs](#programs)
   - [Official Repo Programs](#official-repo-programs)
   - [AUR Programs](#aur-programs)
@@ -723,12 +724,21 @@ Main menu -> Customize -> Uncheck 'Title Bar' Box in the bottom left corner.
 
 ### Wireshark
 
+Make sure, you install wireshark first and then add youself to the group
+
 ```
 pacman -S wireshark-qt
-# this file must be executable by root and users in the group wireshark
-sudo chmod root:wireshark /usr/bin/dumpcap
 useradd -aG wireshark username
 ```
+
+### Powertop
+
+```
+pacman -S powertop
+```
+
+Run with `sudo powertop` and navigate to the **Tunables** Tab.
+Set everything to **Good**.
 
 ## Programs
 
