@@ -752,6 +752,45 @@ pacman -S powertop
 Run with `sudo powertop` and navigate to the **Tunables** Tab.
 Set everything to **Good**.
 
+### Mackup
+
+Sync config files across multiple machines.
+[Github Mackup](https://github.com/lra/mackup)
+
+```
+pip3 install --user mackup
+```
+
+Config file could look like this. 
+See [Configuration](https://github.com/lra/mackup/blob/master/doc/README.md)
+
+```
+engine = file_system
+path = Mega
+directory = Mackup
+
+# Add personal files to backup here
+[configuration_files]
+
+[applications_to_ignore]
+gnupg
+```
+
+If you are using the Open Source Build of VS Code, then make sure to link the
+    config (`.config/Code - OSS`) correctly for Mackup, which is looking for 
+    `.config/Code`.
+
+```
+cd .config
+# if there is a Code folder, remove it (save you config files if you didn't
+# port them to the "Code - OSS" foler)
+
+rm -rf ./Code
+ln -s "Code - OSS" Code
+```
+
+That's it. Now Mackup is looking in "Code - OSS" for the VS Code config files.
+
 ## Programs
 
 ### Official Repo Programs
