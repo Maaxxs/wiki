@@ -64,6 +64,7 @@
     - [No Titlebar](#no-titlebar)
   - [Wireshark](#wireshark)
   - [Powertop](#powertop)
+  - [Mackup](#mackup)
 - [Programs](#programs)
   - [Official Repo Programs](#official-repo-programs)
   - [AUR Programs](#aur-programs)
@@ -73,6 +74,7 @@
 - [Pacman Hooks](#pacman-hooks)
   - [Auszug aus dem Manual zu alpm Hooks (oben verlinkt)](#auszug-aus-dem-manual-zu-alpm-hooks-oben-verlinkt)
   - [Example](#example)
+- [Hardware info](#hardware-info)
 - [Security](#security)
   - [Umask](#umask)
   - [Programs for Security](#programs-for-security)
@@ -954,6 +956,17 @@ When = PostTransaction
 Exec = /usr/bin/paccache -r
 Depends = pacman-contrib
 ```
+
+
+## Hardware info
+
+```
+sudo hwinfo --short
+sudo lshw -short
+sudo lscpu
+inxi -Fx
+```
+
 
 ## Security
 
