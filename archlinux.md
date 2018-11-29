@@ -793,6 +793,7 @@ ln -s "Code - OSS" Code
 
 That's it. Now Mackup is looking in "Code - OSS" for the VS Code config files.
 
+
 ## Programs
 
 ### Official Repo Programs
@@ -903,8 +904,6 @@ Use system chromium path
 ```
 "markdown-pdf.executablePath": "/usr/bin/chromium",
 ```
-
-
 
 
 
