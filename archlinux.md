@@ -66,6 +66,7 @@
   - [Wireshark](#wireshark)
   - [Powertop](#powertop)
   - [Mackup](#mackup)
+  - [Add OpenVPN configuration file to NetworkManager with nmcli](#add-openvpn-configuration-file-to-networkmanager-with-nmcli)
 - [Programs](#programs)
   - [Official Repo Programs](#official-repo-programs)
   - [AUR Programs](#aur-programs)
@@ -808,6 +809,45 @@ ln -s "Code - OSS" Code
 ```
 
 That's it. Now Mackup is looking in "Code - OSS" for the VS Code config files.
+
+### Add OpenVPN configuration file to NetworkManager with nmcli
+
+Import the configuration file
+
+```
+sudo nmcli connection import type openvpn file saved_config.ovpn
+```
+
+If the authentication does not work (eg. password is required, but you want to 
+save it in the file), edit the associated file in
+`/etc/NetworkManager/system-connections/`
+
+```
+[vpn]
+password-flags=0
+username=yourVPNusername
+
+[vpn-secrets]
+password=yourVPNpassword
+```
+
+Restart NetworkManager that the changes take effect.
+
+```
+sudo systemctl restart NetworkManager
+```
+
+If it still does not connect, maybe you've got a cert password?
+
+```
+[vpn]
+cert-pass-flags=0
+
+[vpn-secrets]
+cert-pass=yourCERTpassword
+```
+
+Again: Restart NetworkManager that the changes take effect.
 
 
 ## Programs
