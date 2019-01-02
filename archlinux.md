@@ -268,7 +268,6 @@ options   root=UUID=uuid-of-root resume=UUID=uuid-of-swap rw
 Append the parameter 'quiet' if you don't want to see systemd startup messages on boot
 ```
 
-Only use **one** option line!  
 
 In `/boot/loader/entries/` create following configuration files  
 Name: `arch.conf`
@@ -341,7 +340,7 @@ pacman -S acpid ntp avahi cronie cups
 systemctl enable acpid avahi-daemon cronie ntpd org.cups.cupsd.service
 
 # synchronize
-sudo ntpg -gq
+sudo ntpd -gq
 # check
 date
 ```
