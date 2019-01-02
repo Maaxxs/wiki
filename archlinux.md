@@ -18,6 +18,7 @@
       - [Install](#install-1)
       - [Create boot entries and the loader configuration](#create-boot-entries-and-the-loader-configuration)
   - [Exit and Reboot](#exit-and-reboot)
+  - [Check if you sudo into root](#check-if-you-sudo-into-root)
   - [Check internet connection](#check-internet-connection)
   - [Install basic services](#install-basic-services)
   - [Video Driver](#video-driver)
@@ -316,9 +317,22 @@ reboot
 **That's it. You installed a fully functional basic archlinux system.**  
 **Let's install a graphical environment**
 
+### Check if you sudo into root
+
+If so, you can disable root login
+
+```
+sudo -i 
+
+# if successful, do
+
+passwd -l root
+# or replace the root password hash in /etc/shadow with an '!'
+```
+
 ### Check internet connection
 
-` ping archlinux.org `  
+`ping archlinux.org`  
 If no connection is available run
 
 ```
@@ -343,6 +357,9 @@ systemctl enable acpid avahi-daemon cronie ntpd org.cups.cupsd.service
 sudo ntpd -gq
 # check
 date
+
+# Set the time in the hardware clock
+hwclock -w
 ```
 
 ### Video Driver
@@ -376,7 +393,7 @@ pacman -S virtualbox-guest-utils
 
 Install X, XFCE and LightDM
 
-``` 
+```
 pacman -S xorg-server xorg-xinit xfce4 xfce4-goodies lightdm lightdm-gtk-greeter networkmanager network-manager-applet nm-connection-editor
 
 # enable for boot
@@ -401,7 +418,7 @@ Probably needed packages
 feh [--bg-scale]
 compton
 xrandr arandr
-lxappearance 
+lxappearance
 ```
 
 ### Keyboard
@@ -437,7 +454,7 @@ Trizen will be updated by itself/pacman.
 
 ```
 git clone https://aur.archlinux.org/trizen.git
-cd trizen 
+cd trizen
 makepkg -rsi
 cd .. && rm -rf trizen/
 ```
@@ -835,6 +852,7 @@ lynis
 mathjax
 most
 ncdu
+neofetch
 p7zip
 pdfshuffler
 peda
@@ -866,7 +884,6 @@ etcher
 grub-customizer
 simple-mtpfs
 menulibre
-neofetch
 shotcut
 teamviewer
 virtualbox-ext-oracle
