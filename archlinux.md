@@ -810,6 +810,22 @@ ln -s "Code - OSS" Code
 
 That's it. Now Mackup is looking in "Code - OSS" for the VS Code config files.
 
+### Asciidoc and Asciidoctor
+
+```
+pacman -S asciidoctor asciidoc
+
+# install the pdf generator
+gem install asciidoctor-pdf --pre
+
+# install syntax highlithing support 
+gem install rouge
+```
+
+Add `~/.gem/ruby/2.6.0/bin/` to the `$PATH` variable.
+
+To use rouge as syntax highlighter, set `:source-highlighter: rouge` at the
+top of the .adoc document.
 
 ## Programs
 
