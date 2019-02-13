@@ -66,6 +66,8 @@
   - [Wireshark](#wireshark)
   - [Powertop](#powertop)
   - [Mackup](#mackup)
+  - [Add OpenVPN configuration file to NetworkManager with nmcli](#add-openvpn-configuration-file-to-networkmanager-with-nmcli)
+  - [Gestures support](#gestures-support)
 - [Programs](#programs)
   - [Official Repo Programs](#official-repo-programs)
   - [AUR Programs](#aur-programs)
@@ -269,7 +271,6 @@ options   root=UUID=uuid-of-root resume=UUID=uuid-of-swap rw
 Append the parameter 'quiet' if you don't want to see systemd startup messages on boot
 ```
 
-Only use **one** option line!  
 
 In `/boot/loader/entries/` create following configuration files  
 Name: `arch.conf`
@@ -355,7 +356,7 @@ pacman -S acpid ntp avahi cronie cups
 systemctl enable acpid avahi-daemon cronie ntpd org.cups.cupsd.service
 
 # synchronize
-sudo ntpg -gq
+sudo ntpd -gq
 # check
 date
 
@@ -810,6 +811,7 @@ ln -s "Code - OSS" Code
 
 That's it. Now Mackup is looking in "Code - OSS" for the VS Code config files.
 
+<<<<<<< HEAD
 ### Asciidoc and Asciidoctor
 
 ```
@@ -826,6 +828,82 @@ Add `~/.gem/ruby/2.6.0/bin/` to the `$PATH` variable.
 
 To use rouge as syntax highlighter, set `:source-highlighter: rouge` at the
 top of the .adoc document.
+=======
+### Add OpenVPN configuration file to NetworkManager with nmcli
+
+Import the configuration file
+
+```
+sudo nmcli connection import type openvpn file saved_config.ovpn
+```
+
+If the authentication does not work (eg. password is required, but you want to 
+save it in the file), edit the associated file in
+`/etc/NetworkManager/system-connections/`
+
+```
+[vpn]
+password-flags=0
+username=yourVPNusername
+
+[vpn-secrets]
+password=yourVPNpassword
+```
+
+Restart NetworkManager that the changes take effect.
+
+```
+sudo systemctl restart NetworkManager
+```
+
+If it still does not connect, maybe you've got a cert password?
+
+```
+[vpn]
+cert-pass-flags=0
+
+[vpn-secrets]
+cert-pass=yourCERTpassword
+```
+
+Again: Restart NetworkManager that the changes take effect.
+
+### Gestures support
+
+```
+# Add yourself to the input group. Log Out and log in that the change takes effect
+sudo gpasswd -a yourUsername input
+
+# install dependencies. xf86-input-libinput should be installed already
+pacman -S xdotool wmctrl xf86-input-libinput
+```
+
+Visit [Github Libinput Gestures](https://github.com/bulletmark/libinput-gestures) for more infos.
+
+```
+git clone https://github.com/bulletmark/libinput-gestures.git
+cd libinput-gestures
+sudo make install (or sudo ./libinput-gestures-setup install)
+```
+
+Standard configuration is in `/etc/libinput-gestures.conf`. Create your 
+user config in `~/.config/libinput-gestures.conf`. Visit the link above on 
+how to create a configuration file. It may look like:
+
+```
+gesture swipe up 3 xdotool key alt+f
+gesture swipe down 3 xdotool key ctrl+w
+gesture swipe right 3 xdotool key alt+Left
+gesture swipe left 3 xdotool key alt+Right
+gesture swipe left 4 xdotool key ctrl+super+Right
+gesture swipe right 4 xdotool key ctrl+super+Left
+gesture swipe down 4 xdotool key ctrl+alt+d
+```
+
+After you created your config or changed something, reload it with user
+permissions via `libinput-gestures-setup restart`
+
+>>>>>>> 7f5c0bb6bc949922afff33568b40115a5a3d5685
 
 ## Programs
 
