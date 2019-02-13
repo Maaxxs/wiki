@@ -811,7 +811,6 @@ ln -s "Code - OSS" Code
 
 That's it. Now Mackup is looking in "Code - OSS" for the VS Code config files.
 
-<<<<<<< HEAD
 ### Asciidoc and Asciidoctor
 
 ```
@@ -903,7 +902,6 @@ gesture swipe down 4 xdotool key ctrl+alt+d
 After you created your config or changed something, reload it with user
 permissions via `libinput-gestures-setup restart`
 
->>>>>>> 7f5c0bb6bc949922afff33568b40115a5a3d5685
 
 ## Programs
 
