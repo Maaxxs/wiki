@@ -289,6 +289,7 @@ pacman -S alsa-tools alsa-utils pulseaudio-alsa pavucontrol
 // TODO Maybe needed for X? Is it a dependency of group gnome?
   pacman -S xorg-server xorg-xinit xorg-server-xwayland
 
+
 === Reboot
 
 **Congratulations! You installed a Desktop and a Login Manager**
@@ -297,6 +298,35 @@ pacman -S alsa-tools alsa-utils pulseaudio-alsa pavucontrol
 
 // TODO The following needs to be rewritten in AsciiDoc style
 == Archlinux Tweaks
+
+=== Syslog-ng
+
+==== Installation
+
+  pacman -S syslog-ng
+
+==== Configuration
+
+.`/etc/syslog-ng/syslog-ng.conf`
+Change
+
+  filter f_everything { level(debug..emerg) and not facility(auth, authpriv); };
+
+to
+
+  filter f_everything { level(debug..emerg) and not facility(auth, authpriv) and not filter(f_iptables); };
+
+This will stop output of `iptables` to `/var/log/everything.log`
+
+=== Gnome Shell Extensions
+
+- Alternate Tab
+- NoAnnoyance
+- Dash to Dock
+- Dash to Panel
+- Clipboard Indicator
+- No topleft hot corner
+- Top Icons Plus
 
 === i3 as Desktop
 
@@ -713,7 +743,7 @@ Add `~/.gem/ruby/2.6.0/bin/` to the `$PATH` variable.
 
 To use rouge as syntax highlighter, set `:source-highlighter: rouge` at the
 top of the .adoc document.
-=======
+
 === Add OpenVPN configuration file to NetworkManager with nmcli
 
 Import the configuration file
