@@ -30,3 +30,21 @@ network={
 4. Save. Put the SD-Card into your Pi. Boot. Should connect to your WiFi.
 5. TODO: Go back to some config file `/etc/netctl|net...`. Edit that configuration
   file and remove the clear text password. It's a commented line.
+
+
+### Change username pi to max
+
+Set a root password
+
+Connect as root. In `/etc/ssh/sshd_config`
+    PermitRootLogin yes
+
+    # usermod -l max -d /home/max -m pi
+    # groupmod --new-name max pi
+
+Disable root login in `/etc/ssh/sshd_config`
+
+To disable root the root account
+
+    sudo passwd -l root
+
