@@ -5,5 +5,6 @@ Max
 link:https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3[Official
 Documentation]
 
-IMPORTANT: Download the archive for raspberry pi 3! +
-`wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz<Paste>`
+IMPORTANT: Download the archive for raspberry pi 3!
+
+  wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
