@@ -195,6 +195,7 @@ The following file is responsible to set some default settings
   default arch
   timeout 3
   editor  0
+  console-mode max
 
 === Exit and Reboot
 
