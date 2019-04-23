@@ -1,0 +1,11 @@
+= Ubuntu
+
+
+== Nextcloud
+
+At the moment Nextcloud is asking for the password after
+every login.
+
+.Connect Nextcloud to the password manager
+  snap connect nextcloud-client:password-manager-service
+
