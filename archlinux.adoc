@@ -328,6 +328,12 @@ This will stop output of `iptables` to `/var/log/everything.log`
 - Clipboard Indicator
 - No topleft hot corner
 - Top Icons Plus
+- Removable drive menu
+- Caffeine
+- Remove dropdown arrows
+- Suspend button
+- User Themes
+- Media player indicator
 
 === i3 as Desktop
 
