@@ -1,95 +1,94 @@
 # Archlinux
 
-- [Archlinux](#Archlinux)
-  - [Install Archlinux](#Install-Archlinux)
-    - [Create filesystem](#Create-filesystem)
-    - [Mount all partitions](#Mount-all-partitions)
-    - [Install Base system](#Install-Base-system)
-    - [Generate File system Table](#Generate-File-system-Table)
-    - [Enter your system](#Enter-your-system)
-    - [Set some basic stuff](#Set-some-basic-stuff)
-    - [Set the Time Zone](#Set-the-Time-Zone)
-    - [Add a user](#Add-a-user)
-    - [Allow members of group wheel to gain root priviliges](#Allow-members-of-group-wheel-to-gain-root-priviliges)
-    - [Edit and generate the locales](#Edit-and-generate-the-locales)
-    - [Bootloader](#Bootloader)
-      - [Grub on BIOS - Legacy systems](#Grub-on-BIOS---Legacy-systems)
-        - [Install](#Install)
-        - [Generate Grub configuration](#Generate-Grub-configuration)
-      - [Systemd Boot on UEFI systems](#Systemd-Boot-on-UEFI-systems)
-        - [Install](#Install-1)
-        - [Create boot entries and the loader configuration](#Create-boot-entries-and-the-loader-configuration)
-    - [Exit and Reboot](#Exit-and-Reboot)
-    - [Check if you sudo into root](#Check-if-you-sudo-into-root)
-    - [Check internet connection](#Check-internet-connection)
-    - [Install basic services](#Install-basic-services)
-    - [Video Driver](#Video-Driver)
-      - [Intel](#Intel)
-      - [Nvidia](#Nvidia)
-      - [Open Source Nvidia Driver Nouveau](#Open-Source-Nvidia-Driver-Nouveau)
-      - [Virtualbox](#Virtualbox)
-    - [Install XFCE4 as Desktop](#Install-XFCE4-as-Desktop)
-    - [GNOME](#GNOME)
-    - [Reboot](#Reboot)
-  - [Archlinux Tweaks](#Archlinux-Tweaks)
-    - [Syslog-ng](#Syslog-ng)
-      - [Installation](#Installation)
-      - [Configuration](#Configuration)
-    - [Gnome Shell Extensions](#Gnome-Shell-Extensions)
-    - [i3 as Desktop](#i3-as-Desktop)
-    - [Keyboard](#Keyboard)
-    - [Install AUR Helper Trizen](#Install-AUR-Helper-Trizen)
-    - [Printer Configuration](#Printer-Configuration)
-    - [Themes, Icons, Fonts](#Themes-Icons-Fonts)
-      - [Official Repo Themes](#Official-Repo-Themes)
-      - [AUR Themes](#AUR-Themes)
-    - [Steam](#Steam)
-    - [XFCE Logout](#XFCE-Logout)
-    - [Add custom fonts](#Add-custom-fonts)
-    - [Grub Customization](#Grub-Customization)
-    - [LightDM GTK Greeter Configuration](#LightDM-GTK-Greeter-Configuration)
-    - [SSD Trim](#SSD-Trim)
-    - [No f*cking beep](#No-fcking-beep)
-    - [Don't save session on Exit](#Dont-save-session-on-Exit)
-    - [FireFox Fix GTK dark Theme](#FireFox-Fix-GTK-dark-Theme)
-    - [FireFox Default Zoom Level](#FireFox-Default-Zoom-Level)
-    - [Pacman Commands](#Pacman-Commands)
-    - [Gitg to English](#Gitg-to-English)
-    - [Telegram](#Telegram)
-    - [Use all cores when compressing](#Use-all-cores-when-compressing)
-    - [Powerline Bash](#Powerline-Bash)
-    - [Compton Start on all screens](#Compton-Start-on-all-screens)
-    - [Grep](#Grep)
-    - [Redshift Bug with Geoclue](#Redshift-Bug-with-Geoclue)
-    - [Laptop change brightness in smaller steps](#Laptop-change-brightness-in-smaller-steps)
-    - [Install Arduino](#Install-Arduino)
-    - [Install XFCE4 Dev Dependencies](#Install-XFCE4-Dev-Dependencies)
-    - [Patch the awesome Hack Font](#Patch-the-awesome-Hack-Font)
-    - [NeoVim fuzzy search](#NeoVim-fuzzy-search)
-    - [Firefox Customization](#Firefox-Customization)
-      - [Good Scrolling with Touchpads](#Good-Scrolling-with-Touchpads)
-      - [about:config](#aboutconfig)
-      - [No Titlebar](#No-Titlebar)
-    - [Wireshark](#Wireshark)
-    - [Powertop](#Powertop)
-    - [Mackup](#Mackup)
-    - [Asciidoc and Asciidoctor](#Asciidoc-and-Asciidoctor)
-    - [Add OpenVPN configuration file to NetworkManager with nmcli](#Add-OpenVPN-configuration-file-to-NetworkManager-with-nmcli)
-    - [Gestures support](#Gestures-support)
-  - [Programs](#Programs)
-    - [Official Repo Programs](#Official-Repo-Programs)
-    - [AUR Programs](#AUR-Programs)
-  - [Visual Studio Code (vscode)](#Visual-Studio-Code-vscode)
-    - [Autocomplete for GOject (Gtk, Gio, Gdk, ...)](#Autocomplete-for-GOject-Gtk-Gio-Gdk)
-    - [Markdown PDF Extension](#Markdown-PDF-Extension)
-  - [Pacman Hooks](#Pacman-Hooks)
-    - [Auszug aus dem Manual zu alpm Hooks (oben verlinkt)](#Auszug-aus-dem-Manual-zu-alpm-Hooks-oben-verlinkt)
-    - [Example](#Example)
-  - [Hardware info](#Hardware-info)
-  - [Security](#Security)
-    - [Umask](#Umask)
-    - [Programs for Security](#Programs-for-Security)
-    - [Firewall](#Firewall)
+- [Install Archlinux](#install-archlinux)
+  - [Create filesystem](#create-filesystem)
+  - [Mount all partitions](#mount-all-partitions)
+  - [Install Base system](#install-base-system)
+  - [Generate File system Table](#generate-file-system-table)
+  - [Enter your system](#enter-your-system)
+  - [Set some basic stuff](#set-some-basic-stuff)
+  - [Set the Time Zone](#set-the-time-zone)
+  - [Add a user](#add-a-user)
+  - [Allow members of group wheel to gain root priviliges](#allow-members-of-group-wheel-to-gain-root-priviliges)
+  - [Edit and generate the locales](#edit-and-generate-the-locales)
+  - [Bootloader](#bootloader)
+    - [Grub on BIOS - Legacy systems](#grub-on-bios---legacy-systems)
+      - [Install](#install)
+      - [Generate Grub configuration](#generate-grub-configuration)
+    - [Systemd Boot on UEFI systems](#systemd-boot-on-uefi-systems)
+      - [Install](#install-1)
+      - [Create boot entries and the loader configuration](#create-boot-entries-and-the-loader-configuration)
+  - [Exit and Reboot](#exit-and-reboot)
+  - [Check if you sudo into root](#check-if-you-sudo-into-root)
+  - [Check internet connection](#check-internet-connection)
+  - [Install basic services](#install-basic-services)
+  - [Video Driver](#video-driver)
+    - [Intel](#intel)
+    - [Nvidia](#nvidia)
+    - [Open Source Nvidia Driver Nouveau](#open-source-nvidia-driver-nouveau)
+    - [Virtualbox](#virtualbox)
+  - [Install XFCE4 as Desktop](#install-xfce4-as-desktop)
+  - [GNOME](#gnome)
+  - [Reboot](#reboot)
+- [Archlinux Tweaks](#archlinux-tweaks)
+  - [Syslog-ng](#syslog-ng)
+    - [Installation](#installation)
+    - [Configuration](#configuration)
+  - [Gnome Shell Extensions](#gnome-shell-extensions)
+  - [i3 as Desktop](#i3-as-desktop)
+  - [Keyboard](#keyboard)
+  - [Install AUR Helper Trizen](#install-aur-helper-trizen)
+  - [Printer Configuration](#printer-configuration)
+  - [Themes, Icons, Fonts](#themes-icons-fonts)
+    - [Official Repo Themes](#official-repo-themes)
+    - [AUR Themes](#aur-themes)
+  - [Steam](#steam)
+  - [XFCE Logout](#xfce-logout)
+  - [Add custom fonts](#add-custom-fonts)
+  - [Grub Customization](#grub-customization)
+  - [LightDM GTK Greeter Configuration](#lightdm-gtk-greeter-configuration)
+  - [SSD Trim](#ssd-trim)
+  - [No f*cking beep](#no-fcking-beep)
+  - [Don't save session on Exit](#dont-save-session-on-exit)
+  - [FireFox Fix GTK dark Theme](#firefox-fix-gtk-dark-theme)
+  - [FireFox Default Zoom Level](#firefox-default-zoom-level)
+  - [Pacman Commands](#pacman-commands)
+  - [Gitg to English](#gitg-to-english)
+  - [Telegram](#telegram)
+  - [Use all cores when compressing](#use-all-cores-when-compressing)
+  - [Powerline Bash](#powerline-bash)
+  - [Compton Start on all screens](#compton-start-on-all-screens)
+  - [Grep](#grep)
+  - [Redshift Bug with Geoclue](#redshift-bug-with-geoclue)
+  - [Laptop change brightness in smaller steps](#laptop-change-brightness-in-smaller-steps)
+  - [Install Arduino](#install-arduino)
+  - [Install XFCE4 Dev Dependencies](#install-xfce4-dev-dependencies)
+  - [Patch the awesome Hack Font](#patch-the-awesome-hack-font)
+  - [NeoVim fuzzy search](#neovim-fuzzy-search)
+  - [Firefox Customization](#firefox-customization)
+    - [Good Scrolling with Touchpads](#good-scrolling-with-touchpads)
+    - [about:config](#aboutconfig)
+    - [No Titlebar](#no-titlebar)
+  - [Wireshark](#wireshark)
+  - [Powertop](#powertop)
+  - [Mackup](#mackup)
+  - [Asciidoc and Asciidoctor](#asciidoc-and-asciidoctor)
+  - [Add OpenVPN configuration file to NetworkManager with nmcli](#add-openvpn-configuration-file-to-networkmanager-with-nmcli)
+  - [Gestures support](#gestures-support)
+- [Programs](#programs)
+  - [Official Repo Programs](#official-repo-programs)
+  - [AUR Programs](#aur-programs)
+- [Visual Studio Code (vscode)](#visual-studio-code-vscode)
+  - [Autocomplete for GOject (Gtk, Gio, Gdk, ...)](#autocomplete-for-goject-gtk-gio-gdk)
+  - [Markdown PDF Extension](#markdown-pdf-extension)
+- [Pacman Hooks](#pacman-hooks)
+  - [Auszug aus dem Manual zu alpm Hooks (oben verlinkt)](#auszug-aus-dem-manual-zu-alpm-hooks-oben-verlinkt)
+  - [Example](#example)
+- [Hardware info](#hardware-info)
+- [Security](#security)
+  - [Umask](#umask)
+  - [Programs for Security](#programs-for-security)
+  - [Firewall](#firewall)
 
 ## Install Archlinux
 
@@ -112,14 +111,14 @@ Partition your drive. Assumend drive throughout is `/dev/sda`
 fdisk /dev/sda
 ```
 
-- BIOS – Legacy – DOS  
-  - o -> dos table  
-  - n -> p -> 1 -> first sector -> +50GB  
-  - p [print] -> t [type ändern evtl]  
-  - w [write]  
-- UEFI – GPT  
-  - g -> gpt table  
-  - EFI [type: ef00] Partition mit +512M  
+- BIOS – Legacy – DOS
+  - o -> dos table
+  - n -> p -> 1 -> first sector -> +50GB
+  - p [print] -> t [type ändern evtl]
+  - w [write]
+- UEFI – GPT
+  - g -> gpt table
+  - EFI [type: ef00] Partition mit +512M
   - … je nachdem / und /home
   - mkfs.fat -F 32 -n EFIBOOT /dev/sda1
 
@@ -233,7 +232,7 @@ passwd
 ``` sh
 EDITOR=nano visudo
 
-# remove the '#' in the line: 
+# remove the '#' in the line:
 %wheel ALL = (ALL) ALL
 ```
 
@@ -320,10 +319,10 @@ editor  0
 console-mode max
 ```
 
-**Summary:** You should have created 3 files:  
-`/boot/loader/entries/arch.conf`  
-`/boot/loader/entries/arch-fallback.conf`  
-`/boot/loader/loader.conf`  
+**Summary:** You should have created 3 files:
+`/boot/loader/entries/arch.conf`
+`/boot/loader/entries/arch-fallback.conf`
+`/boot/loader/loader.conf`
 
 ### Exit and Reboot
 
@@ -351,7 +350,7 @@ passwd -l root
 
 ### Check internet connection
 
-`ping archlinux.org`  
+`ping archlinux.org`
 If no connection is available run
 
 ``` sh
@@ -588,7 +587,7 @@ I am using `light-locker-command` to lock my sessions.
 pacman -S light-locker-command
 ```
 
-Go to `/usr/bin/xflock4`  
+Go to `/usr/bin/xflock4`
 In the for loop add the line "light-locker-command -l"
 
 ``` sh
@@ -603,8 +602,8 @@ done
 
 ### Add custom fonts
 
-Directory: `~/.local/share/fonts`  
-eg. put the windows fonts in there.  
+Directory: `~/.local/share/fonts`
+eg. put the windows fonts in there.
 Update your font cache
 
 ``` sh
@@ -625,7 +624,7 @@ GRUB_BACKGROUND=“/usr/share/pixmaps/arch-grub.png“
 
 ### LightDM GTK Greeter Configuration
 
-Install `lightdm-gtk-greeter-settings` for a GUI.  
+Install `lightdm-gtk-greeter-settings` for a GUI.
 Manually edit in `/etc/lightdm/lightdm-gtk-greeter.conf`
 
 ``` conf
@@ -656,18 +655,18 @@ echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
 ### Don't save session on Exit
 
-in "Settings Editor" go to "xfce4-session"  
+in "Settings Editor" go to "xfce4-session"
 In the `general` tab, create a new property named `SaveOnExit`, Type `BOOL` and set it to False
 
 ### FireFox Fix GTK dark Theme
 
-**Might be already fixed** TODO  
+**Might be already fixed** TODO
 [See here](https://wiki.archlinux.org/index.php/Firefox/Tweaks#Unreadable_input_fields_with_dark_GTK.2B_themes)
 
 ### FireFox Default Zoom Level
 
-Go to `about:config` and look for `layout.css.devPixelsPerPx`.  
-Change it to ~1.2  
+Go to `about:config` and look for `layout.css.devPixelsPerPx`.
+Change it to ~1.2
 Default is -1, which respects system settings
 
 ### Pacman Commands
@@ -815,11 +814,11 @@ Plug 'junegunn/fzf.vim'
 #### Good Scrolling with Touchpads
 
 Add this environment variable `env MOZ_USE_XINPUT2=1` to disable the conversion
-from touchpad to mousewheel movement.  
+from touchpad to mousewheel movement.
 
 #### about:config
 
-`layers.acceleration.force-enabled` -> True. (enable OpenGL based compositing which for smooth scrolling)  
+`layers.acceleration.force-enabled` -> True. (enable OpenGL based compositing which for smooth scrolling)
 `layers.omtp.enabled` -> True  further improve performance for scrolling
 
 #### No Titlebar
@@ -853,7 +852,7 @@ Sync config files across multiple machines.
 pip3 install --user mackup
 ```
 
-Config file could look like this. 
+Config file could look like this.
 See [Configuration](https://github.com/lra/mackup/blob/master/doc/README.md)
 
 ``` conf
@@ -869,7 +868,7 @@ gnupg
 ```
 
 If you are using the Open Source Build of VS Code, then make sure to link the
-    config (`.config/Code - OSS`) correctly for Mackup, which is looking for 
+    config (`.config/Code - OSS`) correctly for Mackup, which is looking for
     `.config/Code`.
 
 ``` sh
@@ -891,7 +890,7 @@ pacman -S asciidoctor asciidoc
 # install the pdf generator
 gem install asciidoctor-pdf --pre
 
-# install syntax highlithing support 
+# install syntax highlithing support
 gem install rouge
 ```
 
@@ -908,7 +907,7 @@ Import the configuration file
 sudo nmcli connection import type openvpn file saved_config.ovpn
 ```
 
-If the authentication does not work (eg. password is required, but you want to 
+If the authentication does not work (eg. password is required, but you want to
 save it in the file), edit the associated file in
 `/etc/NetworkManager/system-connections/`
 
@@ -957,8 +956,8 @@ cd libinput-gestures
 sudo make install (or sudo ./libinput-gestures-setup install)
 ```
 
-Standard configuration is in `/etc/libinput-gestures.conf`. Create your 
-user config in `~/.config/libinput-gestures.conf`. Visit the link above on 
+Standard configuration is in `/etc/libinput-gestures.conf`. Create your
+user config in `~/.config/libinput-gestures.conf`. Visit the link above on
 how to create a configuration file. It may look like:
 
 ``` conf
@@ -1068,7 +1067,7 @@ vim-gruvbox-git
 
 ### Autocomplete for GOject (Gtk, Gio, Gdk, ...)
 
-(Python!) [Github Fakegir](https://github.com/strycore/fakegir)  
+(Python!) [Github Fakegir](https://github.com/strycore/fakegir)
 in VS Code Settings:
 
 ``` json
@@ -1091,9 +1090,9 @@ Use system chromium path
 
 [Online Arch Manual zu Hooks](https://jlk.fjfi.cvut.cz/arch/manpages/man/alpm-hooks.5)
 
-- Standardordner für Pacman: `/usr/share/libalpm/hooks/`  
-- Weitere Ordner in `/etc/pacman.conf` konfigurierbar. Option `HookDir=` 
-  - Default ist `/etc/pacman.d/hooks`  
+- Standardordner für Pacman: `/usr/share/libalpm/hooks/`
+- Weitere Ordner in `/etc/pacman.conf` konfigurierbar. Option `HookDir=`
+  - Default ist `/etc/pacman.d/hooks`
 - Dateien enden auf `.hook`, zB. `clean_cache.hook`
 
 ### Auszug aus dem Manual zu alpm Hooks (oben verlinkt)
@@ -1115,9 +1114,9 @@ NeedsTargets (Optional)
 
 ### Example
 
-Räume nach jedem erfolgreichem Install, Upgrade, Remove Prozess den Pacman Cache in `/var/cache/pacman/pkg` auf.  
-`paccache` ist Teil des `pacman-contrib` Pakets.  
-`paccache -r` behält die 3 neusten Versionen eines Paketes und löscht den Rest (`paccache --help`)  
+Räume nach jedem erfolgreichem Install, Upgrade, Remove Prozess den Pacman Cache in `/var/cache/pacman/pkg` auf.
+`paccache` ist Teil des `pacman-contrib` Pakets.
+`paccache -r` behält die 3 neusten Versionen eines Paketes und löscht den Rest (`paccache --help`)
 Speichere Folgendes in `/etc/pacman.d/hooks/clean_cache.hook`
 
 ``` conf
