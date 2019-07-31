@@ -31,6 +31,7 @@
   - [GNOME](#gnome)
   - [Reboot](#reboot)
 - [Archlinux Tweaks](#archlinux-tweaks)
+  - [XDG home directories](#xdg-home-directories)
   - [Syslog-ng](#syslog-ng)
     - [Installation](#installation)
     - [Configuration](#configuration)
@@ -418,7 +419,7 @@ pacman -S xorg-server xorg-xinit xfce4 xfce4-goodies lightdm lightdm-gtk-greeter
 systemctl enable lightdm NetworkManager
 
 # install some audio stuff
-pacman -S alsa-tools alsa-utils pulseaudio-alsa pavucontrol
+pacman -S (alsa-tools) alsa-utils pulseaudio-alsa pulseaudio-bluetooth pavucontrol
 ```
 
 ### GNOME
@@ -440,6 +441,13 @@ pacman -S xorg-server xorg-xinit xorg-server-xwayland
 **Reboot and you should be able to login into your graphical environment**
 
 ## Archlinux Tweaks
+
+### XDG home directories
+
+``` sh
+pacman -S xdg-user-dirs
+xdg-user-dirs-update
+```
 
 ### Syslog-ng
 
@@ -831,7 +839,7 @@ Make sure, you install wireshark first and then add youself to the group
 
 ``` sh
 pacman -S wireshark-qt
-useradd -aG wireshark username
+usermod -aG wireshark username
 ```
 
 ### Powertop
