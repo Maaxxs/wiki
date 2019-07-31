@@ -1,16 +1,18 @@
-# Install Arch
+# Install Archlinux with LVM on LUKS
 
 - with UEFI
 - LVM on LUKS
-- systemd boot
+- systemd-boot
 
-#### Check if booted in UEFI mode. If some content is displayed, then yes:
+## Boot ISO in UEFI mode
 
-```
+Check if booted in UEFI mode. If some content is displayed, then yes:
+
+``` sh
 ls /sys/firmware/efi
 ```
 
-```
+``` sh
 # Create a EFI (ef00) partition of 512MiB size.
 # Create a Linux LVM (8e00) parition of the rest.
 gdisk /dev/sda
@@ -20,123 +22,130 @@ mkfs.fat -F32 /dev/sda1
 cryptsetup luksFormat /dev/sda2
 
 cryptsetup open --type luks /dev/sda2 lvm
+```
 
+## Create volumes
+
+``` sh
 pvcreate /dev/mapper/lvm
-vgcreate main /dev/mapper/lvm
-lvcreate -L 20G main -n root
-lvcreate -l 100%FREE main -n home
+vgcreate arch /dev/mapper/lvm
+lvcreate -L 8G arch -n swap
+lvcreate -l 100%FREE arch -n root
+```
 
-mkfs.ext4 /dev/mapper/main-root -L ROOT
-mkfs.ext4 /dev/mapper/main-home -L HOME
+## Create filesystems
 
-mkdir /mnt/home
+``` sh
+mkfs.ext4 /dev/arch/root
+mkswap /dev/arch/swap
+```
+
+## Mount partitions and activate swap
+
+``` sh
 mkdir /mnt/boot
-
-mount /dev/mapper/main-root /mnt
-mount /dev/mapper/main-home /mnt/home
+mount /dev/arch/root /mnt
 mount /dev/sda1 /mnt/boot
+```
 
+## Install base system
+
+### Chosse a good mirror
+
+``` sh
+vim /etc/pacman.d/mirrorlist
+```
+
+``` sh
 # Add dialog and wpa_supplicant if installing on a laptop
-pacstrap /mnt base base-devel bash-completion neovim (dialog wpa_supplicant)
+pacstrap /mnt base base-devel bash-completion (dialog wpa_supplicant)
+```
 
-genfstab -Up /mnt >> /mnt/etc/fstab
+### Generate Fstab and chroot
 
-arch-chroot
-
+``` sh
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
 hwclock --systohc --utc
+```
 
-# Change root password
+## Change root password
+
+``` sh
 passwd
+```
 
-# Add hooks
-nvim /etc/mkinitcpio.conf
-HOOKS=(base udev autodetect keyboard modconf block encrypt lvm2 filesystems fsck)
+## Add kernel hooks
+
+You may need `FONT=lat9w-16` in `/etc/vconsole.conf` that the consolefont hook runs successfully.
+
+``` sh
+vim /etc/mkinitcpio.conf
+```
+
+``` conf
+...
+HOOKS=(base udev autodetect keyboard keymap consolefont modconf block encrypt lvm2 filesystems resume fsck)
+...
+```
+
+Generate a new ramdisk
+
+``` sh
 mkinitcpio -p linux
+```
 
+## Install systemd bootloader
+
+``` sh
 bootctl --path=/boot/ install
+```
 
+## Create loader config
+
+``` sh
 nvim /boot/loader/loader.conf
+```
+
+``` conf
 default arch
 timeout 2
+console-mode max
 editor 0
+```
 
-# "cryptdevice=... root=..." are on the "options" line!
-nvim /boot/loader/entries/arch.conf
+## Create boot entries
+
+``` sh
+vim /boot/loader/entries/arch.conf
+```
+
+For the intel microcode install the `intel-ucode` package.
+
+"cryptdevice=... root=..." are on the **options** line!
+
+in vim: `:r ! blkid` pastes the output into vim
+
+``` conf
 title   Arch Linux
 linux   /vmlinuz-linux
+initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
-options cryptdevice=UUID=123adf-1234asdf123-1234d-234fdfa:main root=/dev/mapper/main-root rw
+options cryptdevice=UUID=123adf-1234asdf123-1234d-234fdfa:arch
+options root=UUID=123-234
+options resume=UUID=134-123 rw
+```
 
-nvim /boot/loader/entries/arch-fallback.conf
+arch-fallback.conf
+
+``` conf
 title   Arch Linux Fallback
 linux   /vmlinuz-linux
+initrd  /intel-ucode.img
 initrd  /initramfs-linux-fallback.img
-options cryptdevice=UUID=123adf-1234asdf123-1234d-234fdfa:main root=/dev/mapper/main-root rw
-
-# uncomment 'en_US...'
-neovim /etc/locale.gen
-locale-gen
-locale > /etc/locale.conf
-
-
-# Change hostname
-nvim /etc/hostname
-
-ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-echo KEYMAP=us > /etc/vconsole.conf
-
-# Add user
-useradd -m -g users -G wheel,audio,video -s /bin/zsh max
-passwd max
-
-# Remove '#' in front of %wheel All = (ALL) ALL
-EDITOR=nvim visudo
-
-# Make sure, you can sudo into root. Then disable root login
-passwd -l root
-
-exit
-umount -R /mnt
-reboot
+options cryptdevice=UUID=123adf-1234asdf123-1234d-234fdfa:arch
+options root=UUID=123-234
+options resume=UUID=134-123 rw
 ```
 
-#### Login with root and configure system
-
-```
-pacman -S acpid ntp avahi
-systemctl enable acpid ntpd avahi-daemon
-ntpq -gq
-
-# Install graphics driver
-pacman -S xf86-video-intel
-
-# Install Desktop
-pacman -S xorg-server xorg-xinit xfce4 xfce4-goodies lightdm networkmanager network-manager-applet nm-connection-editor git
-systemctl enable lightdm NetworkManager
-
-# Install slick-greeter for lightdm
-git clone https://aur.archlinux.org/lightdm-slick-greeter.git
-cd lightdm-slick-greeter
-makepkg -rsi
-cd .. && rm -rf lightdm-slick-greeter
-
-# Install audio tools
-pacman -S alsa-tools alsa-utils pulseaudio-alsa pavucontrol
-
-reboot
-```
-
-#### You should be able to login with your username into a graphical environment
-```
-# Switch to german layout while right-alt-key is pressed.
-localectl set-x11-keymap us,de ,pc105 ,nodeadkeys grp:switch
-
-# Install gufw as firewall manager
-pacman -S gufw
-ufw enable
-
-# Install window themes, icon themes, applications, ...
-pacman -S ttf-hack noto-fonts arc-icon-theme arc-gtk-theme 
-```
-
-#### Customize your system and have fun
+Follow normal guide [here](/archlinux#set-some-basic-stuff)
