@@ -55,3 +55,8 @@ Install the `dconf` editor and run
 dconf write /org/gnome/evolution/mail/composer-no-signature-delim true
 ```
 
+## Cisco anyconnect 
+
+```
+sudo apt install network-manager-openconnect network-manager-openconnect-gnome
+```
