@@ -60,3 +60,14 @@ dconf write /org/gnome/evolution/mail/composer-no-signature-delim true
 ```
 sudo apt install network-manager-openconnect network-manager-openconnect-gnome
 ```
+
+## Get sensors monitoring data
+
+```
+sudo apt install lm-sensors
+```
+
+Run `sensors-detect`. Usually it's safe to answer all questions with yes.
+Put the found modules in `/etc/modules` and load these modules with 
+`sudo systemctl restart kmod`
+
