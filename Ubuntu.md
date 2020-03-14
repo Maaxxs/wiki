@@ -45,7 +45,7 @@ GRUB_SAVEDEFAULT=true
 GRUB_TIMEOUT=3
 ```
 
-If you've got a 1920x1090 screen, change the resolution, if grub doesn't do automatically
+If you've got a 1920x1080 screen, change the resolution, if grub doesn't do automatically
 
 ```conf
 GRUB_GFXMODE=1920x1080
