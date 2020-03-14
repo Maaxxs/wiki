@@ -35,13 +35,23 @@ load-module module-switch-on-connect
 
 ## Change grub settings
 
-Save and select the last entry booted 
+Save and select the last entry booted
+
+Open the file `/etc/default/grub/`
 
 ```conf
 GRUB_DEFAULT=saved
 GRUB_SAVEDEFAULT=true
 GRUB_TIMEOUT=3
 ```
+
+If you've got a 1920x1090 screen, change the resolution, if grub doesn't do automatically
+
+```conf
+GRUB_GFXMODE=1920x1080
+```
+
+Update the grub configuration
 
 ```bash
 sudo update-grub
@@ -55,7 +65,7 @@ Install the `dconf` editor and run
 dconf write /org/gnome/evolution/mail/composer-no-signature-delim true
 ```
 
-## Cisco anyconnect 
+## Cisco anyconnect
 
 ```
 sudo apt install network-manager-openconnect network-manager-openconnect-gnome
@@ -68,6 +78,6 @@ sudo apt install lm-sensors
 ```
 
 Run `sensors-detect`. Usually it's safe to answer all questions with yes.
-Put the found modules in `/etc/modules` and load these modules with 
+Put the found modules in `/etc/modules` and load these modules with
 `sudo systemctl restart kmod`
 
