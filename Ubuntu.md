@@ -1,8 +1,8 @@
 # Ubuntu
 
-## Nextcloud
+## Nextcloud Client Snap
 
-**Problem:** Nextcloud is asking for the password after
+**Problem:** Nextcloud snap is asking for the password after
 every login.
 
 **Solution:** Connect Nextcloud to the password manager
