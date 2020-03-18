@@ -4,13 +4,13 @@
 
 ### Install Java 8
 
-``` sh
+```sh
 sudo apt install openjdk-8-jre
 ```
 
 ### Install build tools
 
-``` sh
+```sh
 sudo apt install build-essentials
 ```
 
@@ -18,7 +18,7 @@ sudo apt install build-essentials
 
 For Jenkins refer to [Jenkins on Debian](https://jenkins.io/doc/book/installing/#debianubuntu)
 
-``` sh
+```sh
 wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
 sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 sudo apt-get update
@@ -40,6 +40,6 @@ sudo apt-get install jenkins
 2. Top right corner `User -> Configure:API Token`. Add a Token. Save.
 3. In Gitlab `YourProject->Settings->Integrations`. Fill the URL
 
-``` sh
+```sh
 http://USERNAME:API_TOKEN@IP_Address:port/pathTo/project
 ```

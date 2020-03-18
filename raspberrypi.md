@@ -6,14 +6,14 @@
 
 ### WiFi and SSH
 
-**Goal**: You burn the Raspbian image to a SD-Card and want to enable SSH and a 
+**Goal**: You burn the Raspbian image to a SD-Card and want to enable SSH and a
 connection to your WiFi Access Point, so you don't need to connect an
 Ethernat cable to your Raspberry Pi.
 
 1. On your SD-Card: Go to `/boot/`
 2. Create a file named `ssh`. This will start the SSH service
 3. Create a file named `wpa_supplicant.conf` with following content:
-  Edit the SSID and the PSK
+   Edit the SSID and the PSK
 
 ```
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -29,15 +29,14 @@ network={
 
 4. Save. Put the SD-Card into your Pi. Boot. Should connect to your WiFi.
 5. TODO: Go back to some config file `/etc/netctl|net...`. Edit that configuration
-  file and remove the clear text password. It's a commented line.
-
+   file and remove the clear text password. It's a commented line.
 
 ### Change username pi to max
 
 Set a root password
 
 Connect as root. In `/etc/ssh/sshd_config`
-    PermitRootLogin yes
+PermitRootLogin yes
 
     # usermod -l max -d /home/max -m pi
     # groupmod --new-name max pi
@@ -47,4 +46,3 @@ Disable root login in `/etc/ssh/sshd_config`
 To disable root the root account
 
     sudo passwd -l root
-

@@ -4,6 +4,6 @@
 
 **Important:** Download the archive for raspberry pi 3!
 
-``` sh
+```sh
 get http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
 ```

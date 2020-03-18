@@ -1,8 +1,9 @@
 # **Maven**
 
-__created by [Noah](https://gitlab.com/DrNochi)__
+**created by [Noah](https://gitlab.com/DrNochi)**
 
 - Project and Build Management Tool
+
   - Standardization (convention over configuration)
   - Dependency management
   - Documentation & reporting
@@ -10,6 +11,7 @@ __created by [Noah](https://gitlab.com/DrNochi)__
 - Process-Management
 
 ---
+
 ## Project Object Model
 
 - pom.xml
@@ -46,6 +48,7 @@ Specified by either `<parent>` (groupId, artifactId, version) or `<modules><modu
 
 Specifies the build environment
 Declared in `<build>`
+
 - `directory`
   - Output directory
 - `finalName`
@@ -85,13 +88,16 @@ Tells maven from where to fetch plugin artifacts.
 Specified by `<pluginRepositories><pluginRepository>`
 
 ---
+
 ## Build Lifecycle
 
 Cleaning
+
 - `clean`
   - Remove all files from previous bilds
 
 Building (default)
+
 - `validate`
   - Validate necessary information is available & correrct
 - `initialize`
@@ -114,6 +120,7 @@ Building (default)
   - Deploy to remote repository
 
 Site documentation
+
 - `site`
   - Generate documentation
 - `site-deploy`
@@ -124,6 +131,7 @@ Site documentation
 Plugins have different goals (`PLUGIN:GOAL`), these make up the basic building blocks of the process. They are bound to different build phases, and are therefore run during the build lifecycle
 
 ---
+
 ## Default Project Structure
 
 ```
@@ -133,7 +141,7 @@ src/
     main/
         java/
         resouces/
-        
+
     test/
         java/
         resources/
@@ -148,6 +156,7 @@ NOTICE.txt
 ```
 
 ---
+
 ## Maven Assemblies
 
 The `maven-assembly-plugin` can be used to distribute the project (`.jar`s, README, LICENSE, documentation, ...)

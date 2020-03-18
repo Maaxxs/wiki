@@ -8,11 +8,11 @@
 
 Check if booted in UEFI mode. If some content is displayed, then yes:
 
-``` sh
+```sh
 ls /sys/firmware/efi
 ```
 
-``` sh
+```sh
 # Create a EFI (ef00) partition of 512MiB size.
 # Create a Linux LVM (8e00) parition of the rest.
 gdisk /dev/sda
@@ -26,7 +26,7 @@ cryptsetup open --type luks /dev/sda2 lvm
 
 ## Create volumes
 
-``` sh
+```sh
 pvcreate /dev/mapper/lvm
 vgcreate arch /dev/mapper/lvm
 lvcreate -L 8G arch -n swap
@@ -35,14 +35,14 @@ lvcreate -l 100%FREE arch -n root
 
 ## Create filesystems
 
-``` sh
+```sh
 mkfs.ext4 /dev/arch/root
 mkswap /dev/arch/swap
 ```
 
 ## Mount partitions and activate swap
 
-``` sh
+```sh
 mkdir /mnt/boot
 mount /dev/arch/root /mnt
 mount /dev/sda1 /mnt/boot
@@ -52,18 +52,18 @@ mount /dev/sda1 /mnt/boot
 
 ### Chosse a good mirror
 
-``` sh
+```sh
 vim /etc/pacman.d/mirrorlist
 ```
 
-``` sh
+```sh
 # Add dialog and wpa_supplicant if installing on a laptop
 pacstrap /mnt base base-devel bash-completion (dialog wpa_supplicant)
 ```
 
 ### Generate Fstab and chroot
 
-``` sh
+```sh
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 hwclock --systohc --utc
@@ -71,7 +71,7 @@ hwclock --systohc --utc
 
 ## Change root password
 
-``` sh
+```sh
 passwd
 ```
 
@@ -79,11 +79,11 @@ passwd
 
 You may need `FONT=lat9w-16` in `/etc/vconsole.conf` that the consolefont hook runs successfully.
 
-``` sh
+```sh
 vim /etc/mkinitcpio.conf
 ```
 
-``` conf
+```conf
 ...
 HOOKS=(base udev autodetect keyboard keymap consolefont modconf block encrypt lvm2 filesystems resume fsck)
 ...
@@ -91,23 +91,23 @@ HOOKS=(base udev autodetect keyboard keymap consolefont modconf block encrypt lv
 
 Generate a new ramdisk
 
-``` sh
+```sh
 mkinitcpio -p linux
 ```
 
 ## Install systemd bootloader
 
-``` sh
+```sh
 bootctl --path=/boot/ install
 ```
 
 ## Create loader config
 
-``` sh
+```sh
 nvim /boot/loader/loader.conf
 ```
 
-``` conf
+```conf
 default arch
 timeout 2
 console-mode max
@@ -116,7 +116,7 @@ editor 0
 
 ## Create boot entries
 
-``` sh
+```sh
 vim /boot/loader/entries/arch.conf
 ```
 
@@ -126,7 +126,7 @@ For the intel microcode install the `intel-ucode` package.
 
 in vim: `:r ! blkid` pastes the output into vim
 
-``` conf
+```conf
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img
@@ -138,7 +138,7 @@ options resume=UUID=134-123 rw
 
 arch-fallback.conf
 
-``` conf
+```conf
 title   Arch Linux Fallback
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img

@@ -49,7 +49,7 @@
   - [Grub Customization](#grub-customization)
   - [LightDM GTK Greeter Configuration](#lightdm-gtk-greeter-configuration)
   - [SSD Trim](#ssd-trim)
-  - [No f*cking beep](#no-fcking-beep)
+  - [No f\*cking beep](#no-fcking-beep)
   - [Don't save session on Exit](#dont-save-session-on-exit)
   - [FireFox Fix GTK dark Theme](#firefox-fix-gtk-dark-theme)
   - [FireFox Default Zoom Level](#firefox-default-zoom-level)
@@ -95,20 +95,20 @@
 
 You might want to override your harddrive, especially if you want to encrypt it.
 
-``` sh
+```sh
 # Parameter -n: how many times?
 shred –verbose –random-source=/dev/urandom -n1 /dev/sdX
 ```
 
 For a german keyboard layout
 
-``` sh
+```sh
 loadkeys de
 ```
 
 Partition your drive. Assumend drive throughout is `/dev/sda`
 
-``` sh
+```sh
 fdisk /dev/sda
 ```
 
@@ -131,14 +131,14 @@ If you want Hibernation
 
 ### Create filesystem
 
-``` sh
+```sh
 mkfs.ext4 -L ROOT /dev/sdaX
 mkswap -L SWAP /dev/sdaX
 ```
 
 ### Mount all partitions
 
-``` sh
+```sh
 mount /dev/sdaX /mnt          # root
 mount /dev/sdaX /mnt/home     # home
 swapon /dev/sdaX              # activate Swap
@@ -152,14 +152,14 @@ free -h
 
 ### Install Base system
 
-``` sh
+```sh
 # Add dialog and wpa_supplicant if you need wifi.
 pacstrap /mnt base base-devel bash-completion intel-ucode (dialog wpa_supplicant)
 ```
 
 ### Generate File system Table
 
-``` sh
+```sh
 genfstab -Up /mnt >> /mnt/etc/fstab
 
 # check with: cat /mnt/etc/fstab
@@ -167,7 +167,7 @@ genfstab -Up /mnt >> /mnt/etc/fstab
 
 ### Enter your system
 
-``` sh
+```sh
 arch-chroot /mnt
 ```
 
@@ -175,50 +175,50 @@ arch-chroot /mnt
 
 - `/etc/hostname`
 
-    ``` sh
-    # Hostname
-    hostname
-    ```
+  ```sh
+  # Hostname
+  hostname
+  ```
 
 - `/etc/locale.conf`
 
-    ``` sh
-    # german
-    LANG=de_DE.UTF-8
-    LANGUAGE=de_DE
+  ```sh
+  # german
+  LANG=de_DE.UTF-8
+  LANGUAGE=de_DE
 
-    # english
-    LANG=en_US.UTF-8
-    LANGUAGE=en_US
-    ```
+  # english
+  LANG=en_US.UTF-8
+  LANGUAGE=en_US
+  ```
 
 - `/etc/vconsole.conf`
 
-    ``` sh
-    # german layout
-    KEYMAP=de-latin1-nodeadkeys
+  ```sh
+  # german layout
+  KEYMAP=de-latin1-nodeadkeys
 
-    # us layout
-    KEYMAP=us
+  # us layout
+  KEYMAP=us
 
-    # Font on early boot
-    FONT=lat9w-16
-    ```
+  # Font on early boot
+  FONT=lat9w-16
+  ```
 
 ### Set the Time Zone
 
-``` sh
+```sh
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 ```
 
 ### Add a user
 
-*@param -m: create home directory*\
-*@param -g: main user group*\
-*@param -G: other groups*\
-*@param -s: Shell*
+_@param -m: create home directory_\
+_@param -g: main user group_\
+_@param -G: other groups_\
+_@param -s: Shell_
 
-``` sh
+```sh
 useradd -m -g users -G wheel,audio,video -s /bin/bash username
 
 # Set password for your user
@@ -230,7 +230,7 @@ passwd
 
 ### Allow members of group wheel to gain root priviliges
 
-``` sh
+```sh
 EDITOR=nano visudo
 
 # remove the '#' in the line:
@@ -239,7 +239,7 @@ EDITOR=nano visudo
 
 ### Edit and generate the locales
 
-``` sh
+```sh
 # eg: remove '#' in front of all 'de_DE' or 'en_US' entries
 vim /etc/locale.gen
 
@@ -253,7 +253,7 @@ locale-gen
 
 ##### Install
 
-``` sh
+```sh
 # Install Grub and os-prober to detect other installed operating systems if you have any
 pacman -S grub os-prober
 grub-install /dev/sda
@@ -261,7 +261,7 @@ grub-install /dev/sda
 
 ##### Generate Grub configuration
 
-``` sh
+```sh
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
@@ -269,7 +269,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 ##### Install
 
-``` sh
+```sh
 pacman -S efibootmgr dosfstools gptfdisk
 
 # install to disk
@@ -282,7 +282,7 @@ Append the parameter `quiet` if you don't want to see systemd startup messages o
 
 The options line:
 
-``` conf
+```conf
 options   root=LABEL=label-of-root resume=LABEL=label-of-swap rw
 options   root=UUID=uuid-of-root resume=UUID=uuid-of-swap rw
 ```
@@ -291,29 +291,29 @@ Create the following configuration files
 
 - `/boot/loader/entries/arch.conf`
 
-    ``` conf
-    title    Arch Linux
-    linux    /vmlinuz-linux
-    initrd   /intel-ucode.img
-    initrd   /initramfs-linux.img
-    options  root=LABEL=p_arch resume=LABEL=p_swap rw
-    ```
+  ```conf
+  title    Arch Linux
+  linux    /vmlinuz-linux
+  initrd   /intel-ucode.img
+  initrd   /initramfs-linux.img
+  options  root=LABEL=p_arch resume=LABEL=p_swap rw
+  ```
 
 The fallback configuration file
 
 - `/boot/loader/configuration/arch-fallback.conf`
 
-    ``` conf
-    title    Arch Linux Fallback
-    linux    /vmlinuz-linux
-    initrd   /intel-ucode.img
-    initrd   /initramfs-linux-fallback.img
-    options  root=LABEL=p_arch resume=LABEL=p_swap rw
-    ```
+  ```conf
+  title    Arch Linux Fallback
+  linux    /vmlinuz-linux
+  initrd   /intel-ucode.img
+  initrd   /initramfs-linux-fallback.img
+  options  root=LABEL=p_arch resume=LABEL=p_swap rw
+  ```
 
 - Bootloader configuration `/boot/loader/loader.conf`
 
-``` conf
+```conf
 default arch
 timeout 3
 editor  0
@@ -327,7 +327,7 @@ console-mode max
 
 ### Exit and Reboot
 
-``` sh
+```sh
 exit
 umount -R /mnt
 reboot
@@ -340,7 +340,7 @@ reboot
 
 If so, you can disable root login
 
-``` sh
+```sh
 sudo -i
 
 # if successful, do
@@ -354,7 +354,7 @@ passwd -l root
 `ping archlinux.org`
 If no connection is available run
 
-``` sh
+```sh
 ip a
 dhcpcd your-ethernet-interface
 
@@ -366,7 +366,7 @@ wifi-menu
 
 If you don't know what they do, use google.
 
-``` sh
+```sh
 pacman -S acpid ntp avahi cronie cups
 
 # Enable them at boot
@@ -385,25 +385,25 @@ hwclock -w
 
 #### Intel
 
-``` sh
+```sh
 pacman -S xf86-video-intel
 ```
 
 #### Nvidia
 
-``` sh
+```sh
 pacman -S nvidia nvidia-settings
 ```
 
 #### Open Source Nvidia Driver Nouveau
 
-``` sh
+```sh
 pacman -S xf86-video-nouveau
 ```
 
 #### Virtualbox
 
-``` sh
+```sh
 # choose the 'modules-arch' version
 pacman -S virtualbox-guest-utils
 ```
@@ -412,7 +412,7 @@ pacman -S virtualbox-guest-utils
 
 Install X, XFCE and LightDM
 
-``` sh
+```sh
 pacman -S xorg-server xorg-xinit xfce4 xfce4-goodies lightdm lightdm-gtk-greeter networkmanager network-manager-applet nm-connection-editor
 
 # enable for boot
@@ -426,14 +426,13 @@ pacman -S (alsa-tools) alsa-utils pulseaudio-alsa pulseaudio-bluetooth pavucontr
 
 Install Gnome Display Manager, group `gnome` and `gnome-extra` if desired.
 
-``` sh
+```sh
 pacman -S gdm gnome (gnome-extra)
 systemctl enable gmd
 
 # Maybe as well?
 pacman -S xorg-server xorg-xinit xorg-server-xwayland
 ```
-
 
 ### Reboot
 
@@ -444,7 +443,7 @@ pacman -S xorg-server xorg-xinit xorg-server-xwayland
 
 ### XDG home directories
 
-``` sh
+```sh
 pacman -S xdg-user-dirs
 xdg-user-dirs-update
 ```
@@ -453,7 +452,7 @@ xdg-user-dirs-update
 
 #### Installation
 
-``` sh
+```sh
 pacman -S syslog-ng
 ```
 
@@ -461,13 +460,13 @@ pacman -S syslog-ng
 
 Change in `/etc/syslog-ng/syslog-ng.conf`
 
-``` conf
+```conf
 filter f_everything { level(debug..emerg) and not facility(auth, authpriv); };
 ```
 
 to
 
-``` conf
+```conf
 filter f_everything { level(debug..emerg) and not facility(auth, authpriv) and not filter(f_iptables); };
 ```
 
@@ -493,7 +492,7 @@ This will stop output of `iptables` to `/var/log/everything.log`
 
 Probably needed packages
 
-``` sh
+```sh
 feh [--bg-scale]
 compton
 xrandr arandr
@@ -504,19 +503,19 @@ lxappearance
 
 Set german keyboard layout
 
-``` sh
+```sh
 localectl set-x11-keymap de pc105 nodeadkeys
 ```
 
 Set US as default layout and switch to german layout while pressing the 'Right Alt Key'
 
-``` sh
+```sh
 localectl set-x11-keymap us,de ,pc105 ,nodeadkeys grp:switch
 ```
 
 You can do that manually as well in `/etc/X11/xorg.conf.d/20-keyboard.conf`
 
-``` conf
+```conf
 Section "InputClass"
   Identifier "sytem-keyboard"
   MatchIsKeyboard "on"
@@ -531,7 +530,7 @@ EndSection
 
 Trizen will be updated by itself/pacman.
 
-``` sh
+```sh
 git clone https://aur.archlinux.org/trizen.git
 cd trizen
 makepkg -rsi
@@ -540,7 +539,7 @@ cd .. && rm -rf trizen/
 
 ### Printer Configuration
 
-``` sh
+```sh
 pacman -S system-config-printer cups-pk-helper
 ```
 
@@ -552,7 +551,7 @@ Good to install, needed by a lot of packages: `gtk-engine-murrine`
 
 #### Official Repo Themes
 
-``` sh
+```sh
 noto-fonts
 ttf-hack
 arc-icon-theme
@@ -565,7 +564,7 @@ faenza-icon-theme
 
 #### AUR Themes
 
-``` sh
+```sh
 numix-circle-icon-theme-git
 numix-frost-themes ????
 numix-icon-theme-git
@@ -582,7 +581,7 @@ xfce-theme-greybird
 
 Activate `[multilib]` Repo in `/etc/pacman.conf`
 
-``` sh
+```sh
 pacman -Syy steam
 trizen -S steam-fonts
 ```
@@ -591,14 +590,14 @@ trizen -S steam-fonts
 
 I am using `light-locker-command` to lock my sessions.
 
-``` sh
+```sh
 pacman -S light-locker-command
 ```
 
 Go to `/usr/bin/xflock4`
 In the for loop add the line "light-locker-command -l"
 
-``` sh
+```sh
 for lock_cmd in \
     "light-locker-command -l"\
     "xscreensaver-command -lock" \
@@ -614,7 +613,7 @@ Directory: `~/.local/share/fonts`
 eg. put the windows fonts in there.
 Update your font cache
 
-``` sh
+```sh
 fc-cache
 ```
 
@@ -622,7 +621,7 @@ fc-cache
 
 in `/etc/default/grub`
 
-``` conf
+```conf
 GRUB_CMDLINE_LINUX_DEFAULT=“text“
 GRUB_GFXMODE=“1920x1080x32“
 GRUB_COLOR_NORMAL=“white/black“
@@ -635,7 +634,7 @@ GRUB_BACKGROUND=“/usr/share/pixmaps/arch-grub.png“
 Install `lightdm-gtk-greeter-settings` for a GUI.
 Manually edit in `/etc/lightdm/lightdm-gtk-greeter.conf`
 
-``` conf
+```conf
 background=/usr/share/pixmaps/nameOfPic.png
 position=200,start 480,start
 active-monitor=0
@@ -643,21 +642,21 @@ active-monitor=0
 
 Set "Date - Time" in Login Screen
 
-``` conf
+```conf
 %d %b - %H:%M
 ```
 
 ### SSD Trim
 
-``` sh
+```sh
 systemctl enable fstrim.timer
 ```
 
-### No f*cking beep
+### No f\*cking beep
 
 **Run as Root**
 
-``` sh
+```sh
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 ```
 
@@ -681,25 +680,25 @@ Default is -1, which respects system settings
 
 Get all explicitly installed packages
 
-``` sh
+```sh
 pacman -Qeq
 ```
 
 Get explicitly installed packages of official respository
 
-``` sh
+```sh
 pacman -Qneq
 ```
 
 Get explicitly installed packages of AUR
 
-``` sh
+```sh
 pacman -Qmeq
 ```
 
 Show all Orphans
 
-``` sh
+```sh
 pacman -Qtdq
 ```
 
@@ -707,7 +706,7 @@ pacman -Qtdq
 
 Hack to switch Gitg to english, if system language is german. Always start Gitg with the following. (eg. change 'exec' it in `/usr/share/applications/gitg.desktop`)
 
-``` sh
+```sh
 bash -c "LANG=en_US.UTF8 && gitg"
 ```
 
@@ -715,19 +714,19 @@ bash -c "LANG=en_US.UTF8 && gitg"
 
 Start Telegram minimized in Tray
 
-``` sh
+```sh
 telegram-desktop -startintray
 ```
 
 ### Use all cores when compressing
 
-``` sh
+```sh
 pacman -S pigz xz
 ```
 
 change the following in `/etc/makepkg.conf`
 
-``` sh
+```sh
 COMPRESSGZ=(pigz -c -f -n)
 COMPRESSXZ=(xz -c -z - --threads=0)
 ```
@@ -738,7 +737,7 @@ COMPRESSXZ=(xz -c -z - --threads=0)
 
 ### Compton Start on all screens
 
-``` sh
+```sh
 compton -b -d :0
 ```
 
@@ -746,11 +745,11 @@ compton -b -d :0
 
 Find changed config **files** (if you leave some searchable string in there)
 
-*@param -i: case insensitiv*\
-*@param -r: recurse*\
-*@param -l: show only filenames*
+_@param -i: case insensitiv_\
+_@param -r: recurse_\
+_@param -l: show only filenames_
 
-``` sh
+```sh
 egrep "edited by me" -irl
 ```
 
@@ -758,7 +757,7 @@ egrep "edited by me" -irl
 
 in `/etc/geoclue/geoclue.conf` add at the end
 
-``` conf
+```conf
 [redshift]
 allowed=true
 system=false
@@ -767,14 +766,14 @@ users=
 
 ### Laptop change brightness in smaller steps
 
-``` sh
+```sh
 trizen -S light
 
 ```
 
 Exampel configuration as keyboard shortcuts
 
-``` conf
+```conf
 Alt+. = light -U 5
 Alt+, = light -A 5
 Alt+Shift+> = light -S 100
@@ -783,13 +782,13 @@ Alt+Shift+< = light -S 1
 
 ### Install Arduino
 
-``` sh
+```sh
 pacman -S arduino arduino-avr-core
 ```
 
 ### Install XFCE4 Dev Dependencies
 
-``` sh
+```sh
 pacman -S xfce4-dev-tools
 ```
 
@@ -797,7 +796,7 @@ pacman -S xfce4-dev-tools
 
 See [Github Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 
-``` sh
+```sh
 trizen -S nerd-fonts-hack
 ```
 
@@ -806,13 +805,13 @@ trizen -S nerd-fonts-hack
 Use [fzf](https://github.com/junegunn/fzf)
 To use `:Ag` install
 
-``` sh
+```sh
 pacman -S the_silver_searcher
 ```
 
 Coresponding part in `init.vim`
 
-``` sh
+```sh
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 ```
@@ -827,7 +826,7 @@ from touchpad to mousewheel movement.
 #### about:config
 
 `layers.acceleration.force-enabled` -> True. (enable OpenGL based compositing which for smooth scrolling)
-`layers.omtp.enabled` -> True  further improve performance for scrolling
+`layers.omtp.enabled` -> True further improve performance for scrolling
 
 #### No Titlebar
 
@@ -837,14 +836,14 @@ Main menu -> Customize -> Uncheck 'Title Bar' Box in the bottom left corner.
 
 Make sure, you install wireshark first and then add youself to the group
 
-``` sh
+```sh
 pacman -S wireshark-qt
 usermod -aG wireshark username
 ```
 
 ### Powertop
 
-``` sh
+```sh
 pacman -S powertop
 ```
 
@@ -856,14 +855,14 @@ Set everything to **Good**.
 Sync config files across multiple machines.
 [Github Mackup](https://github.com/lra/mackup)
 
-``` sh
+```sh
 pip3 install --user mackup
 ```
 
 Config file could look like this.
 See [Configuration](https://github.com/lra/mackup/blob/master/doc/README.md)
 
-``` conf
+```conf
 engine = file_system
 path = Mega
 directory = Mackup
@@ -876,10 +875,10 @@ gnupg
 ```
 
 If you are using the Open Source Build of VS Code, then make sure to link the
-    config (`.config/Code - OSS`) correctly for Mackup, which is looking for
-    `.config/Code`.
+config (`.config/Code - OSS`) correctly for Mackup, which is looking for
+`.config/Code`.
 
-``` sh
+```sh
 cd .config
 # if there is a Code folder, remove it (save you config files if you didn't
 # port them to the "Code - OSS" foler)
@@ -892,7 +891,7 @@ That's it. Now Mackup is looking in "Code - OSS" for the VS Code config files.
 
 ### Asciidoc and Asciidoctor
 
-``` sh
+```sh
 pacman -S asciidoctor asciidoc
 
 # install the pdf generator
@@ -911,7 +910,7 @@ top of the .adoc document.
 
 Import the configuration file
 
-``` sh
+```sh
 sudo nmcli connection import type openvpn file saved_config.ovpn
 ```
 
@@ -919,7 +918,7 @@ If the authentication does not work (eg. password is required, but you want to
 save it in the file), edit the associated file in
 `/etc/NetworkManager/system-connections/`
 
-``` conf
+```conf
 [vpn]
 password-flags=0
 username=yourVPNusername
@@ -930,13 +929,13 @@ password=yourVPNpassword
 
 Restart NetworkManager that the changes take effect.
 
-``` sh
+```sh
 sudo systemctl restart NetworkManager
 ```
 
 If it still does not connect, maybe you've got a cert password?
 
-``` conf
+```conf
 [vpn]
 cert-pass-flags=0
 
@@ -948,7 +947,7 @@ Again: Restart NetworkManager that the changes take effect.
 
 ### Gestures support
 
-``` sh
+```sh
 # Add yourself to the input group. Log Out and log in that the change takes effect
 sudo gpasswd -a yourUsername input
 
@@ -958,7 +957,7 @@ pacman -S xdotool wmctrl xf86-input-libinput
 
 Visit [Github Libinput Gestures](https://github.com/bulletmark/libinput-gestures) for more infos.
 
-``` sh
+```sh
 git clone https://github.com/bulletmark/libinput-gestures.git
 cd libinput-gestures
 sudo make install (or sudo ./libinput-gestures-setup install)
@@ -968,7 +967,7 @@ Standard configuration is in `/etc/libinput-gestures.conf`. Create your
 user config in `~/.config/libinput-gestures.conf`. Visit the link above on
 how to create a configuration file. It may look like:
 
-``` conf
+```conf
 gesture swipe up 3 xdotool key alt+f
 gesture swipe down 3 xdotool key ctrl+w
 gesture swipe right 3 xdotool key alt+Left
@@ -985,7 +984,7 @@ permissions via `libinput-gestures-setup restart`
 
 ### Official Repo Programs
 
-``` sh
+```sh
 chromium
 firefox firefox-i18n-de
 qt4 vlc
@@ -1047,7 +1046,7 @@ youtube-dl
 
 ### AUR Programs
 
-``` sh
+```sh
 trizen
 chromium-widevine
 conky-nvidia
@@ -1078,7 +1077,7 @@ vim-gruvbox-git
 (Python!) [Github Fakegir](https://github.com/strycore/fakegir)
 in VS Code Settings:
 
-``` json
+```json
     "python.autoComplete.extraPaths": [
         "/home/max/.cache/fakegir/"
     ],
@@ -1088,7 +1087,7 @@ in VS Code Settings:
 
 Use system chromium path
 
-``` json
+```json
 "markdown-pdf.executablePath": "/usr/bin/chromium",
 ```
 
@@ -1105,7 +1104,7 @@ Use system chromium path
 
 ### Auszug aus dem Manual zu alpm Hooks (oben verlinkt)
 
-``` conf
+```conf
 [Trigger] (Required, Repeatable)
 Operation = Install|Upgrade|Remove (Required, Repeatable)
 Type = File|Package (Required)
@@ -1127,7 +1126,7 @@ Räume nach jedem erfolgreichem Install, Upgrade, Remove Prozess den Pacman Cach
 `paccache -r` behält die 3 neusten Versionen eines Paketes und löscht den Rest (`paccache --help`)
 Speichere Folgendes in `/etc/pacman.d/hooks/clean_cache.hook`
 
-``` conf
+```conf
 [Trigger]
 Operation = Upgrade
 Operation = Install
@@ -1144,13 +1143,12 @@ Depends = pacman-contrib
 
 ## Hardware info
 
-``` sh
+```sh
 sudo hwinfo --short
 sudo lshw -short
 sudo lscpu
 inxi -Fx
 ```
-
 
 ## Security
 
