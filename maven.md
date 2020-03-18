@@ -1,6 +1,6 @@
 # **Maven**
 
-**created by [Noah](https://gitlab.com/DrNochi)**
+_created by [Noah](https://gitlab.com/DrNochi)_
 
 - Project and Build Management Tool
 
@@ -134,7 +134,7 @@ Plugins have different goals (`PLUGIN:GOAL`), these make up the basic building b
 
 ## Default Project Structure
 
-```
+```conf
 pom.xml
 
 src/
@@ -162,6 +162,6 @@ NOTICE.txt
 The `maven-assembly-plugin` can be used to distribute the project (`.jar`s, README, LICENSE, documentation, ...)
 For each type of distribution a descriptor is created, that specifies the format and content of the distribution archive
 
-# Apache Ant
+## Apache Ant
 
 No default build lifecycle. Low standardization

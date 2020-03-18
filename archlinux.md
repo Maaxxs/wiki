@@ -251,7 +251,7 @@ locale-gen
 
 #### Grub on BIOS - Legacy systems
 
-##### Install
+##### Installation of `grub` and `os-prober`
 
 ```sh
 # Install Grub and os-prober to detect other installed operating systems if you have any
@@ -267,7 +267,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 #### Systemd Boot on UEFI systems
 
-##### Install
+##### Installation of `efi` tools
 
 ```sh
 pacman -S efibootmgr dosfstools gptfdisk
@@ -654,7 +654,7 @@ systemctl enable fstrim.timer
 
 ### No f\*cking beep
 
-**Run as Root**
+Run the following as root
 
 ```sh
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
