@@ -1,21 +1,13 @@
 # Raspberry Pi
 
-## Content
+## Enable WLAN
 
-- [Connect to WiFi and start SSH after installing](#wifi-and-ssh)
+Go to the directory `/boot/` on the SD card and create a file called
+`wpa_supplicant.conf` with the following content.
 
-### WiFi and SSH
+Edit the value of `country`, `ssid` and `psk`.
 
-**Goal**: You burn the Raspbian image to a SD-Card and want to enable SSH and a
-connection to your WiFi Access Point, so you don't need to connect an
-Ethernat cable to your Raspberry Pi.
-
-1. On your SD-Card: Go to `/boot/`
-2. Create a file named `ssh`. This will start the SSH service
-3. Create a file named `wpa_supplicant.conf` with following content:
-   Edit the SSID and the PSK
-
-```
+```conf
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=DE
@@ -27,22 +19,38 @@ network={
 }
 ```
 
-4. Save. Put the SD-Card into your Pi. Boot. Should connect to your WiFi.
-5. TODO: Go back to some config file `/etc/netctl|net...`. Edit that configuration
-   file and remove the clear text password. It's a commented line.
+Save the file and boot your pi.
 
-### Change username pi to max
+Note: Go back to some config file in `/etc/netctl|net...`. Edit that
+configuration file and remove the clear text password. It's a commented line.
 
-Set a root password
+## Enable SSH
 
-Connect as root. In `/etc/ssh/sshd_config`
+Create a file called `ssh` in `/boot/` of your SD card. That's it.
+
+## Change username `pi` to `michael`
+
+Connect as root to your raspberry pi. This can be enabled by changing the
+`PermitRootLogin` option to `yes` in `/etc/ssh/sshd_config` and reloading the
+SSH daemon `sudo systemctl restart sshd`.
+
+```conf
 PermitRootLogin yes
+```
 
-    # usermod -l max -d /home/max -m pi
-    # groupmod --new-name max pi
+Then execute as root
 
-Disable root login in `/etc/ssh/sshd_config`
+```sh
+usermod -l michael -d /home/michael -m pi
+groupmod --new-name michael pi
+```
 
-To disable root the root account
+Disable root login in `/etc/ssh/sshd_config`.
 
-    sudo passwd -l root
+## "Disable" root account
+
+To disable the root account
+
+```sh
+sudo passwd -l root
+```
