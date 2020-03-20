@@ -26,3 +26,20 @@
 - Vala Code
 - x86 and x86_64 Assembly
 - XML Tools
+
+## Configuration
+
+<!-- prettier-ignore -->
+```json
+{
+    "window.titleBarStyle": "custom",
+    "editor.fontFamily": "'Hack','Droid Sans Mono', 'monospace', 'Droid Sans Fallback'",
+    // "editor.fontLigatures": true,
+    "editor.fontSize": 13,
+    "workbench.startupEditor": "newUntitledFile",
+    "dart.debugExternalLibraries": false,
+    "dart.debugSdkLibraries": false,
+    "python.formatting.provider": "black",
+    "prettier.proseWrap": "always"
+}
+```
