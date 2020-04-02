@@ -21,3 +21,21 @@
    PasswordAuthentication no
    PubkeyAuthentication yes
    ```
+## Disable Debian Banner 
+
+Example of returned banner
+
+```conf
+OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+```
+
+Use `DebianBanner` option in `sshd_config` and set it to `no`.
+```conf
+DebianBanner no
+```
+
+Result:
+
+```conf
+OpenSSH 7.6p1 (protocol 2.0)
+```
