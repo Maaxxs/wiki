@@ -34,6 +34,8 @@ Use `DebianBanner` option in `sshd_config` and set it to `no`.
 DebianBanner no
 ```
 
+You can test the configuration for errors with `sshd -t`.
+
 Result:
 
 ```conf
