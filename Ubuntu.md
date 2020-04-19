@@ -79,3 +79,8 @@ sudo apt install lm-sensors
 Run `sensors-detect`. Usually it's safe to answer all questions with yes.
 Put the found modules in `/etc/modules` and load these modules with
 `sudo systemctl restart kmod`
+
+## Install nodejs
+
+[See here](https://github.com/nodesource/distributions/blob/master/README.md)
+
