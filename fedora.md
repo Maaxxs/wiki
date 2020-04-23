@@ -12,3 +12,7 @@ Nextcloud asks for the password after every login sometimes only after reboot. I
 
 fixed this after adding the credentials one more time.
 
+## Grub
+
+[Set default entry](https://fedoraproject.org/wiki/GRUB_2#Setting_default_entry)
+
