@@ -28,3 +28,11 @@ To update the grub settings for UEFI systems
 ```sh
 sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
 ```
+
+## Fonts
+
+Installing the Noto Sans fonts (mono, serif and display font)
+
+```sh
+sudo dnf install google-noto-sans-mono-fonts google-noto-serif-display-fonts google-noto-sans-display-fonts
+```
