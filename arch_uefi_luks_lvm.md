@@ -58,7 +58,7 @@ vim /etc/pacman.d/mirrorlist
 
 ```sh
 # Add dialog and wpa_supplicant if installing on a laptop
-pacstrap /mnt base base-devel bash-completion (dialog wpa_supplicant)
+pacstrap /mnt base base-devel linux linux-firmware bash-completion (dialog wpa_supplicant)
 ```
 
 ### Generate Fstab and chroot
@@ -82,6 +82,9 @@ You may need `FONT=lat9w-16` in `/etc/vconsole.conf` that the consolefont hook r
 ```sh
 vim /etc/mkinitcpio.conf
 ```
+
+For the `lvm2` hook the package `lvm2` is needed which can be installed in
+the chroot with `pacman -S lvm2`.
 
 ```conf
 ...
