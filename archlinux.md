@@ -160,7 +160,7 @@ pacstrap /mnt base base-devel bash-completion intel-ucode (dialog wpa_supplicant
 ### Generate File system Table
 
 ```sh
-genfstab -Up /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 
 # check with: cat /mnt/etc/fstab
 ```
