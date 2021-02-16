@@ -358,6 +358,17 @@ If no connection is available run
 ip a
 dhcpcd your-ethernet-interface
 
+If `dhcpcd` is not available set an IP address manually:
+
+```sh
+# set (a not used) IP
+ip addr add 192.168.178.250/24 dev eth0
+# set interface up
+ip link set eth0 up
+# set default gateway
+ip route add default via 192.168.178.1 dev eth0
+```
+
 # or for wifi (you must have installed 'dialog wpa_supplicant')
 wifi-menu
 ```
