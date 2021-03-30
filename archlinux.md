@@ -214,12 +214,11 @@ ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 ### Add a user
 
 _@param -m: create home directory_\
-_@param -g: main user group_\
 _@param -G: other groups_\
-_@param -s: Shell_
+_@param -s: Shell._ Default is `/bin/bash`
 
 ```sh
-useradd -m -g users -G wheel,audio,video -s /bin/bash username
+useradd -m -G wheel  username
 
 # Set password for your user
 passwd username
@@ -367,7 +366,6 @@ ip addr add 192.168.178.250/24 dev eth0
 ip link set eth0 up
 # set default gateway
 ip route add default via 192.168.178.1 dev eth0
-```
 
 # or for wifi (you must have installed 'dialog wpa_supplicant')
 wifi-menu
@@ -375,18 +373,20 @@ wifi-menu
 
 ### Install basic services
 
+Enable the `timesyncd` service of systemd (check with `date` command)
+
+```sh
+systemctl enable systemd-timesyncd
+systemctl start systemd-timesyncd
+```
+
 If you don't know what they do, use google.
 
 ```sh
-pacman -S acpid ntp avahi cronie cups
+pacman -S acpid avahi cups
 
 # Enable them at boot
-systemctl enable acpid avahi-daemon cronie ntpd org.cups.cupsd.service
-
-# synchronize
-sudo ntpd -gq
-# check
-date
+systemctl enable acpid avahi-daemon org.cups.cupsd.service
 
 # Set the time in the hardware clock
 hwclock -w
@@ -395,6 +395,10 @@ hwclock -w
 ### Video Driver
 
 #### Intel
+
+Works out of the box. The following package is usually not recommended to
+install but might be needed in special cases. See
+[here](https://wiki.archlinux.org/index.php/Intel_graphics)
 
 ```sh
 pacman -S xf86-video-intel
@@ -439,10 +443,7 @@ Install Gnome Display Manager, group `gnome` and `gnome-extra` if desired.
 
 ```sh
 pacman -S gdm gnome (gnome-extra)
-systemctl enable gmd
-
-# Maybe as well?
-pacman -S xorg-server xorg-xinit xorg-server-xwayland
+systemctl enable gmd NetworkManager
 ```
 
 ### Reboot

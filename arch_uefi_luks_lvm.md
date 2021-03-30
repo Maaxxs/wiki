@@ -38,13 +38,14 @@ lvcreate -l 100%FREE arch -n root
 ```sh
 mkfs.ext4 /dev/arch/root
 mkswap /dev/arch/swap
+swapon /dev/arch/swap
 ```
 
 ## Mount partitions and activate swap
 
 ```sh
-mkdir /mnt/boot
 mount /dev/arch/root /mnt
+mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 ```
 
@@ -58,7 +59,7 @@ vim /etc/pacman.d/mirrorlist
 
 ```sh
 # Add dialog and wpa_supplicant if installing on a laptop
-pacstrap /mnt base base-devel linux linux-firmware bash-completion (dialog wpa_supplicant)
+pacstrap /mnt base base-devel linux linux-firmware bash-completion dhcpcd (dialog wpa_supplicant)
 ```
 
 ### Generate Fstab and chroot
@@ -123,11 +124,12 @@ editor 0
 vim /boot/loader/entries/arch.conf
 ```
 
-For the intel microcode install the `intel-ucode` package.
-
-"cryptdevice=... root=..." are on the **options** line!
-
-in vim: `:r ! blkid` pastes the output into vim
+- For the intel microcode install the `intel-ucode` package.
+- "cryptdevice=... root=..." are on the **options** line!
+  - `cryptdevice` gets the UUID of the LUKS partition
+  - `root` gets the UUID of the root partition in the LUKS container
+  - `resume` gets the UUID of the swap partition in the LUKS container
+- in vim: `:r ! blkid` pastes the output into vim
 
 ```conf
 title   Arch Linux
