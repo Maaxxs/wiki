@@ -1162,6 +1162,11 @@ sudo lscpu
 inxi -Fx
 ```
 
+## Shortcuts
+
+- make `Alt+Tab` switch between windows not applications. In settings->Keyboard
+  Shortcuts->*Switch Windows* to shortcut `Alt+Tab`
+
 ## Security
 
 ### Umask
@@ -1180,7 +1185,10 @@ change umask in `/etc/profile` to
 
 ### Firewall
 
-TODO: Get some configuration here.
+Install `ufw`. The default config is deny all incoming and allow outgoing.
+Forwarding is disabled. Run the following.
 
-- nftables
-- iptables
+```sh
+ufw enable
+```
+
