@@ -391,13 +391,12 @@ reboot
 
 ### Check if you sudo into root
 
-If so, you can disable root login
+If so, you can disable root login (at least, I like to do that)
 
 ```sh
 sudo -i
 
 # if successful, do
-
 passwd -l root
 # or replace the root password hash in /etc/shadow with an '!'
 ```
@@ -441,9 +440,6 @@ pacman -S acpid avahi cups
 
 # Enable them at boot
 systemctl enable acpid avahi-daemon org.cups.cupsd.service
-
-# Set the time in the hardware clock
-hwclock -w
 ```
 
 ### Video Driver
@@ -462,6 +458,42 @@ pacman -S xf86-video-intel
 
 ```sh
 pacman -S nvidia nvidia-settings
+```
+
+I had some problem when having intalled gnome as desktop that `gdm` would load
+before the nvidia modules and therefore fail. Then you have to manually restart
+`gdm` and everything works but that's annoying.
+
+Add nvidia modules to initramfs to load them first. Also add a pacman hook to
+make sure that the initramfs is updated if the `nvidia` package is updated.
+
+See [this
+link](https://wiki.archlinux.org/index.php/NVIDIA#DRM_kernel_mode_setting) for
+more information.
+
+In `/etc/mkinitcpio.conf` add the modules
+```conf
+MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+```
+
+Add the pacman hook `/etc/pacman.d/hooks/nvidia.hook` 
+```
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Operation=Remove
+Type=Package
+Target=nvidia
+Target=linux
+# Change the linux part above and in the Exec line if a different kernel is used
+
+[Action]
+Description=Update Nvidia module in initcpio
+Depends=mkinitcpio
+When=PostTransaction
+NeedsTargets
+Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
+# the above command avoids multiple runs of mkinitcpio if both - linux and nvidia package - is updated
 ```
 
 #### Open Source Nvidia Driver Nouveau
@@ -497,50 +529,13 @@ Install Gnome Display Manager, group `gnome` and `gnome-extra` if desired.
 
 ```sh
 pacman -S gdm gnome (gnome-extra)
-systemctl enable gmd NetworkManager
+systemctl enable gdm NetworkManager
 ```
 
 ### Reboot
 
 **Congratulations! You installed a Desktop and a Login Manager**\
 **Reboot and you should be able to login into your graphical environment**
-
-## Configurations
-
-Nvidia module loads after `gdm` which means `gdm` won't start and I need to
-restart it manually. Add nvidia modules to initramfs to load them first. Also
-add a pacman hook to make sure that the initramfs is updated if the `nvidia`
-package is updated.
-
-See [this
-link](https://wiki.archlinux.org/index.php/NVIDIA#DRM_kernel_mode_setting) for
-more information.
-
-In `/etc/mkinitcpio.conf` add the modules
-```conf
-MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
-```
-
-Add the pacman hook `/etc/pacman.d/hooks/nvidia.hook` 
-```
-[Trigger]
-Operation=Install
-Operation=Upgrade
-Operation=Remove
-Type=Package
-Target=nvidia
-Target=linux
-# Change the linux part above and in the Exec line if a different kernel is used
-
-[Action]
-Description=Update Nvidia module in initcpio
-Depends=mkinitcpio
-When=PostTransaction
-NeedsTargets
-Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
-# the above command avoids multiple runs of mkinitcpio if both - linux and nvidia package - is updated
-```
-
 
 
 ## Archlinux Tweaks
@@ -630,15 +625,15 @@ Section "InputClass"
 EndSection
 ```
 
-### Install AUR Helper Trizen
+### Install AUR Helper
 
-Trizen will be updated by itself/pacman.
+I use `yay`
 
 ```sh
-git clone https://aur.archlinux.org/trizen.git
-cd trizen
+git clone https://aur.archlinux.org/yay.git
+cd yay
 makepkg -rsi
-cd .. && rm -rf trizen/
+cd .. && rm -r yay/
 ```
 
 ### Printer Configuration
@@ -771,8 +766,7 @@ In the `general` tab, create a new property named `SaveOnExit`, Type `BOOL` and 
 
 ### FireFox Fix GTK dark Theme
 
-**Might be already fixed** TODO
-[See here](https://wiki.archlinux.org/index.php/Firefox/Tweaks#Unreadable_input_fields_with_dark_GTK.2B_themes)
+[See here](https://wiki.archlinux.org/index.php/Firefox/Tweaks#Unreadable_input_fields_with_dark_GTK_themes)
 
 ### FireFox Default Zoom Level
 
@@ -835,10 +829,6 @@ COMPRESSGZ=(pigz -c -f -n)
 COMPRESSXZ=(xz -c -z - --threads=0)
 ```
 
-### Powerline Bash
-
-[Github Powerline Shell](https://github.com/b-ryan/powerline-shell)
-
 ### Compton Start on all screens
 
 ```sh
@@ -871,7 +861,7 @@ users=
 ### Laptop change brightness in smaller steps
 
 ```sh
-trizen -S light
+pacman -S light
 
 ```
 
@@ -902,22 +892,6 @@ See [Github Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 
 ```sh
 trizen -S nerd-fonts-hack
-```
-
-### NeoVim fuzzy search
-
-Use [fzf](https://github.com/junegunn/fzf)
-To use `:Ag` install
-
-```sh
-pacman -S the_silver_searcher
-```
-
-Coresponding part in `init.vim`
-
-```sh
-Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
-Plug 'junegunn/fzf.vim'
 ```
 
 ### Firefox Customization
