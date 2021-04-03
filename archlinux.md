@@ -93,6 +93,9 @@
 
 ## Install Archlinux
 
+This will be an archlinux installation with systemd-boot (EFI) and LVM in a LUKS
+encrypted container.
+
 You might want to override your harddrive, especially if you want to encrypt it.
 
 ```sh
@@ -106,62 +109,81 @@ For a german keyboard layout
 loadkeys de
 ```
 
-Partition your drive. Assumend drive throughout is `/dev/sda`
+You can check if you booted in efi mode: if the following command lists some
+content then you did.
 
 ```sh
-fdisk /dev/sda
+ls /sys/firmware/efi
 ```
 
-- BIOS – Legacy – DOS
-  - o -> dos table
-  - n -> p -> 1 -> first sector -> +50GB
-  - p [print] -> t [type ändern evtl]
-  - w [write]
-- UEFI – GPT
-  - g -> gpt table
-  - EFI [type: ef00] Partition mit +512M
-  - … je nachdem / und /home
-  - mkfs.fat -F 32 -n EFIBOOT /dev/sda1
-
-If you want Hibernation
-
-- Create Swap Partition
-- Add hook `resume` in mkinitcpio.conf (after udev hook!)
-- specify resume Kernel-Parameter in Boot Loader Config Files
-
-### Create filesystem
+Partition of the drive: 
+- Create a EFI (ef00) partition of 512MiB size.
+  - if you've got a windows installation you can use the Windows EFI partition
+      if it's big enough which should usually be the case.
+- Create a Linux (can be the LUKS type 8309) parition of the rest.
 
 ```sh
-mkfs.ext4 -L ROOT /dev/sdaX
-mkswap -L SWAP /dev/sdaX
+gdisk /dev/sda
+```
+
+Format efi partition (sda1) and create and open the luks container
+
+```sh
+mkfs.fat -F32 /dev/sda1
+
+cryptsetup luksFormat /dev/sda2
+cryptsetup open /dev/sda2 lvm
+``` 
+
+I want hibernation to be available so a swap partition must be created.
+
+```sh
+pvcreate /dev/mapper/lvm
+vgcreate arch /dev/mapper/lvm
+lvcreate -L 8G arch -n swap
+lvcreate -l 100%FREE arch -n root
+```
+
+### Create filesystems and activate swap
+
+```sh
+mkfs.ext4 /dev/arch/root
+mkswap /dev/arch/swap
+swapon /dev/arch/swap
 ```
 
 ### Mount all partitions
 
 ```sh
-mount /dev/sdaX /mnt          # root
-mount /dev/sdaX /mnt/home     # home
-swapon /dev/sdaX              # activate Swap
+mount /dev/arch/root /mnt
+mkdir /mnt/boot
+mount /dev/sda1 /mnt/boot
+```
 
-# check mountpoints
+### check mountpoints and swap
+```sh
 df -Th
-
 # check swap
 free -h
+```
+
+### Chosse a good mirror
+
+```sh
+vim /etc/pacman.d/mirrorlist
 ```
 
 ### Install Base system
 
 ```sh
-# Add dialog and wpa_supplicant if you need wifi.
-pacstrap /mnt base base-devel bash-completion intel-ucode (dialog wpa_supplicant)
+# Add dialog and wpa_supplicant if installing on a computer connected via wlan.
+pacstrap /mnt base base-devel linux linux-firmware intel-ucode bash-completion dhcpcd (dialog wpa_supplicant)
 ```
 
 ### Generate File system Table
 
 ```sh
 genfstab -U /mnt >> /mnt/etc/fstab
-
 # check with: cat /mnt/etc/fstab
 ```
 
@@ -170,6 +192,32 @@ genfstab -U /mnt >> /mnt/etc/fstab
 ```sh
 arch-chroot /mnt
 ```
+
+### Synchronize hardware clock if you'd like
+```sh
+hwclock --systohc --utc
+```
+
+### Add kernel hooks
+```sh
+vim /etc/mkinitcpio.conf
+```
+
+For the `lvm2` hook the package `lvm2` is needed which can be installed in
+the chroot with `pacman -S lvm2`. The `resume` hook is needed for hibernation.
+
+```conf
+...
+HOOKS=(base udev autodetect keyboard keymap consolefont modconf block encrypt lvm2 filesystems resume fsck)
+...
+```
+
+Generate a new ramdisk
+
+```sh
+mkinitcpio -p linux
+```
+
 
 ### Set some basic stuff
 
@@ -180,7 +228,7 @@ arch-chroot /mnt
   hostname
   ```
 
-- `/etc/locale.conf`
+- `/etc/locale.conf` (choose language)
 
   ```sh
   # german
@@ -192,17 +240,15 @@ arch-chroot /mnt
   LANGUAGE=en_US
   ```
 
-- `/etc/vconsole.conf`
+- `/etc/vconsole.conf` (choose layout)
 
   ```sh
-  # german layout
-  KEYMAP=de-latin1-nodeadkeys
-
-  # us layout
-  KEYMAP=us
-
   # Font on early boot
   FONT=lat9w-16
+  # german layout
+  KEYMAP=de-latin1-nodeadkeys
+  # us layout
+  KEYMAP=us
   ```
 
 ### Set the Time Zone
@@ -218,19 +264,23 @@ _@param -G: other groups_\
 _@param -s: Shell._ Default is `/bin/bash`
 
 ```sh
-useradd -m -G wheel  username
-
+useradd -m -G wheel username
 # Set password for your user
 passwd username
+```
 
-# Set password for root
+### Change the root password
+
+```sh
 passwd
 ```
 
 ### Allow members of group wheel to gain root priviliges
 
+For `nvim`, install `pacman -S neovim`
+
 ```sh
-EDITOR=nano visudo
+EDITOR=nvim visudo
 
 # remove the '#' in the line:
 %wheel ALL = (ALL) ALL
@@ -240,17 +290,19 @@ EDITOR=nano visudo
 
 ```sh
 # eg: remove '#' in front of all 'de_DE' or 'en_US' entries
-vim /etc/locale.gen
+nvim /etc/locale.gen
 
 # generate
 locale-gen
 ```
 
-### Bootloader
 
-#### Grub on BIOS - Legacy systems
+### Grub on BIOS - Legacy systems
 
-##### Installation of `grub` and `os-prober`
+**Ignore this. Legacy. I don't use it anymore. It's just there for reference.
+Jump to [Systemd-boot](#systemd-boot-on-uefi-systems)**
+
+#### Installation of `grub` and `os-prober`
 
 ```sh
 # Install Grub and os-prober to detect other installed operating systems if you have any
@@ -258,71 +310,73 @@ pacman -S grub os-prober
 grub-install /dev/sda
 ```
 
-##### Generate Grub configuration
+#### Generate Grub configuration
 
 ```sh
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-#### Systemd Boot on UEFI systems
+### Systemd Boot on UEFI systems
 
-##### Installation of `efi` tools
+if the efi partition was mounted to `/boot/` the following is fine. Otherwise
+use path arguments of `bootctl` to adjust the path.
 
 ```sh
-pacman -S efibootmgr dosfstools gptfdisk
-
-# install to disk
 bootctl install
 ```
 
-##### Create boot entries and the loader configuration
+### Create loader config
 
-Append the parameter `quiet` if you don't want to see systemd startup messages on boot
-
-The options line:
-
-```conf
-options   root=LABEL=label-of-root resume=LABEL=label-of-swap rw
-options   root=UUID=uuid-of-root resume=UUID=uuid-of-swap rw
+```sh
+nvim /boot/loader/loader.conf
 ```
-
-Create the following configuration files
-
-- `/boot/loader/entries/arch.conf`
-
-  ```conf
-  title    Arch Linux
-  linux    /vmlinuz-linux
-  initrd   /intel-ucode.img
-  initrd   /initramfs-linux.img
-  options  root=LABEL=p_arch resume=LABEL=p_swap rw
-  ```
-
-The fallback configuration file
-
-- `/boot/loader/configuration/arch-fallback.conf`
-
-  ```conf
-  title    Arch Linux Fallback
-  linux    /vmlinuz-linux
-  initrd   /intel-ucode.img
-  initrd   /initramfs-linux-fallback.img
-  options  root=LABEL=p_arch resume=LABEL=p_swap rw
-  ```
-
-- Bootloader configuration `/boot/loader/loader.conf`
 
 ```conf
 default arch
-timeout 3
-editor  0
+timeout 2
 console-mode max
+editor 0
+```
+
+## Create boot entries
+
+- For the intel microcode install the `intel-ucode` package.
+- "cryptdevice=... root=..." are on the **options** line!
+  - `cryptdevice` gets the UUID of the LUKS partition
+  - `root` gets the UUID of the root partition in the LUKS container
+  - `resume` gets the UUID of the swap partition in the LUKS container
+- in vim: `:r ! blkid` pastes the output into vim
+
+```sh
+nvim /boot/loader/entries/arch.conf
+```
+
+```conf
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /intel-ucode.img
+initrd  /initramfs-linux.img
+options cryptdevice=UUID=123adf-1234asdf123-1234d-234fdfa:arch
+options root=UUID=123-234
+options resume=UUID=134-123 rw
+```
+
+arch-fallback.conf
+
+```conf
+title   Arch Linux Fallback
+linux   /vmlinuz-linux
+initrd  /intel-ucode.img
+initrd  /initramfs-linux-fallback.img
+options cryptdevice=UUID=123adf-1234asdf123-1234d-234fdfa:arch
+options root=UUID=123-234
+options resume=UUID=134-123 rw
 ```
 
 **Summary:** You should have created 3 files:
-`/boot/loader/entries/arch.conf`
-`/boot/loader/entries/arch-fallback.conf`
-`/boot/loader/loader.conf`
+- `/boot/loader/entries/arch.conf`
+- `/boot/loader/entries/arch-fallback.conf`
+- `/boot/loader/loader.conf`
 
 ### Exit and Reboot
 
@@ -450,6 +504,44 @@ systemctl enable gmd NetworkManager
 
 **Congratulations! You installed a Desktop and a Login Manager**\
 **Reboot and you should be able to login into your graphical environment**
+
+## Configurations
+
+Nvidia module loads after `gdm` which means `gdm` won't start and I need to
+restart it manually. Add nvidia modules to initramfs to load them first. Also
+add a pacman hook to make sure that the initramfs is updated if the `nvidia`
+package is updated.
+
+See [this
+link](https://wiki.archlinux.org/index.php/NVIDIA#DRM_kernel_mode_setting) for
+more information.
+
+In `/etc/mkinitcpio.conf` add the modules
+```conf
+MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+```
+
+Add the pacman hook `/etc/pacman.d/hooks/nvidia.hook` 
+```
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Operation=Remove
+Type=Package
+Target=nvidia
+Target=linux
+# Change the linux part above and in the Exec line if a different kernel is used
+
+[Action]
+Description=Update Nvidia module in initcpio
+Depends=mkinitcpio
+When=PostTransaction
+NeedsTargets
+Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
+# the above command avoids multiple runs of mkinitcpio if both - linux and nvidia package - is updated
+```
+
+
 
 ## Archlinux Tweaks
 
