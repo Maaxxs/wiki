@@ -460,6 +460,8 @@ pacman -S xf86-video-intel
 pacman -S nvidia nvidia-settings
 ```
 
+#### Fixing boot order for `gdm`
+
 I had some problem when having intalled gnome as desktop that `gdm` would load
 before the nvidia modules and therefore fail. Then you have to manually restart
 `gdm` and everything works but that's annoying.
@@ -495,6 +497,25 @@ NeedsTargets
 Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
 # the above command avoids multiple runs of mkinitcpio if both - linux and nvidia package - is updated
 ```
+
+#### Monitors don't wake up after suspend
+
+- [Nvidia
+  forums](https://forums.developer.nvidia.com/t/regression-460-series-black-screen-on-boot-nvidia-modeset-error-gpu-failed-to-allocate-display-engine-core-dma-push-buffer/165598)
+
+seems to be a regession. possible fixes should be: 
+- turn on CSM legacy in BIOS (actually that did fix it for me)
+- start with kernel parameter `nvidia-drm.modeset=1` Also see [Arch
+  wiki](https://wiki.archlinux.org/index.php/NVIDIA#DRM_kernel_mode_setting)
+
+I moved the file `/usr/share/X11/xorg.conf.d/10-quirks.conf` to
+`/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf` and added the following
+option: `Option "PrimaryGPU" "yes"`
+
+Also see [Arch
+forum](https://bbs.archlinux.org/viewtopic.php?pid=1881083#p1881083) and
+[this](https://bbs.archlinux.org/viewtopic.php?pid=1881506#p1881506)
+
 
 #### Open Source Nvidia Driver Nouveau
 
