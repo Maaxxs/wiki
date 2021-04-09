@@ -561,6 +561,12 @@ systemctl enable gdm NetworkManager
 
 ## Archlinux Tweaks
 
+### OBS Studio
+
+Install `v4l2loopback-dkms` and load the module with `sudo modprobe
+v4l2loopback`. Then it's possible start a virtual camera in OBS. See also
+<https://github.com/obsproject/obs-studio/pull/3182>
+
 ### XDG home directories
 
 ```sh
