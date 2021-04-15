@@ -614,6 +614,14 @@ This will stop output of `iptables` to `/var/log/everything.log`
 - User Themes
 - Media player indicator
 
+### Top Icons Plus 
+
+is not maintened anymore. GNOME 40 broke the package. Repo was fored and a patch
+from
+<https://github.com/kofemann/TopIcons-plus/commit/98cd17aa324a031e2ee3d344582dfdafd1e4642f>
+applied to get it working with Gnome 40 (not merged upstream). Therefore, the
+package `gnome-shell-extension-topicons-plus` still works. 
+
 ### i3 as Desktop
 
 Probably needed packages
