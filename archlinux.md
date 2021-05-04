@@ -126,12 +126,20 @@ Partition of the drive:
 gdisk /dev/sda
 ```
 
-Format efi partition (sda1) and create and open the luks container
+Format efi partition (sda1) and create and open the luks container. If the
+SSD/HDD uses 4096 bytes as physical sector size you probably want to set the
+sector size to 4096 with `cryptsetup` as well (and for the file system!). This
+can be checked with `hdparm -I /dev/sda | grep 'Sector size'`
 
 ```sh
+# create file system for the efi partition
 mkfs.fat -F32 /dev/sda1
 
+# use defaults
 cryptsetup luksFormat /dev/sda2
+# use sector size of 4096
+cryptsetup luksFormat --sector-size 4096 /dev/sda2
+
 cryptsetup open /dev/sda2 lvm
 ``` 
 
@@ -146,8 +154,14 @@ lvcreate -l 100%FREE arch -n root
 
 ### Create filesystems and activate swap
 
+Usually, the correct block size is choosen automatically. You can check this
+after creating the filesystem with `sudo dumpe2fs /dev/arch/root | grep 'Block
+size'`. If it is not correct, you may force it with `mkfs.ext4 -F -b 4096
+/dev/arch/root` (if 4096 is the correct sector size).
+
 ```sh
 mkfs.ext4 /dev/arch/root
+
 mkswap /dev/arch/swap
 swapon /dev/arch/swap
 ```
@@ -156,6 +170,7 @@ swapon /dev/arch/swap
 
 ```sh
 mount /dev/arch/root /mnt
+
 mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 ```
