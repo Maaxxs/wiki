@@ -7,7 +7,7 @@
 borg init --encryption=keyfile raspistation:/backup/fedtow
 
 # store key in config file on remote repo
-borg init --encryption=repofile raspistation:/backup/fedtow
+borg init --encryption=repokey raspistation:/backup/fedtow
 ```
 
 ## Create an archive
