@@ -49,11 +49,15 @@ iface eth0 inet dhcp
 
 With static address
 ```conf
+auto eth0
 iface eth0 inet static
 address 10.0.3.3
 netmask 255.255.255.0
 gateway 10.0.3.1
+dns-nameservers 9.9.9.9
 ```
+
+See also [linuxhint.com](https://linuxhint.com/debian_etc_network_interfaces/)
 
 
 
