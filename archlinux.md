@@ -662,6 +662,11 @@ Set US as default layout and switch to german layout while pressing the 'Right A
 localectl set-x11-keymap us,de ,pc105 ,nodeadkeys grp:switch
 ```
 
+To switch between us and de layout while holding the CAPSLOCK key use this:
+```sh
+localectl set-x11-keymap us,de ,pc105 ,nodeadkeys grp:caps_switch
+```
+
 You can do that manually as well in `/etc/X11/xorg.conf.d/20-keyboard.conf`
 
 ```conf
