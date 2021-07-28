@@ -1,4 +1,12 @@
-# Printing
+---
+title: "Printing"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Print double-sided pages
 

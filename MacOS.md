@@ -1,4 +1,12 @@
-# MacOS
+---
+title: "Macos"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 Check if apps are already supported for ARM:
 * https://isapplesiliconready.com/de

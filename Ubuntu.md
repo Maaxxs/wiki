@@ -1,4 +1,12 @@
-# Ubuntu
+---
+title: "Ubuntu"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Nextcloud Client Snap
 

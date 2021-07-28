@@ -1,4 +1,12 @@
-# **Maven**
+---
+title: "Maven"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 _created by [Noah](https://gitlab.com/DrNochi)_
 

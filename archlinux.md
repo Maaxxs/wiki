@@ -1,4 +1,12 @@
-# Archlinux
+---
+title: "Archlinux"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 - [Install Archlinux](#install-archlinux)
   - [Create filesystem](#create-filesystem)

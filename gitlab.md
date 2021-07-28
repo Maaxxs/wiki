@@ -1,4 +1,12 @@
-# Gitlab
+---
+title: "Gitlab"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Verify SSH fingerprint of gitlab servers
 

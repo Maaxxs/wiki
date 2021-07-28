@@ -1,4 +1,12 @@
-# Using Borg as Backup system
+---
+title: "Borg"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Initialize the backup repository
 

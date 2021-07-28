@@ -1,4 +1,12 @@
-# Raspberry Pi
+---
+title: "Raspberrypi"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Enable WLAN
 

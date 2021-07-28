@@ -1,4 +1,12 @@
-# Network configuration
+---
+title: "Network"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## systemd-networkd
 

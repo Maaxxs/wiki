@@ -1,4 +1,12 @@
-# ARM Arch Linux Raspberry Pi
+---
+title: "Arm Archlinux"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 [Official Documentation](https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3)
 

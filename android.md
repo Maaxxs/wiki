@@ -1,4 +1,12 @@
-# Android
+---
+title: "Android"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Permissions errors
 

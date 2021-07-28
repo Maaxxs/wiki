@@ -1,4 +1,12 @@
-# Secure erasing
+---
+title: "Secure-Erasing"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Shredding devices and files
 

@@ -1,4 +1,12 @@
-# Installation of Jenkins on Ubuntu 18.04 LTS
+---
+title: "Install Jenkins Ubuntu"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Installation
 

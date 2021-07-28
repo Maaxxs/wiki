@@ -1,4 +1,12 @@
-# Flatpak
+---
+title: "Flatpak"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 - each application is build against a runtime. a runtime provides basic dependencies
 - multiple runtimes (and versions of it) can be installed at the same time

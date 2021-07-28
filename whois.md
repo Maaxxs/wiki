@@ -1,4 +1,12 @@
-# Denic - Whois
+---
+title: "Whois"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 <https://www.denic.de/service/whois-service/>
 

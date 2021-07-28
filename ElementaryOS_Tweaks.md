@@ -1,4 +1,12 @@
-# Elementary OS Tweaks
+---
+title: "Elementaryos Tweaks"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Install wing panel
 

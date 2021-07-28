@@ -1,4 +1,12 @@
-# Windows
+---
+title: "Windows"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Create a bigger ESP partition (default 100MB)
 

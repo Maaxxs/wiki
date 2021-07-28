@@ -1,4 +1,12 @@
-# UFW 
+---
+title: "Ufw"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Add rules
 

@@ -1,4 +1,12 @@
-# Fuzzing
+---
+title: "Fuzzing"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## RAM disk for fuzzing to minimize writes on SSDs
 

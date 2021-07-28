@@ -1,4 +1,12 @@
-# GPG
+---
+title: "Gpg"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Use with Thunderbird
 

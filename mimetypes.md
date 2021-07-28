@@ -1,4 +1,12 @@
-# Mime
+---
+title: "Mimetypes"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 Query for default mime type 
 

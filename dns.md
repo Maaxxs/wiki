@@ -1,4 +1,12 @@
-# DNS
+---
+title: "Dns"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 | Service                                 | IPv4            | IPv6                 |
 | :-------------------------------------- | :-------------- | :------------------- |

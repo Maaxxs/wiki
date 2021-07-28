@@ -1,4 +1,12 @@
-# Fedora
+---
+title: "Fedora"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 To use the command `chsh`, install
 

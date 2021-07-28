@@ -1,4 +1,12 @@
-# Systemd
+---
+title: "Systemd"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 
 Build dependency graph. The package `graphviz` is required.

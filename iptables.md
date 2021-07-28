@@ -1,4 +1,12 @@
-# Netfiler iptables
+---
+title: "Iptables"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 - [Why to use `REJECT` instead of `DROP`](http://www.chiark.greenend.org.uk/~peterb/network/drop-vs-reject)
 

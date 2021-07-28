@@ -1,4 +1,12 @@
-# PiHole
+---
+title: "Pihole"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Removing an entry from audit list
 

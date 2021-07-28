@@ -1,3 +1,12 @@
+---
+title: "Fedora Tweaks"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 
 ## Removing local calendars

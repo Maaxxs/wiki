@@ -1,4 +1,12 @@
-# Configure SSH
+---
+title: "Configure Ssh"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Initial configuration
 

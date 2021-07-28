@@ -1,4 +1,12 @@
-# Forensics
+---
+title: "Forensics"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Filesystem creation date
 

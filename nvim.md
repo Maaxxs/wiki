@@ -1,4 +1,12 @@
-# Nvim
+---
+title: "Nvim"
+date: 
+tags: ["wiki"]
+ShowLastUpdated: true
+toc: true
+draft: false
+---
+
 
 ## Plugins
 
