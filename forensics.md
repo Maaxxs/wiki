@@ -2,7 +2,7 @@
 title: "Forensics"
 date: 
 tags: ["wiki"]
-ShowLastUpdated: true
+ShowLastUpdated: false
 toc: true
 draft: false
 ---

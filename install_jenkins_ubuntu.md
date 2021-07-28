@@ -2,7 +2,7 @@
 title: "Install Jenkins Ubuntu"
 date: 
 tags: ["wiki"]
-ShowLastUpdated: true
+ShowLastUpdated: false
 toc: true
 draft: false
 ---

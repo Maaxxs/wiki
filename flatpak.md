@@ -2,7 +2,7 @@
 title: "Flatpak"
 date: 
 tags: ["wiki"]
-ShowLastUpdated: true
+ShowLastUpdated: false
 toc: true
 draft: false
 ---
