@@ -1,0 +1,6 @@
+site_name: My Wiki
+site_url: https://kunzelma.de/wiki
+# nav:
+#     - Home: index.md
+#     - About: about.md
+theme: readthedocs
