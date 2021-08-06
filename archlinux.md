@@ -462,6 +462,24 @@ pacman -S xf86-video-nouveau
 pacman -S virtualbox-guest-utils
 ```
 
+## Sway
+
+Install
+```sh
+pacman -S sway swaylock swayidle alacritty xorg-xwayland wofi
+```
+
+`sway` can then be started from a tty with the command `sway`. 
+Autostart in `tty` can be done as follows in the shell initialization file (such
+as `~/.zshrc`):
+
+```sh
+if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+  exec sway
+fi
+```
+
+
 ### Install XFCE4 as Desktop
 
 Install X, XFCE and LightDM
