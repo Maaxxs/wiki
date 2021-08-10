@@ -756,16 +756,24 @@ Install `lightdm-gtk-greeter-settings` for a configuration GUI.
 Manually edits can be done in `/etc/lightdm/lightdm-gtk-greeter.conf`.
 
 ```conf
+[greeter]
 background=/usr/share/pixmaps/nameOfPic.png
 position=200,start 480,start
 active-monitor=0
+clock-format=(CW %U) %a, %d.%m.%Y   %H:%M
 ```
 
-Set "Date - Time" in Login Screen
+For the clock format, see [the cheatsheet](https://strftime.org/)
 
-```conf
-%d %b - %H:%M
-```
+- `%a` - Weekday as locale’s abbreviated name.
+- `%d` - Day of the month as a zero-padded decimal number.
+- `%m` - Month as a zero-padded decimal number.
+- `%Y` - Year with century as a decimal number.
+- `%H` - Hour (24-hour clock) as a zero-padded decimal number.
+- `%M` - Minute as a zero-padded decimal number.
+- `%U` - Week number of the year (Sunday as the first day of the week) as a
+  zero padded decimal number. All days in a new year preceding the first Sunday
+  are considered to be in week 0.
 
 ### SSD Trim
 
