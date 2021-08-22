@@ -140,7 +140,7 @@ vim /etc/pacman.d/mirrorlist
 
 ```sh
 # Add dialog and wpa_supplicant if installing on a computer connected via wlan.
-pacstrap /mnt base base-devel linux linux-firmware intel-ucode bash-completion dhcpcd (dialog wpa_supplicant)
+pacstrap /mnt base base-devel linux linux-firmware intel-ucode bash-completion (iwd)
 ```
 
 ### Generate File system Table
@@ -386,6 +386,34 @@ ip route add default via 192.168.178.1 dev eth0
 wifi-menu
 ```
 
+#### Systemd-networkd
+If wlan is used and `iwd` is installed, enable it so that `systemd-networkd` can 
+use it.
+```sh
+systemctl enable --now iwd
+```
+
+Then create a config file for the network interface (multiple are fine) which 
+sould be managed by `systemd-networkd`.
+
+In `/etc/systemd/network/net.network`
+```
+[Match]
+Name=wlan0
+Name=eth0
+
+[Network]
+DHCP=yes
+```
+
+Then enable `systemd-networkd`
+```sh
+systemctl enable --now systemd-networkd
+```
+
+Also see [Network](./network.md).
+
+
 ### Install basic services
 
 Enable the `timesyncd` service of systemd (check with `date` command). The
@@ -393,6 +421,7 @@ following enables and starts `timesyncd`.
 
 ```sh
 systemctl enable --now systemd-timesyncd
+timedatectl set-ntp true
 ```
 
 Only install these if you them; otherwise you can install them later if you
@@ -548,9 +577,24 @@ pacman -S xorg-server xorg-xinit xfce4 xfce4-goodies lightdm lightdm-gtk-greeter
 
 # enable for boot
 systemctl enable lightdm NetworkManager
+```
 
-# install some audio stuff
+For `pulseaudio` and `alsa` install the following:
+```sh
 pacman -S (alsa-tools) alsa-utils pulseaudio-alsa pulseaudio-bluetooth pavucontrol
+```
+
+I use pipewire as a full replacement for pulseaudio and pulseaudio-bluetooth.
+Install 
+```sh
+pacman -S pipewire pipewire-pulse pavucontrol (pamixer)
+```
+
+The following is required for WebRTC screen sharing `xdg-desktop-portal` and 
+a backend for it, eg. for `sway`:
+```sh
+pacman -S xdg-desktop-portal pipewire-media-session xdg-desktop-portal-wlr  
+# Gnome: xdg-desktop-portal-gtk
 ```
 
 #### XFCE Logout
@@ -592,6 +636,12 @@ See issue with [`gdm` and Nvidia](#fixing-boot-order-for-gdm)
 
 
 ## Archlinux Tweaks
+
+### Power
+
+```sh
+pacman -S upower
+```
 
 ### OBS Studio
 
