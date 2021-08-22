@@ -27,6 +27,30 @@ For a german keyboard layout
 loadkeys de
 ```
 
+Connect to the internet via wlan with `iwd`. Get the interactive prompt with:
+```sh
+iwctl
+```
+
+Device list
+```
+[iwd]# device list
+```
+
+Let's sway the wlan device is called `wlan0`. Scan and list networks:
+```
+[iwd]# station wlan0 scan
+[iwd]# station wlan0 get-networks
+```
+
+Connect to a network:
+```
+[iwd]# station wlan0 connect <SSID>
+```
+
+
+### Create filesystems and activate swap
+
 You can check if you booted in efi mode: if the following command lists some
 content then you did.
 
@@ -70,14 +94,13 @@ vgcreate arch /dev/mapper/lvm
 lvcreate -L 8G arch -n swap
 lvcreate -l 100%FREE arch -n root
 ```
-
-### Create filesystems and activate swap
-
 Usually, the correct block size is choosen automatically. You can check this
 after creating the filesystem with 
+
 ```sh
 sudo dumpe2fs /dev/arch/root | grep 'Blocksize'
 ```
+
 If it is not correct, you may force a sector size of 4096 with
 ```sh
 mkfs.ext4 -F -b 4096 /dev/arch/root
