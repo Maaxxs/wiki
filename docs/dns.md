@@ -1,12 +1,3 @@
----
-title: "DNS"
-date: 
-tags: ["wiki"]
-ShowLastUpdated: false
-toc: true
-draft: false
----
-
 # DNS
 
 ## DNS Server
@@ -24,6 +15,20 @@ draft: false
 ```sh
 dig ch version.bind txt
 # or
-dig ch @1.1.1.1 version.bind txt 
+dig ch @1.1.1.1 version.bind txt
+```
+
+## Dump DNS Cache
+
+If `systemd-resolved` is used, you can dump the current DNS cache.
+
+Follow the unit in the journal with:
+```sh
+journalctl -f -u systemd-resolved
+```
+
+Then dump the cache with this command.
+```sh
+sudo killall -USR1 systemd-resolved
 ```
 
