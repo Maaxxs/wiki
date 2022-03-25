@@ -1,12 +1,3 @@
----
-title: "Archlinux"
-date: 
-tags: ["wiki"]
-ShowLastUpdated: false
-toc: true
-draft: false
----
-
 # Archlinux
 
 ## Install Archlinux
@@ -37,7 +28,7 @@ Device list
 [iwd]# device list
 ```
 
-Let's sway the wlan device is called `wlan0`. Scan and list networks:
+Let's assume the wlan device is called `wlan0`. Scan and list networks:
 ```
 [iwd]# station wlan0 scan
 [iwd]# station wlan0 get-networks
@@ -58,7 +49,7 @@ content then you did.
 ls /sys/firmware/efi
 ```
 
-Partition of the drive: 
+Partition of the drive:
 
 - Create a EFI (ef00) partition of 512MiB size (if you've got a windows
   installation you can use the Windows EFI partition if it's big enough which
@@ -84,7 +75,7 @@ cryptsetup luksFormat /dev/sda2
 cryptsetup luksFormat --sector-size 4096 /dev/sda2
 
 cryptsetup open /dev/sda2 lvm
-``` 
+```
 
 I want hibernation to be available so a swap partition must be created.
 
@@ -95,7 +86,7 @@ lvcreate -L 8G arch -n swap
 lvcreate -l 100%FREE arch -n root
 ```
 Usually, the correct block size is choosen automatically. You can check this
-after creating the filesystem with 
+after creating the filesystem with
 
 ```sh
 sudo dumpe2fs /dev/arch/root | grep 'Blocksize'
@@ -222,7 +213,7 @@ ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 ### Add a user
 
-- _@param -m: create home directory_ 
+- _@param -m: create home directory_
 - _@param -G: other groups_
 - _@param -s: Shell._ Default is `/bin/bash`
 
@@ -371,6 +362,7 @@ If no connection is available run
 ```sh
 ip a
 dhcpcd your-ethernet-interface
+```
 
 If `dhcpcd` is not available set an IP address manually:
 
@@ -387,13 +379,13 @@ wifi-menu
 ```
 
 #### Systemd-networkd
-If wlan is used and `iwd` is installed, enable it so that `systemd-networkd` can 
+If wlan is used and `iwd` is installed, enable it so that `systemd-networkd` can
 use it.
 ```sh
 systemctl enable --now iwd
 ```
 
-Then create a config file for the network interface (multiple are fine) which 
+Then create a config file for the network interface (multiple are fine) which
 sould be managed by `systemd-networkd`.
 
 In `/etc/systemd/network/net.network`
@@ -424,8 +416,8 @@ systemctl enable --now systemd-timesyncd
 timedatectl set-ntp true
 ```
 
-Only install these if you them; otherwise you can install them later if you
-actually need functionalities of these packages.
+Only install the following packages if you need them. Otherwise, you can
+install them later at any time.
 
 ```sh
 pacman -S acpid avahi cups
@@ -476,7 +468,7 @@ In `/etc/mkinitcpio.conf` add the modules
 MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
 ```
 
-Add the pacman hook `/etc/pacman.d/hooks/nvidia.hook` 
+Add the pacman hook `/etc/pacman.d/hooks/nvidia.hook`
 ```
 [Trigger]
 Operation=Install
@@ -501,7 +493,7 @@ Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /
 - [Nvidia
   forums](https://forums.developer.nvidia.com/t/regression-460-series-black-screen-on-boot-nvidia-modeset-error-gpu-failed-to-allocate-display-engine-core-dma-push-buffer/165598)
 
-Seems to be a regession. possible fixes should be: 
+Seems to be a regession. possible fixes should be:
 
 - turn on CSM legacy in BIOS (actually that did fix it for me)
 - start with kernel parameter `nvidia-drm.modeset=1` Also see [Arch
@@ -556,7 +548,7 @@ pacman -S sway swaylock swayidle alacritty xorg-xwayland wofi
 For configuration take a look at
 [this](https://gitlab.com/Maaxxs/dotfiles/-/blob/master/.config/sway/config).
 
-`sway` can then be started from a tty with the command `sway`. 
+`sway` can then be started from a tty with the command `sway`.
 Autostart in `tty` can be done as follows in the shell initialization file (such
 as `~/.zshrc`):
 
@@ -585,15 +577,15 @@ pacman -S (alsa-tools) alsa-utils pulseaudio-alsa pulseaudio-bluetooth pavucontr
 ```
 
 I use pipewire as a full replacement for pulseaudio and pulseaudio-bluetooth.
-Install 
+Install
 ```sh
 pacman -S pipewire pipewire-pulse pavucontrol (pamixer)
 ```
 
-The following is required for WebRTC screen sharing `xdg-desktop-portal` and 
+The following is required for WebRTC screen sharing `xdg-desktop-portal` and
 a backend for it, eg. for `sway`:
 ```sh
-pacman -S xdg-desktop-portal pipewire-media-session xdg-desktop-portal-wlr  
+pacman -S xdg-desktop-portal pipewire-media-session xdg-desktop-portal-wlr
 # Gnome: xdg-desktop-portal-gtk
 ```
 
@@ -685,7 +677,7 @@ This will stop output of `iptables` to `/var/log/everything.log`
 
 ### Gnome Shell Extensions
 
-Worth to take a look at 
+Worth to take a look at
 
 - Alternate Tab
 - NoAnnoyance
@@ -701,13 +693,13 @@ Worth to take a look at
 - User Themes
 - Media player indicator
 
-### Top Icons Plus 
+### Top Icons Plus
 
 is not maintened anymore. GNOME 40 broke the package. Repo was forked and a
 patch from
 <https://github.com/kofemann/TopIcons-plus/commit/98cd17aa324a031e2ee3d344582dfdafd1e4642f>
 applied to get it working with Gnome 40 (not merged upstream). Therefore, the
-package `gnome-shell-extension-topicons-plus` still works. 
+package `gnome-shell-extension-topicons-plus` still works.
 
 
 ### Keyboard
