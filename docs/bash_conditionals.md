@@ -1,7 +1,7 @@
 # Bash Conditionals
 
 Check [6.4 Bash Conditional
-Expressions](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html).
+Expressions](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
 for more information.
 
 
