@@ -1,6 +1,6 @@
 # Virtualbox
 
-## Shrink VDI disk
+## Option 1: Shrink VDI disk using `dd`
 
 1. Start the VM and delete anything you don't need in the VM.
 2. Then create a file with just zeros.
@@ -14,6 +14,29 @@ rm junk
 
 4. Poweroff the VM and navigate to the folder containing the disk on the host 
 and run the following command.
+
+```sh
+VBoxManage modifymedium disk ./diskname.vdi -compact
+```
+
+## Option 2: Shrink VDI disk using `zerofree`
+
+[About `zerofree`](https://frippery.org/uml/)
+
+First step is to install `zerofree`. On archlinux it can be installed from the 
+AUR: `yay -S zerofree`.
+
+1. Start the VM and delete anything you don't need in the VM.
+2. Make sure you are allowed to edit command line parameters on boot.
+3. When starting the VM, hit `Esc` repeatedly (grub) or hold `space` for the
+   systemd boot menu to show up.
+4. Press `e` to edit the parameters and append an `init=/bin/bash` to the
+   command line arguments. Continue boot. You'll land in the bash shell. 
+6. Remount the root filesystem as read-only: `mount -n -o remount,ro -t ext4 /dev/sda1 /`
+7. Finally run `zerofree -v /dev/sda1`
+8. When finished, shutdown with `halt`
+
+In the last step we run the `VBoxManage` command to shrink the VDI disk.
 
 ```sh
 VBoxManage modifymedium disk ./diskname.vdi -compact
