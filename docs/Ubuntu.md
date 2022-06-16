@@ -1,6 +1,6 @@
 ---
 title: "Ubuntu"
-date: 
+date:
 tags: ["wiki"]
 ShowLastUpdated: false
 toc: true
@@ -8,6 +8,34 @@ draft: false
 ---
 
 # Ubuntu
+
+## Server Automatic Upgrades
+
+Install
+```sh
+sudo apt install unattended-upgrades apt-listchanges bsd-mailx
+```
+
+Edit the auto upgrade configuration `/etc/apt/apt.conf.d/20auto-upgrades`:
+```
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+APT::Periodic::Unattended-Upgrade::Mail "your@email.com";
+APT::Periodic::Unattended-Upgrade::Automatic-Reboot "true";
+APT::Periodic::Unattended-Upgrade::Automatic-Reboot-Time "04:30";
+```
+
+In `/etc/apt/listchanges.conf` change the line to your email:
+```
+email_address=your@mail.com
+```
+
+Test with a dry run:
+```sh
+sudo unattended-upgrades --dry-run
+```
+
+Logs can be found in `/var/log/unattended-upgrades/`.
 
 ## Nextcloud Client Snap
 
