@@ -205,7 +205,6 @@ Set profile name (shows up in boot menu)
 nixos-rebuild switch -p test-name
 ```
 
-
 ## Upgrade NixOS
 
 Check the [documentation to upgrade NixOS](https://nixos.org/manual/nixos/stable/index.html#sec-upgrading).
@@ -221,4 +220,11 @@ nix-channel --list
 ```
 
 Note that channel are set per user. So, you probably want to run this as `root`.
+
+[Garbage
+collection](https://nixos.org/manual/nix/stable/introduction.html#garbage-collection):
+Delete all packages, which are not in use.
+```sh
+nix-collect-garbage
+```
 
