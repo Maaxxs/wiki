@@ -75,3 +75,11 @@ Allow macOS to run non-Apple arm64e code.
 sudo nvram boot-args=-arm64e_preview_abi
 ```
 
+## Secure Keyboard Entry
+
+To check if an app currently uses the "Secure Keyboard Entry" feature, you can use `ioreg`:
+
+```sh
+ioreg -l -w 0 | grep SecureInput
+```
+
