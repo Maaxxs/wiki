@@ -1,5 +1,7 @@
 # Wayland
 
+Check for [wayland supporting apps here](https://arewewaylandyet.com/).
+
 # Firefox
 
 For good touchpad scrolling, set these in `about:config`.
