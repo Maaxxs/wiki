@@ -1,12 +1,3 @@
----
-title: "Windows"
-date: 
-tags: ["wiki"]
-ShowLastUpdated: false
-toc: true
-draft: false
----
-
 # Windows
 
 ## Create a bigger ESP partition (default 100MB)
@@ -20,3 +11,13 @@ draft: false
 5. Create ESP: `create partition efi size=512` (512MiB)
 6. Exit diskpart: `exit`
 7. Continue installation
+
+
+## Telemetry
+
+Switch off the following services.
+
+```
+WerSvc — Windows-Fehlerberichterstattungsdienst
+DiagTrack — Benutzererfahrungen und Telemetrie im verbundenen Modus
+```
