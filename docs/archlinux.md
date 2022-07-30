@@ -558,6 +558,15 @@ if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
 fi
 ```
 
+Using pipewire and wireplumber for audio.
+
+```sh
+pacman -S pipewire pipewire-pulse wireplumber rtkit pavucontrol
+```
+
+For bluetooth install `blueman`. If `wireplumber` is used, then the audio is
+actually switchted automatically to the new bluetooth device and back.
+
 ### XFCE4
 
 #### Installation
