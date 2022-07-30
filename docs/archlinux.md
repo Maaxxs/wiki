@@ -354,33 +354,12 @@ passwd -l root
 # or replace the root password hash in /etc/shadow with an '!'
 ```
 
-### Check internet connection
-
-`ping archlinux.org`
-If no connection is available run
-
-```sh
-ip a
-dhcpcd your-ethernet-interface
-```
-
-If `dhcpcd` is not available set an IP address manually:
-
-```sh
-# set (a not used) IP
-ip addr add 192.168.178.250/24 dev eth0
-# set interface up
-ip link set eth0 up
-# set default gateway
-ip route add default via 192.168.178.1 dev eth0
-
-# or for wifi (you must have installed 'dialog wpa_supplicant')
-wifi-menu
-```
+### Internet Connection
 
 #### Systemd-networkd
-If wlan is used and `iwd` is installed, enable it so that `systemd-networkd` can
-use it.
+
+If wlan is used and `iwd` is installed, enable it so that `systemd-networkd`
+can use it.
 ```sh
 systemctl enable --now iwd
 ```
@@ -403,8 +382,30 @@ Then enable `systemd-networkd`
 systemctl enable --now systemd-networkd
 ```
 
+For DNS with systemd, activate the following service:
+```sh
+systemctl enable --now systemd-resolved
+```
+
 Also see [Network](./network.md).
 
+#### DHCPCD
+
+If you installed `dhcpcd`, run `dhcpcd eth0`.
+
+#### Set an IP Address Manually
+
+```sh
+# set (a not used) IP
+ip addr add 192.168.178.250/24 dev eth0
+# set interface up
+ip link set eth0 up
+# set default gateway
+ip route add default via 192.168.178.1 dev eth0
+
+# or for wifi (you must have installed 'dialog wpa_supplicant')
+wifi-menu
+```
 
 ### Install basic services
 
@@ -430,8 +431,8 @@ systemctl enable acpid avahi-daemon org.cups.cupsd.service
 
 ### Intel
 
-Works out of the box. The following package is usually not recommended to
-install but might be needed in special cases. See
+Works out of the box. It's **not recommended** to install the following package
+but it might be needed in special cases. See
 [here](https://wiki.archlinux.org/index.php/Intel_graphics)
 
 ```sh
