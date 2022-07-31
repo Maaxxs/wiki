@@ -387,6 +387,14 @@ For DNS with systemd, activate the following service:
 systemctl enable --now systemd-resolved
 ```
 
+This is the recommended way to propagate the systemd-resolved managed
+configuration to all DNS clients (e.g. `dig` will then work). See [here for
+more information](https://wiki.archlinux.org/title/Systemd-resolved#DNS).
+
+```sh
+sudo ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+```
+
 Also see [Network](./network.md).
 
 #### DHCPCD
