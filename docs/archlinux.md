@@ -872,15 +872,19 @@ Run the following as root
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 ```
 
-### Firefox fix for GTK dark theme
+### Firefox
 
-[See here](https://wiki.archlinux.org/index.php/Firefox/Tweaks#Unreadable_input_fields_with_dark_GTK_themes)
+Don't open the menu when pressing the `alt` key. Go to `about:config` and set:
+```
+ui.key.menuAccessKeyFocuses = false
+```
 
-### FireFox Default Zoom Level
+Fix for GTK dark theme [see here](https://wiki.archlinux.org/index.php/Firefox/Tweaks#Unreadable_input_fields_with_dark_GTK_themes)
 
-Go to `about:config` and look for `layout.css.devPixelsPerPx`.
-Change it to ~1.2
-Default is -1, which respects system settings
+Change default zoom level:
+
+Go to `about:config`, look for `layout.css.devPixelsPerPx` and change it to
+~1.2. The default is -1, which respects the system settings.
 
 ### Pacman Commands
 
