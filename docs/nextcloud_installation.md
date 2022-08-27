@@ -1,5 +1,40 @@
 # Nextcloud Installation on Ubuntu 21.04.4 LTS
 
+## Update to PHP 8.1
+
+I needed to install the following packages manually after upgrading Ubuntu to
+Ubuntu 22.04.1 LTS (jammy).
+
+```sh
+sudo apt install php8.1-common php8.1-opcache php8.1-readline php8.1-cli php8.1-phpdbg php8.1-imagick php8.1-igbinary php8.1-redis php8.1-mysql php8.1-curl php8.1-xml php8.1-gd php8.1-mbstring php8.1-zip php8.1-bz2 php8.1-intl
+```
+
+The symlinks in `/etc/apache2/mods-enabled` need to be adusted for PHP8.1.
+```sh
+cd /etc/apache2/mods-enabled
+sudo rm php7.4.conf php7.4.load
+sudo ln -s ../mods-available/php8.1.conf php8.1.conf
+sudo ln -s ../mods-available/php8.1.load php8.1.load
+```
+
+Any settings which were changed in php ini files to be adjusted for the new PHP
+version, e.g. the `memory_limit`. See [PHP Settings](#php-settings) in the
+installation section.
+
+```sh
+cd /etc/php/8.1/apache2
+```
+
+```php
+memory_limit = 512M
+post_max_size = 10G
+upload_max_filesize = 10G
+max_input_time = 3600
+max_execution_time = 3600
+```
+
+## Install Packages
+
 Docs: <https://docs.nextcloud.com/server/stable/admin_manual/installation/example_ubuntu.html>
 
 ```sh
@@ -8,6 +43,7 @@ sudo apt install apache2 mariadb-server libapache2-mod-php7.4
 sudo apt install php7.4-gd php7.4-mysql php7.4-curl php7.4-mbstring php7.4-intl
 sudo apt install php7.4-gmp php7.4-bcmath php-imagick php7.4-xml php7.4-zip
 ```
+
 
 Change MySQL root password.
 
@@ -315,8 +351,8 @@ upload_max_filesize = 10G
 
 The following values can be set as well to increase the timeout.
 ```php
-max_input_time 3600
-max_execution_time 3600
+max_input_time = 3600
+max_execution_time = 3600
 ```
 
 To get SVG support for the PHP module `imagick`, install
