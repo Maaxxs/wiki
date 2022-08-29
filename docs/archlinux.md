@@ -1207,6 +1207,18 @@ Depends = pacman-contrib
 
 ## Programs
 
+### Signal Messenger
+
+Start with tray icon and show window:
+```sh
+signal-desktop --use-tray-icon
+```
+
+Start minimized in tray
+```sh
+signal-desktop --start-in-tray
+```
+
 ### Official Repo Programs
 
 ```sh
