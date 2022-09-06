@@ -1,12 +1,3 @@
----
-title: "GPG"
-date: 
-tags: ["wiki"]
-ShowLastUpdated: false
-toc: true
-draft: false
----
-
 # GPG
 
 ## Use with Thunderbird
