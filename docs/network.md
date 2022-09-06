@@ -1,6 +1,6 @@
 ---
 title: "Network"
-date: 
+date:
 tags: ["wiki"]
 ShowLastUpdated: false
 toc: true
@@ -68,5 +68,27 @@ dns-nameservers 9.9.9.9
 
 See also [linuxhint.com](https://linuxhint.com/debian_etc_network_interfaces/)
 
+
+## Tethering via iPhone
+
+Connect the iPhone via USB and make sure that [USBGuard](./usbguard.md) allows
+the connection if you use it.
+
+A new interface should show up with a name such as `enp0s20f0u1c4i2`. If that's
+not the case you can try running `sudo idevicepair pair` to pair the iPhone.
+
+Create a systemd-networkd config in `/etc/systemd/network/30-tethering.network`
+with the following content:
+
+```toml
+[Match]
+Name=enp0s20f0u1c4i2
+
+[Network]
+DHCP=yes
+```
+
+This will automatically pick up the new interface and get an IP address via
+DHCP.
 
 
