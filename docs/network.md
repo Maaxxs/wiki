@@ -11,6 +11,8 @@ draft: false
 
 ## systemd-networkd
 
+### Network Configuration
+
 Create a file named `<something>.network`, eg `20-eth0.network`, in `/etc/systemd/network/`.
 ```toml
 [Match]
@@ -46,19 +48,63 @@ Restart the service `systemctl restart systemd-networkd`.
 More information in the [archlinux
 wiki](https://wiki.archlinux.org/title/Systemd-networkd)
 
-## MAC Address Randomization with iwd (Internet wireless daemon)
+### MAC Address Randomization with systemd.link file
 
-MAC address randomization for every network to prevent tracking by WLAN
-providers.
+The following configuration will randomize the MAC addresses of the matched
+interfaces on boot time (does not work when just restarting
+`systemd-networkd`).
+
+Create a `something.link` file in `/etc/systemd/network/`, e.g.
+`/etc/systemd/network/90-all.link`. The name starts with `90...` because I set
+the "default" for the interfaces. Quote from manpage:
+
+> The first (in alphanumeric order) of the link files that matches a
+> given interface is applied, all later files are ignored, even if they
+> match as well.
+
+So, the default will be to randomize the MAC address as shown in the next
+configuration block, but I could create another link file starting with number
+below `90`, which would take precedence at any time, e.g. if I wanted to create
+a static spoofed MAC address and not a randomized one. (I'm already taking
+precedence with my custom `.link` file. Take a look at the
+`/usr/lib/systemd/network/99-default.link` file.)
+
+Content of `/etc/systemd/network/90-all.link`:
+
+```conf
+[Match]
+# Mach all interfaces with:
+OriginalName=*
+# one or more explicit hardware MAC addresses where this configuration should match
+#PermamentMACAddress=aa:bb:cc:dd:ee:ff 12:34:56:78:90:ab
+
+[Link]
+#MACAddress=<fixed-spoofed-mac>
+MACAddressPolicy=random
+```
+
+See `man systemd.link` (5).
+
+This works for the ethernet interface. As I'm using `iwd` for WLAN, see [the
+next section](#mac-address-randomization-with-iwd), which is a simple 3-line
+configuration.
+
+
+## MAC Address Randomization with iwd
+
+This configuration randomizes the MAC address at every (re)start of iwd
+(Internet wireless daemon) to prevent tracking by WLAN providers.
 
 Put the following in `/etc/iwd/main.conf`:
 
 ```conf
 [General]
-AddressRandomization=network
+AddressRandomization=once
 AddressRandomizationRange=full
 ```
 
+If you want to generate a MAC address for every network, which will be
+consistent accross restats of iwd as well, use `AddressRandomization=network`.
 This will generate a new MAC for every network and it will always be the same
 MAC for the same network. The option `full` randomizes all 6 octets of the MAC
 address (other option is `nic`). See `man iwd.config` (5).
