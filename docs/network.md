@@ -104,7 +104,7 @@ AddressRandomizationRange=full
 ```
 
 If you want to generate a MAC address for every network, which will be
-consistent accross restats of iwd as well, use `AddressRandomization=network`.
+consistent accross restarts of iwd as well, use `AddressRandomization=network`.
 This will generate a new MAC for every network and it will always be the same
 MAC for the same network. The option `full` randomizes all 6 octets of the MAC
 address (other option is `nic`). See `man iwd.config` (5).
