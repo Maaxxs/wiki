@@ -46,6 +46,23 @@ Restart the service `systemctl restart systemd-networkd`.
 More information in the [archlinux
 wiki](https://wiki.archlinux.org/title/Systemd-networkd)
 
+## MAC Address Randomization with iwd (Internet wireless daemon)
+
+MAC address randomization for every network to prevent tracking by WLAN
+providers.
+
+Put the following in `/etc/iwd/main.conf`:
+
+```conf
+[General]
+AddressRandomization=network
+AddressRandomizationRange=full
+```
+
+This will generate a new MAC for every network and it will always be the same
+MAC for the same network. The option `full` randomizes all 6 octets of the MAC
+address (other option is `nic`). See `man iwd.config` (5).
+
 ## In `interfaces` file
 
 Edit `/etc/network/interfaces`.
