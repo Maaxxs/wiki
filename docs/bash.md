@@ -77,3 +77,12 @@ Check [tldp.org](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-seq
 | `\[`            | begin a sequence of non-printing characters, which could be used to embed a terminal control sequence into the prompt
 | `\]`            | end a sequence of non-printing characters
 
+
+## Bash Prompt
+
+The normal usual colored bash prompt. Put in `.bashrc`:
+
+```sh
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+```
+
