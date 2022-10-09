@@ -27,3 +27,12 @@ DiagTrack — Benutzererfahrungen und Telemetrie im verbundenen Modus
 ```
 shutdown /r /fw /f /t 0
 ```
+
+### Retrive Windows key from firmware table
+
+The bottom couple of rows produced by the following command are your key.
+
+```sh
+hexdump -C /sys/firmware/acpi/tables/MSDM
+```
+
