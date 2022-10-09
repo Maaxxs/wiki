@@ -21,3 +21,9 @@ Switch off the following services.
 WerSvc — Windows-Fehlerberichterstattungsdienst
 DiagTrack — Benutzererfahrungen und Telemetrie im verbundenen Modus
 ```
+
+### Boot directly into BIOS
+
+```
+shutdown /r /fw /f /t 0
+```
