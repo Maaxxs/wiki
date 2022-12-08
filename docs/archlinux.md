@@ -199,7 +199,7 @@ the chroot with `pacman -S lvm2`. The `resume` hook is needed for hibernation.
 
 ```conf
 ...
-HOOKS=(base udev autodetect keyboard keymap consolefont modconf block encrypt lvm2 filesystems resume fsck)
+HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block encrypt lvm2 filesystems resume fsck)
 ...
 ```
 
