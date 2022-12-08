@@ -274,7 +274,7 @@ For `nvim`, install `pacman -S neovim`
 EDITOR=nvim visudo
 
 # remove the '#' in the line:
-%wheel ALL = (ALL) ALL
+%wheel ALL=(ALL:ALL) ALL
 ```
 
 ### Edit and generate the locales
