@@ -1,5 +1,33 @@
 # Archlinux
 
+## Copy ISO on USB
+
+Download archlinux ISO. If you are currently on an archlinux machine, you can
+check the signature with
+
+```sh
+pacman-key -v archlinux.iso.sig
+```
+
+otherwise
+
+```sh
+gpg --verify archlinux.iso.sig
+```
+
+If you need to download the key used for signing the image, use
+
+```sh
+# if the key with id 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC was used
+gpg --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
+```
+
+Write to USB drive `/dev/sdX` as root:
+
+```sh
+dd bs=4M if=./archlinux.iso of=/dev/sdX conv=fsync oflag=direct status=progress
+```
+
 ## Install Archlinux
 
 This will be an archlinux installation with systemd-boot (EFI) and LVM in a LUKS
