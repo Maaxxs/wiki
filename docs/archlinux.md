@@ -231,7 +231,7 @@ LANG=en_US.UTF-8
 LANGUAGE=en_US
 ```
 
-- `/etc/vconsole.conf` (choose layout)
+- `/etc/vconsole.conf` (choose layout) TODO: not really needed.
 
 ```sh
 # Font on early boot
