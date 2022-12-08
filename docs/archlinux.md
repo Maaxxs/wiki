@@ -79,50 +79,32 @@ ls /sys/firmware/efi
 
 Partition of the drive:
 
-- Create a EFI (ef00) partition of 512MiB size (if you've got a windows
+- Create a EFI (`ef00`) partition of 512MiB size (if you've got a windows
   installation you can use the Windows EFI partition if it's big enough which
   should usually be the case).
-- Create a Linux (can be the LUKS type 8309) parition of the rest.
+- Create a Linux (can be the LUKS type `8309`) parition of the rest.
 
 ```sh
 gdisk /dev/sda
 ```
 
-Format efi partition (sda1) and create and open the luks container. If the
-SSD/HDD uses 4096 bytes as physical sector size you probably want to set the
-sector size to 4096 with `cryptsetup` as well (and for the file system!). This
-can be checked with `hdparm -I /dev/sda | grep 'Sector size'`
+Format efi partition (sda1) and create and open the luks container.
 
 ```sh
 # create file system for the efi partition
 mkfs.fat -F32 /dev/sda1
 
-# use defaults
 cryptsetup luksFormat /dev/sda2
-# use sector size of 4096
-cryptsetup luksFormat --sector-size 4096 /dev/sda2
-
-cryptsetup open /dev/sda2 lvm
+cryptsetup open /dev/sda2 luks
 ```
 
 I want hibernation to be available so a swap partition must be created.
 
 ```sh
-pvcreate /dev/mapper/lvm
-vgcreate arch /dev/mapper/lvm
+pvcreate /dev/mapper/luks
+vgcreate arch /dev/mapper/luks
 lvcreate -L 8G arch -n swap
 lvcreate -l 100%FREE arch -n root
-```
-Usually, the correct block size is choosen automatically. You can check this
-after creating the filesystem with
-
-```sh
-sudo dumpe2fs /dev/arch/root | grep 'Blocksize'
-```
-
-If it is not correct, you may force a sector size of 4096 with
-```sh
-mkfs.ext4 -F -b 4096 /dev/arch/root
 ```
 
 Create the `ext4` filesystem. Create and activate the swap.
@@ -131,6 +113,33 @@ mkfs.ext4 /dev/arch/root
 
 mkswap /dev/arch/swap
 swapon /dev/arch/swap
+```
+
+**The following only applies if the pysical sector size of your drive/SSD if
+larger than 512MiB.** Otherwise jump ahead to [mount all
+partitions](#mount-all-partitions).
+
+If the SSD/HDD uses 4096 bytes as physical sector size, you probably want to
+set the sector size to 4096 in the `cryptsetup` command and in the filesystem
+creation command. This can be checked with `hdparm -I /dev/sda | grep 'Sector
+size'`
+
+```sh
+# use sector size of 4096
+cryptsetup luksFormat --sector-size 4096 /dev/sda2
+```
+
+After creating the ext4 filesystem, the block size is usually choosen
+correctly. You can verify this after creating the ext4 filesystem with
+
+```sh
+sudo dumpe2fs /dev/arch/root | grep 'Blocksize'
+```
+
+If it is not correct, you may force a sector size of 4096 with
+
+```sh
+mkfs.ext4 -F -b 4096 /dev/arch/root
 ```
 
 ### Mount all partitions
