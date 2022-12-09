@@ -133,7 +133,7 @@ After creating the ext4 filesystem, the block size is usually choosen
 correctly. You can verify this after creating the ext4 filesystem with
 
 ```sh
-sudo dumpe2fs /dev/arch/root | grep 'Blocksize'
+sudo dumpe2fs /dev/arch/root | grep 'Block size'
 ```
 
 If it is not correct, you may force a sector size of 4096 with
