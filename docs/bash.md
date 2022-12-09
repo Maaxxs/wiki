@@ -4,7 +4,7 @@
 
 Check [6.4 Bash Conditional
 Expressions](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
-for more information.
+or the manpage `man test` for more information.
 
 
 | Option | Explanation
