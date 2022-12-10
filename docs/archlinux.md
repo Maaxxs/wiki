@@ -586,10 +586,19 @@ For configuration take a look at
 
 ### Sway
 
-Install
+`polkit` is needed for sway to get access to your hardware. There are [other
+possibilities](https://wiki.archlinux.org/title/Sway#Starting) as well.
+
 ```sh
-pacman -S sway swaylock swayidle alacritty xorg-xwayland wofi
+pacman -S sway swaylock swayidle alacritty xorg-xwayland polkit
 ```
+
+I use rofi built only with wayland. There is an AUR package.
+
+```sh
+yay -S rofi-lbonn-wayland-only-git
+```
+
 
 For configuration take a look at
 [this](https://gitlab.com/Maaxxs/dotfiles/-/blob/master/.config/sway/config).
@@ -604,10 +613,10 @@ if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
 fi
 ```
 
-Using pipewire and wireplumber for audio.
+Using pipewire and wireplumber for audio and screensharing
 
 ```sh
-pacman -S pipewire pipewire-pulse wireplumber rtkit pavucontrol
+pacman -S wireplumber pipewire-pulse pavucontrol xdg-desktop-portal-wlr
 ```
 
 For bluetooth install `blueman`. If `wireplumber` is used, then the audio is
