@@ -1,5 +1,43 @@
 # GPG
 
+## Export keys on old machine
+
+Export all public keys.
+
+```sh
+gpg -a --export > pubkeys.asc
+```
+
+Export all private keys with corresponding public keys.
+
+```sh
+gpg -a --export-secret-keys > seckeys.asc
+```
+
+Optionally, export trust database of gpg.
+
+```sh
+gpg --export-ownertrust > otrust.txt
+```
+
+## Import keys on new machine
+
+Transfer these files to the new computer and import them.
+
+```sh
+gpg --import pubkeys.asc
+gpg --import seckeys.asc
+```
+
+Verify (list) the imported public keys with `gpg -k` and the imported
+private keys with `gpg -K`.
+
+Optionally, import the trust database.
+
+```sh
+gpg --import-ownertrust otrust.txt
+```
+
 ## No Password Dialog with Thunderbird
 
 I'm not sure anymore if I had this problem only with Gnome or i3 as well.
