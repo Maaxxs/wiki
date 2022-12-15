@@ -38,6 +38,19 @@ Optionally, import the trust database.
 gpg --import-ownertrust otrust.txt
 ```
 
+If you did not export your trust database, you have to manually trust
+your key(s) again. For instance, if you copied your `.password-store` as
+well, `pass` will not work before you do that.
+
+```sh
+gpg --edit-key <KEY_ID>
+gpg> trust
+# e.g. select level 5.
+gpg> quit
+```
+
+
+
 ## No Password Dialog with Thunderbird
 
 I'm not sure anymore if I had this problem only with Gnome or i3 as well.
