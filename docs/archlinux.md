@@ -201,7 +201,7 @@ HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block encryp
 Generate a new ramdisk
 
 ```sh
-mkinitcpio -p linux
+mkinitcpio -P
 ```
 
 
