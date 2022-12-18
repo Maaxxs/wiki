@@ -168,7 +168,7 @@ vim /etc/pacman.d/mirrorlist
 
 ```sh
 # Add dialog and wpa_supplicant if installing on a computer connected via wlan.
-pacstrap /mnt base base-devel linux linux-firmware intel-ucode bash-completion (iwd)
+pacstrap -K /mnt base base-devel linux linux-firmware intel-ucode bash-completion (iwd)
 ```
 
 ### Generate File system Table
