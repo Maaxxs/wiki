@@ -184,11 +184,6 @@ genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ```
 
-### Synchronize hardware clock if you'd like
-```sh
-hwclock --systohc --utc
-```
-
 ### Add kernel hooks
 ```sh
 vim /etc/mkinitcpio.conf
@@ -246,6 +241,12 @@ KEYMAP=us
 
 ```sh
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+```
+
+### Synchronize hardware clock if you'd like
+
+```sh
+hwclock --systohc --utc
 ```
 
 ### Add a user
