@@ -2,11 +2,19 @@
 
 ## Client Configuration
 
+Set a stricter umask before generating a private and public key (you can
+use `chmod` after generation, too):
+
+```sh
+umask 077
+wg genkey | tee privatekey | wg pubkey > publickey
+```
+
 Sample client configuration in `/etc/wireguard/wg0.conf`:
 
 ```conf
 [Interface]
-PrivateKey = publicKeyOfClient
+PrivateKey = privateKeyOfClient
 Address = 10.0.0.4/24
 DNS = 9.9.9.9
 #ListenPort = 51820
@@ -27,13 +35,16 @@ PersistentKeepalive = 25
   connection up. Especially useful if the client is behind a NAT.
 
 
+You must have some `resolvconf` installed. If using `systemd-resolved`
+for DNS on Arch Linux, install `systemd-resolvconf`, otherwise the
+package `openresolv`.
+
 ## Enable on Boot
 
 The client can be enabled by default on boot with:
 ```sh
 systemctl enable wg-quick@wg0.service
 ```
-
 
 
 
