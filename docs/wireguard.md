@@ -1,5 +1,9 @@
 # Wireguard
 
+- Also see [Wireguard Quick
+  Start](https://www.wireguard.com/quickstart/)
+- [Wireguard Config Generator](https://www.wireguardconfig.com/)
+
 ## Client Configuration
 
 Set a stricter umask before generating a private and public key (you can
@@ -45,6 +49,4 @@ The client can be enabled by default on boot with:
 ```sh
 systemctl enable wg-quick@wg0.service
 ```
-
-
 
