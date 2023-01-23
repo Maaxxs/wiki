@@ -53,6 +53,14 @@ OpenSSH 7.6p1 (protocol 2.0)
 
 ## Key verification 
 
+## On your server
+
+Check the fingerprints with the keys on your server:
+
+```sh
+for key in /etc/ssh/ssh_host_*_key; do ssh-keygen -l -f $key; done
+```
+
 ### Gitlab servers
 
 - The website is kinda hidden: <https://gitlab.com/help/instance_configuration>
