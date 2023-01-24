@@ -228,3 +228,12 @@ Delete all packages, which are not in use.
 nix-collect-garbage
 ```
 
+## Locating Binaries in Packages
+
+```sh
+nix-shell -p nix-index
+# create the index
+nix-index
+# search for a binary
+nix-locate --top-level mkfs.fat
+```
