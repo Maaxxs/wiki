@@ -32,3 +32,8 @@ Then dump the cache with this command.
 sudo killall -USR1 systemd-resolved
 ```
 
+## Show Statistics
+
+```sh
+systemd-resolve --statistics
+```
