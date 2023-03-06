@@ -10,6 +10,39 @@
 |                                         | 1.0.0.1         | 2606:4700:4700::1001 |
 
 
+## Configure `systemd-resolved`
+
+The following configuration file will
+
+- enable DNS over TLS
+- DNSSEC where enabled
+- use quad9 DNS servers with cloudflare as fallback
+
+Create the configuration file `/etc/systemd/resolved.conf.d/mydns.conf` with
+the following content:
+
+```conf
+[Resolve]
+DNS=9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net 2620:fe::fe#dns.quad9.net 2620:fe::9#dns.quad9.net
+FallbackDNS=1.1.1.1#cloudflare-dns.com
+# Use the here configured DNS servers, even if a per-link DNS server sets the
+# domain to ~. as well. More specific queries will go to the per-link DNS server
+Domains=~.
+DNSSEC=true
+DNSOverTLS=yes
+#MulticastDNS=yes
+#LLMNR=yes
+#Cache=yes
+#CacheFromLocalhost=no
+#DNSStubListener=yes
+#DNSStubListenerExtra=
+#ReadEtcHosts=yes
+#ResolveUnicastSingleLabel=no
+```
+
+For the default options check the file `/etc/systemd/resolved.conf` and the
+manpage with `man resolved.conf`.
+
 ## Query version
 
 ```sh
