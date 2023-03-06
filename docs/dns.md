@@ -32,8 +32,20 @@ Then dump the cache with this command.
 sudo killall -USR1 systemd-resolved
 ```
 
+## Flush DNS Cache
+
+```sh
+systemd-resolve --flush-caches
+```
+
 ## Show Statistics
 
 ```sh
 systemd-resolve --statistics
+```
+
+## Monitor DNS Requests
+
+```sh
+sudo resolvectl monitor
 ```
