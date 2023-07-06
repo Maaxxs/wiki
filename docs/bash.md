@@ -86,3 +86,7 @@ The normal usual colored bash prompt. Put in `.bashrc`:
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 ```
 
+## Bash Quoting
+
+See [quoting
+manual](https://www.gnu.org/software/bash/manual/html_node/Quoting.html)
