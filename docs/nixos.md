@@ -1,4 +1,6 @@
-# Installing NixOS with UTM on MacOS
+# NixOS
+
+## Installing NixOS with UTM on MacOS
 
 Download the [AArch64](https://nixos.wiki/wiki/NixOS_on_ARM/UEFI) image. More
 ARM specific information can be found at the same page.
@@ -11,7 +13,7 @@ After creating the VM in UTM and plugging the ISO in as boot image, NixOS can
 be installed.
 
 
-## Installation
+### Installation
 
 Execute as `root`.
 ```sh
@@ -236,4 +238,14 @@ nix-shell -p nix-index
 nix-index
 # search for a binary
 nix-locate --top-level mkfs.fat
+```
+
+## Generating a Password with `mkpasswd`
+
+The generated hashed password can be put into the file used with
+`passwordFile = ./passwd-user.enc`.
+
+```sh
+nix-shell -p mkpasswd
+mkpasswd -m sha-512
 ```
