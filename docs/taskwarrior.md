@@ -133,3 +133,23 @@ openssl x509 -noout -fingerprint -sha1 -inform pem -in /var/lib/taskserver/keys/
 That's it. You can now add tasks in the app and sync them to the server
 by hitting that circle arrow at the top. On your computer run
 `task sync` to sync the latest changes.
+
+
+## Foreground on Android
+
+Install
+[Foreground](https://f-droid.org/en/packages/me.bgregos.brighttask/)
+from F-Droid.
+
+Use the `server.cert` as CA certificate. Otherwise you'll get trust
+anchor issues. This file is on the taskwarrior server, perhaps at
+`/var/lib/taskserver/keys/server.cert`.
+
+```txt
+CA Certificate: server.cert
+private key file: private.key
+private certificate: public.cert    # yes. no mistake.
+```
+
+You should know the other information or just look it up in your local
+`~/.taskrc`.
