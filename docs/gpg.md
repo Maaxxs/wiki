@@ -131,3 +131,28 @@ ssb => 'Secret SuBkey'
 pub => 'PUBlic key'
 sub => 'public SUBkey'
 ```
+
+List Keys Cached by gpg-agent
+-----------------------------
+
+All keys that have a `1` in the 7th column are cached keys. Remember the
+keygrip in that line.
+
+```sh
+$ gpg-connect-agent 'keyinfo --list'
+S KEYINFO AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA D - - 1 P - - -     <-this one is cached
+S KEYINFO BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB D - - - P - - -
+```
+
+Then list your secret gpg keys with the keygrip to figure out to what
+key that keygrip belongs to.
+
+```sh
+$ gpg --list-secret-keys --with-keygrip
+sec   rsa4096 2100-00-00 [SC]
+      CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+      Keygrip = XXXXOTHERKEYGRIPOFTHISKEYZZZZZZZZZZZZZZZ
+uid           [ultimate] something <something@example.com>
+ssb   rsa4096 2100-00-00 [E]                          <- belongs to this secret sub key <----.
+      Keygrip = AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA     <- here is the matching keygrip |
+```
