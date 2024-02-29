@@ -70,8 +70,49 @@ Connect to a network:
 
 ### Create filesystems and activate swap
 
-You can check if you booted in efi mode: if the following command lists some
-content then you did.
+Before creating a partition, check whether the NVMe is using the "best"
+block/sector size for performance. Often SSDs/NVMe support a block size
+of 4096 byte but run in 512 byte mode.
+
+According to [Advanced Format][af-nvme], you can check supported modes of a
+NVMe drive with:
+
+```sh
+$ nvme id-ns -H /dev/nvme0n1 | grep "Relative Performance"
+LBA Format  0 : Metadata Size: 0   bytes - Data Size: 512 bytes - Relative Performance: 0x2 Good (in use)
+LBA Format  1 : Metadata Size: 0   bytes - Data Size: 4096 bytes - Relative Performance: 0x1 Better
+```
+
+To format the NVMe to change the logical block size, run (deletes all
+data on the drive):
+
+```sh
+nvme format --lbaf=1 /dev/nvme0n1
+```
+
+For SSDs you can use `hdparm` ([more info][af-ssd]):
+
+```sh
+$ hdparm -I /dev/sdX | grep 'Sector size:'
+    Logical  Sector size:                  4096 bytes [ Supported: 512 4096 ]
+    Physical Sector size:                  4096 bytes
+```
+
+Reformat with:
+
+```sh
+hdparm --set-sector-size 4096 --please-destroy-my-drive /dev/sdX
+```
+
+[af-nvme]: https://wiki.archlinux.org/title/Advanced_Format#NVMe_solid_state_drives
+[af-ssd]: https://wiki.archlinux.org/title/Advanced_Format#Advanced_Format_hard_disk_drives
+
+Later, when creating the LUKS container and the ext4 filesystem, make
+sure you use 4096 byte blocks, too.
+
+With that correct sector/block size, let's check whether the machine is
+booted in efi mode: if the following command lists some content then it
+is.
 
 ```sh
 ls /sys/firmware/efi
