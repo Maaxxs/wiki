@@ -310,13 +310,25 @@ passwd
 
 ### Allow members of group wheel to gain root priviliges
 
-For `nvim`, install `pacman -S neovim`
+Run `visudo` and remove the `#` in the line that enables members of the
+group `wheel` to execute commands as `root`. The edited file is
+`/etc/sudoers` but you should not edit in manually, only with `visudo`.
+
+```sh
+# remove the '#' in the line:
+%wheel ALL=(ALL:ALL) ALL
+```
+
+If you want to set another editor used by `visudo`, set the evironment
+variable `EDITOR`, for example for neovim, do
+
+```sh
+# install
+pacman -S neovim
+```
 
 ```sh
 EDITOR=nvim visudo
-
-# remove the '#' in the line:
-%wheel ALL=(ALL:ALL) ALL
 ```
 
 ### Edit and generate the locales
