@@ -1,5 +1,23 @@
 # NixOS
 
+## Show Patches contained in a NixOS Build
+
+Example: OpenSSH
+
+First create the `.drv` file by passing the path to the current OpenSSH
+version to `nix-store --deriver`. Then use it to show the patches.
+
+```
+$ nix-store -q --deriver /nix/store/ik1hrivpiw5lkmarlzmpk8armfgpxwcf-openssh-9.7p1
+$ nix-store -q --binding patches /nix/store/9n6abwsahsgzp4kwhv9z2jqq5lzfsfyn-openssh-9.7p1.drv | tr ' ' '\n' | cat
+/nix/store/isik6ifcjxpw22sfh3kz37galficc78c-locale_archive.patch
+/nix/store/6id7rg81nbkx9r9pxvax7nssr11xdaas-gss-serv.c.patch?id=a7509603971ce2f3282486a43bb773b1b522af83
+/nix/store/ybb4xs45dkngdf3x1xnxqgzn5zmv5alf-dont_create_privsep_path.patch
+/nix/store/7jbzj9s2wkbznn93ga3aqka6vfx06gjg-ssh-keysign-8.5.patch
+/nix/store/19h9868xxidcxz9jal6rzchn1kf6ayb1-openssh-9.6_p1-CVE-2024-6387.patch
+/nix/store/bzcv443j20xn17fm8vgwgcf9rasbbnzn-openssh-9.6_p1-chaff-logic.patch
+```
+
 ## Installing NixOS with UTM on MacOS
 
 Download the [AArch64](https://nixos.wiki/wiki/NixOS_on_ARM/UEFI) image. More
