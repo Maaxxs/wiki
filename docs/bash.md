@@ -78,12 +78,24 @@ Check [tldp.org](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-seq
 | `\]`            | end a sequence of non-printing characters
 
 
-## Bash Prompt
+## Bash Profile
 
-The normal usual colored bash prompt. Put in `.bashrc`:
+Basic `$HOME/.profile`
+
+```sh
+if [ -f "$HOME/.bashrc" ]; then
+        source "$HOME/.bashrc"
+fi
+```
+
+Basic `$HOME/.bashrc`
 
 ```sh
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+alias ls='ls -p --color'
+alias la='ls -al'
+alias ll='ls -l'
 ```
 
 ## Bash Quoting
