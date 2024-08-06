@@ -235,7 +235,7 @@ the chroot with `pacman -S lvm2`. The `resume` hook is needed for hibernation.
 
 ```conf
 ...
-HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block encrypt lvm2 filesystems resume fsck)
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt lvm2 filesystems resume fsck)
 ...
 ```
 
@@ -258,13 +258,11 @@ hostname
 - `/etc/locale.conf` (choose language)
 
 ```sh
-# german
-LANG=de_DE.UTF-8
-LANGUAGE=de_DE
-
 # english
 LANG=en_US.UTF-8
-LANGUAGE=en_US
+
+# or german
+LANG=de_DE.UTF-8
 ```
 
 - `/etc/vconsole.conf` (choose layout) TODO: not really needed.
@@ -272,10 +270,11 @@ LANGUAGE=en_US
 ```sh
 # Font on early boot
 FONT=lat9w-16
-# german layout
-KEYMAP=de-latin1-nodeadkeys
 # us layout
 KEYMAP=us
+
+# or german layout
+KEYMAP=de-latin1-nodeadkeys
 ```
 
 ### Set the Time Zone
@@ -383,12 +382,12 @@ editor 0
 
 ### Create boot entries
 
-- For the intel microcode install the `intel-ucode` package.
-- "cryptdevice=... root=..." are on the **options** line!
-  - `cryptdevice` gets the UUID of the LUKS partition
-  - `root` gets the UUID of the root partition in the LUKS container
-  - `resume` gets the UUID of the swap partition in the LUKS container
-- in vim: `:r ! blkid` pastes the output into vim
+* For the intel [microcode](https://wiki.archlinux.org/title/Microcode) install the `intel-ucode` package.
+* The `options` line:
+    * `cryptdevice`: set the UUID of the LUKS partition
+    * `root`: set the UUID of the root partition in the LUKS container
+    * `resume`: set the UUID of the swap partition in the LUKS container
+* In vim: `:r ! blkid` pastes the output into vim
 
 ```sh
 nvim /boot/loader/entries/arch.conf
@@ -397,7 +396,6 @@ nvim /boot/loader/entries/arch.conf
 ```conf
 title   Arch Linux
 linux   /vmlinuz-linux
-initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
 options cryptdevice=UUID=123adf-1234asdf123-1234d-234fdfa:arch
 options root=UUID=123-234
@@ -409,7 +407,6 @@ and create the fallback configuration `arch-fallback.conf`
 ```conf
 title   Arch Linux Fallback
 linux   /vmlinuz-linux
-initrd  /intel-ucode.img
 initrd  /initramfs-linux-fallback.img
 options cryptdevice=UUID=123adf-1234asdf123-1234d-234fdfa:arch
 options root=UUID=123-234
