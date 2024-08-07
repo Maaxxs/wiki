@@ -12,10 +12,9 @@
     - if true, continue
     - if false, continue but always return false
 
-## Automatically unlock default keyring with user password
+## Automatically Change Keyring Password with User Password
 
-The default keyring must have the same password as user login
-([Arch Linux wiki][auto-unlock]).
+See [Arch Linux wiki][auto-unlock].
 In `/etc/pam.d/passwd` append the following line:
 
 ```
