@@ -219,3 +219,9 @@ Also exlude the tree. It's rarely useful but good for CI.
 ```sh
 git clone --filter=tree:0 https://github.com/torvalds/linux.git
 ```
+
+## Reset the Author for the Last Three Commits
+
+```sh
+git rebase -i --exec 'git commit --amend --reset-author --no-edit' HEAD~3
+```
