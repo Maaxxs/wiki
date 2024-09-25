@@ -24,11 +24,18 @@ version shown below that.
 git config remote.origin.fetch '+refs/pull/*:refs/remotes/origin/pull/*'
 ```
 
-I use this additional fetch resource.
+I use this additional fetch resource (GitHub):
 
 ```gitconfig
 [remote "origin"]
     fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+```
+
+Gitlab:
+
+```gitconfig
+[remote "origin"]
+    fetch = +refs/merge-requests/*/head:refs/remotes/origin/pr/*
 ```
 
 Then to checkout pull request 42 I do `git checkout pr/42`.
