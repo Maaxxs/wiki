@@ -1,6 +1,6 @@
 ---
 title: "SSH"
-date: 
+date:
 tags: ["wiki"]
 ShowLastUpdated: false
 toc: true
@@ -30,7 +30,7 @@ Port 22
 PasswordAuthentication no
 PubkeyAuthentication yes
 ```
-## Disable Debian Banner 
+## Disable Debian Banner
 
 Example of returned banner
 
@@ -51,7 +51,7 @@ Result:
 OpenSSH 7.6p1 (protocol 2.0)
 ```
 
-## Key verification 
+## Key verification
 
 ## On your server
 
@@ -69,5 +69,9 @@ for key in /etc/ssh/ssh_host_*_key; do ssh-keygen -l -f $key; done
 
 - <https://docs.github.com/en/github/authenticating-to-github/githubs-ssh-key-fingerprints>
 
+## Show list of Host Key Fingerprints
 
+```sh
+ssh-keygen -l -f ~/.ssh/known_hosts
+```
 
