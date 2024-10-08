@@ -1,6 +1,6 @@
 ---
 title: "Neovim/Vim"
-date: 
+date:
 tags: ["wiki"]
 ShowLastUpdated: false
 toc: true
@@ -25,3 +25,8 @@ dotfiles](https://gitlab.com/Maaxxs/dotfiles/-/blob/master/.config/nvim/init.vim
 - zc: close a fold your cursor is on
 - zC: close a fold your cursor is on recursively
 
+# Search and Open Results in New Buffer
+
+```sh
+:vnew | 0r!grep TODO #
+```
