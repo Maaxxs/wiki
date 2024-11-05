@@ -40,6 +40,13 @@ Gitlab:
 
 Then to checkout pull request 42 I do `git checkout pr/42`.
 
+
+## Delete Remote Branch
+
+```sh
+git push <remote-ref> --delete <branch-name>
+```
+
 ## So You Think You Know Git
 
 Notes from the [talk by Scott Chacon][chacon-git] at FOSDEM24.
