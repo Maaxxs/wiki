@@ -34,5 +34,5 @@ Other resources
 * BPT compiler (bpfc) part of <http://netsniff-ng.org/>
 
 [ts]: http://outflux.net/teach-seccomp/
-[p1]: blog.viraptor.info/post/seccomp-sandboxes-and-memcached-example-part-1
-[p2]: blog.viraptor.info/post/seccomp-sandboxes-and-memcached-example-part-2
+[p1]: https://blog.viraptor.info/post/seccomp-sandboxes-and-memcached-example-part-1
+[p2]: https://blog.viraptor.info/post/seccomp-sandboxes-and-memcached-example-part-2

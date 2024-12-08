@@ -47,7 +47,7 @@ tail -f /some/log/file | grep --line-buffered thing1 | grep thing2
 tail -f /some/log/file |  awk '/thing1/ && /thing2/'
 ```
 
-Turn off libc's buffering via LD_PRELOAD and `stdbuf` ([how stdbuf works](How stdbuf works)):
+Turn off libc's buffering via LD_PRELOAD and `stdbuf` ([how stdbuf works](https://hmarr.com/blog/how-stdbuf-works/)):
 
 ```sh
 tail -f /some/log/file | stdbuf -o0 grep thing1 | grep thing2

@@ -1,18 +1,4 @@
----
-title: "Talks"
-date: 
-tags: ["wiki"]
-ShowLastUpdated: false
-toc: true
-draft: false
----
-
 # Talks
-
-## Content
-
-- [Python](#python)
-- [C](#c)
 
 ### Python
 
