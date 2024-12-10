@@ -1,11 +1,27 @@
 ---
 title: "Fedora"
-date: 
+date:
 tags: ["wiki"]
 ShowLastUpdated: false
 toc: true
 draft: false
 ---
+
+# DNF Things
+
+Show dependencies of package `vim`:
+
+```sh
+dnf repoquery --requires vim
+# same as alias  rq
+dnf rq --requires vim
+```
+
+Show files of package `vim`:
+
+```sh
+dnf rq -l vim
+```
 
 # Fedora
 
@@ -91,7 +107,7 @@ Import public key of microsoft
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 ```
 
-Add `vscode.repo` in `/etc/yum.repos.d/` 
+Add `vscode.repo` in `/etc/yum.repos.d/`
 ```sh
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 ```
@@ -105,7 +121,7 @@ sudo dnf install code
 ### Install nextcloud client and the nautilus integration
 
 ```sh
-sudo dnf install nextcloud-client nextcloud-client-nautilus 
+sudo dnf install nextcloud-client nextcloud-client-nautilus
 ```
 
 
