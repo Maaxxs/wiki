@@ -26,4 +26,9 @@ nft add rule ip accounting input tcp sport 22 tcp flags == syn\|ack counter
 nft list table ip accounting
 ```
 
+Record traffic on interface `eth0` from IP `IP_ADDR` without traffic to destination port 443 and write the pcap to `dump.pcap`.
 
+
+```sh
+sudo tcpdump -i eth0 tcp and src host IP_ADDR and not dst port 443 -w dump.pcap
+```
