@@ -12,6 +12,34 @@
     - if true, continue
     - if false, continue but always return false
 
+## Automatically Unlock Keyring when Logging in via Console
+
+When using a display manager such as GDM, LightDM, ... this is not necessary.
+They are already configured that way.
+
+If you login via console, add the necessary PAM lines in `/etc/pam.d/login`.
+
+> Add `auth optional pam_gnome_keyring.so` at the end of the auth section and
+> `session optional pam_gnome_keyring.so auto_start` at the end of the session
+> section.
+>
+> -- see the [Arch Linux wiki](https://wiki.archlinux.org/title/GNOME/Keyring#PAM_step)
+
+The file `/etc/pam.d/login` should look like this:
+
+```conf
+#%PAM-1.0
+
+auth       required     pam_securetty.so
+auth       requisite    pam_nologin.so
+auth       include      system-local-login
+auth       optional     pam_gnome_keyring.so    # <--- this
+account    include      system-local-login
+session    include      system-local-login
+session    optional     pam_gnome_keyring.so auto_start   # <--- this
+```
+
+
 ## Automatically Change Keyring Password with User Password
 
 See [Arch Linux wiki][auto-unlock].
