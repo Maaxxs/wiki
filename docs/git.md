@@ -40,6 +40,12 @@ Gitlab:
 
 Then to checkout pull request 42 I do `git checkout pr/42`.
 
+## Set Upstream Branch for Currently Checked Out Local Branch
+
+```sh
+git branch -u upstream/foo
+```
+
 
 ## Delete Remote Branch
 
