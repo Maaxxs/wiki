@@ -1,13 +1,4 @@
----
-title: "Printing"
-date:
-tags: ["wiki"]
-ShowLastUpdated: false
-toc: true
-draft: false
----
-
-# Print double-sided pages
+## Print double-sided pages
 
 How to print double-sided pages with a printer which doesn't explictely support
 that mode.
@@ -19,7 +10,7 @@ that mode.
 3. Print all *odd* pages.
 
 
-# Setup on Arch Linux
+## Setup on Arch Linux
 
 I use `systemd-resolved` to resolve DNS queries. I disabled `mDNS`
 support to prevent conflicts with Avahi. You can do so by setting
@@ -59,5 +50,18 @@ Start the GUI, click Add. The networked printer should show up.
 Check the official documentation for
 [cups](https://wiki.archlinux.org/title/CUPS) and [hostname resolution
 with Avahi](https://wiki.archlinux.org/title/Avahi#Hostname_resolution).
+
+## HP
+
+Avoid this company.
+If you
+[release security updates](https://support.hp.com/us-en/document/ish_11892982-11893015-16/hpsbpi03995)
+on 29. January 2025 for CVE's dated from 2017 to 2023,
+that's more than enough proof that you don't care about your customers.
+
+* CVE-2017-12652 -- 9.8 Critical -- libpng -- Arbitrary Code Execution
+* CVE-2022-2068 -- 9.8 Critical -- OpenSSL -- Arbitrary Code Execution
+* CVE-2023-45853 -- 9.8 Critical -- zlib -- Information Disclosure
+* CVE-2020-14152 -- 7.1 High -- libjpeg -- Denial of Service
 
 
