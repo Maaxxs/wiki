@@ -44,6 +44,15 @@ or the manpage `man test` for more information.
 | string1 > string2 | True if string1 sorts after string2 lexicographically.
 | arg1 OP arg2 | OP is one of ‘-eq’, ‘-ne’, ‘-lt’, ‘-le’, ‘-gt’, or ‘-ge’. These arithmetic binary operators return true if arg1 is equal to, not equal to, less than, less than or equal to, greater than, or greater than or equal to arg2, respectively. Arg1 and arg2 may be positive or negative integers. When used with the [[ command, Arg1 and Arg2 are evaluated as arithmetic expressions (see Shell Arithmetic).
 
+## Bash Creating Subshells
+
+* [Process substitution](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Process-Substitution): `<(command)`.
+  Using this we can pass the output of a command to another command that takes a file as input.
+  The output of the first command gets a temporary file descriptor assigned.
+* Command substitution: `$(command)` (or the older version: `command`)
+* Pipelines: `echo '5+5 | bc -l)`
+* Command grouping: `declare a=5; echo $a`
+* Running a command in the background: `sleep 3 &`
 
 ## Bash Prompt Escape Sequences
 
