@@ -54,6 +54,44 @@ or the manpage `man test` for more information.
 * Command grouping: `declare a=5; echo $a`
 * Running a command in the background: `sleep 3 &`
 
+## Other Bash Gems
+
+Redirect stdout and stderr in append mode to `output.log`.
+The `ip` command writes its usage and help to stderr.
+
+```sh
+(ip; ip) &>> output.log
+```
+
+Similarly, pipe stdout and stderr to another command.
+
+```sh
+ip |& grep Usage
+```
+
+Substring extraction
+
+```sh
+# ${parameter:offset:length}
+string="hello world"
+echo ${string:6:5}
+# Output: world
+```
+
+Regex Matching.
+
+```sh
+if [[ "hello" =~ ^h ]]; then echo "Matched!"; fi
+# Output: Matched!
+```
+
+Process substitution (as mentioned earlier).
+
+```sh
+# <() creates a temporary file descriptor
+diff <(sort file1) <(sort file2)
+```
+
 ## Bash Prompt Escape Sequences
 
 Check [tldp.org](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-sequences.html).
