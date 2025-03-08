@@ -19,4 +19,13 @@ It saves a copy of the video in the same directory as the original file.
 
 For other options, see the [usage](https://github.com/familyfriendlymikey/mpv-cut#usage).
 
+## Play DVDs
+
+To play DVDs with encrypted content, install `libdvdcss` (Arch Linux).
+
+Then insert the DVD and run the next command and it should just work.
+
+```sh
+mpv dvd://
+```
 
