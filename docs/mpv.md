@@ -29,3 +29,16 @@ Then insert the DVD and run the next command and it should just work.
 mpv dvd://
 ```
 
+## Use Hardware Video Decoding
+
+Relevant part in the [man page](https://man.archlinux.org/man/mpv.1#hwdec=_api1,api2,..._no_auto_auto)
+
+`~/.config/mpv/mpv.conf`
+
+```conf
+hwdec=auto-safe
+```
+
+When hardware decoding is used, it shows up when loading the video file.
+You can test while playing a video by pressing `CTRL-h` to toggle between the mode `auto-safe` and `no`.
+
