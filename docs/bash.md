@@ -149,3 +149,20 @@ alias ll='ls -l'
 
 See [quoting
 manual](https://www.gnu.org/software/bash/manual/html_node/Quoting.html)
+
+# Escape Codes
+
+> For example you can run this bash snippet to see every possible escape code
+> for “clear screen” for all of the different terminals your system knows
+> about:
+
+via Julia Evans [Standards for ANSI escape codes](Standards for ANSI escape codes).
+
+```sh
+for term in $(toe -a | awk '{print $1}')
+do
+  echo $term
+  infocmp -1 -T "$term" 2>/dev/null | grep 'clear=' | sed 's/clear=//g;s/,//g'
+done
+```
+
