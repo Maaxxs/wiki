@@ -20,3 +20,10 @@ gsettings set org.gnome.desktop.interface icon-theme Arc
 gsettings set org.gnome.desktop.interface gtk-theme Arc-Dark-solid
 ```
 
+## Thunar FileChooser Dialog
+
+When opening the file chooser dialog (e.g. save a file), then sort directories first:
+
+```sh
+gsettings set org.gtk.Settings.FileChooser sort-directories-first true
+```
