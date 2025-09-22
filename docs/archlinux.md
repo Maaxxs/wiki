@@ -1013,6 +1013,12 @@ Show all Orphans
 pacman -Qtdq
 ```
 
+List changed backup files
+
+```sh
+pacman -Qii | awk '/\[modified\]/ {print $(NF - 1)}'
+```
+
 ### Telegram
 
 Start Telegram minimized in Tray
