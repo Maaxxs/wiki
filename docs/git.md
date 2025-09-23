@@ -245,3 +245,9 @@ git clone --filter=tree:0 https://github.com/torvalds/linux.git
 ```sh
 git rebase -i --exec 'git commit --amend --reset-author --no-edit' HEAD~3
 ```
+
+## Find rule from gitignore that matches
+
+```sh
+git check-ignore -v path/to/file
+```
