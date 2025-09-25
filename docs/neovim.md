@@ -1,18 +1,4 @@
----
-title: "Neovim/Vim"
-date:
-tags: ["wiki"]
-ShowLastUpdated: false
-toc: true
-draft: false
----
-
-# Neovim
-
-In general, see [my
-dotfiles](https://gitlab.com/Maaxxs/dotfiles/-/blob/master/.config/nvim/init.vim).
-
-### Vim Markdown
+# NeoVim
 
 [Vim Markdown Github](https://github.com/plasticboy/vim-markdown)
 
@@ -29,4 +15,10 @@ dotfiles](https://gitlab.com/Maaxxs/dotfiles/-/blob/master/.config/nvim/init.vim
 
 ```sh
 :vnew | 0r!grep TODO #
+```
+
+
+# Show lua table:
+```sh
+:lua print(vim.inspect(vim.lsp.config['ltex']))
 ```
