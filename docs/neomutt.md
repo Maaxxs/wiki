@@ -26,3 +26,29 @@ Match on email flags:
 
 To reset the limit filter, use the filter text `all`.
 
+
+## Automaically add nested mailboxes
+
+In neomuttrc file:
+
+```conf
+        mailboxes \
+            +Inbox \
+            +Drafts \
+            +Outbox \
+            +Sent \
+            `find {{ mail_data_dir }} \
+                -type d \
+                -name cur \
+                -not \( \
+                    -path "*/Inbox/*" -o \
+                    -path "*/Drafts/*" -o \
+                    -path "*/Sent/*" -o \
+                    -path "*/Spam/*" -o \
+                    -path "*/Trash/*" \
+                \) \
+                -printf "'%h' " \
+              | sort -t/` \
+            +Spam \
+            +Trash
+```
