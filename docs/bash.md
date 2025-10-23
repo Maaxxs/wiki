@@ -166,3 +166,12 @@ do
 done
 ```
 
+## Sustitutions
+
+If the variable `DIR` is not defined (null or not set), then the script errors out.
+
+```sh
+echo "DIR is ${DIR:?}"
+```
+
+
