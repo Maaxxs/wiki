@@ -124,6 +124,18 @@ Check [tldp.org](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-seq
 | `\[`            | begin a sequence of non-printing characters, which could be used to embed a terminal control sequence into the prompt
 | `\]`            | end a sequence of non-printing characters
 
+### Prompt Examples
+
+```sh
+if test -v SSH_CONNECTION
+then
+    REMOTE="\[\e[31m\][SSH:\u@\h]\[\e[0m\] "
+fi
+
+#export PS1="${REMOTE:-}[\D{%H:%M}] \[\e[34m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\] \e[0;33m\w\[\e[0m\] \$ "
+export PS1="${REMOTE:-}[\D{%H:%M}] \[\e[0;33m\]\w\[\e[0m\]\n\$ "
+```
+
 
 ## Bash Profile
 
@@ -173,5 +185,6 @@ If the variable `DIR` is not defined (null or not set), then the script errors o
 ```sh
 echo "DIR is ${DIR:?}"
 ```
+
 
 
