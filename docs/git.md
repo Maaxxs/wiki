@@ -251,3 +251,14 @@ git rebase -i --exec 'git commit --amend --reset-author --no-edit' HEAD~3
 ```sh
 git check-ignore -v path/to/file
 ```
+
+## Git Credentials Helper with pass
+
+In the `.git/config` file your local tracked directory, you can set this specific entry that gets the password from `pass`.
+Set the username to whatever the remote expects.
+
+```conf
+[credential]
+  username = git
+  helper = "!f() { test \"$1\" = get && echo \"password=$(pass path/to/password)\"; }; f"
+```
