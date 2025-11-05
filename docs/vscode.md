@@ -1,13 +1,12 @@
----
-title: "Visual Studio Code"
-date: 
-tags: ["wiki"]
-ShowLastUpdated: false
-toc: true
-draft: false
----
-
 # Visual Studio Code
+
+## Show logs
+
+Show logs, e.g. if code has trouble recognizing the credential store such as gnome-libsecret.
+
+```sh
+code --verbose --vmodule="*/components/os_crypt/*=1"
+```
 
 ## Extensions
 
@@ -56,7 +55,7 @@ draft: false
     },
     "editor.rulers": [
         80,
-        100,
-    ],
+        100
+    ]
 }
 ```
