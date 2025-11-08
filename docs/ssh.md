@@ -1,13 +1,23 @@
----
-title: "SSH"
-date:
-tags: ["wiki"]
-ShowLastUpdated: false
-toc: true
-draft: false
----
-
 # SSH
+
+## Add port forwarding in a running SSH session
+
+In the SSH client config `~/.ssh/config/` enable this mode.
+
+```conf
+EnableEscapeCommandline yes
+```
+
+Connect to the server, then type
+
+```sh
+# Open command line (C) in SSH via control character (default is tilde)
+~C
+# This opens the  ssh>  prompt. You can now enter forwarding commands.
+ssh> -L 8080:127.0.0.1:80
+```
+
+Show the help of this mode with `~?`.
 
 ## Initial configuration
 
