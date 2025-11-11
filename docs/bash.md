@@ -92,6 +92,9 @@ Process substitution (as mentioned earlier).
 diff <(sort file1) <(sort file2)
 ```
 
+[This Stack Overflow post](https://unix.stackexchange.com/questions/159513/what-are-the-shells-control-and-redirection-operators/159514#159514)
+also lists some common operators.
+
 ## Bash Prompt Escape Sequences
 
 Check [tldp.org](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/bash-prompt-escape-sequences.html).
