@@ -16,7 +16,9 @@ systemctl mask systemd-rfkill.socket
 
 2026.03.07: I don't have the systemd service running at the moment, though.
 
-`tlp.conf`
+For the Framework laptop, definitely take a look at the [`framework_tool`](https://github.com/FrameworkComputer/framework-system).
+
+`/etc/tlp.conf`
 
 ```sh
 # No pop noise on AC.
