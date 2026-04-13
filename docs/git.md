@@ -262,3 +262,9 @@ Set the username to whatever the remote expects.
   username = git
   helper = "!f() { test \"$1\" = get && echo \"password=$(pass path/to/password)\"; }; f"
 ```
+
+## Show Code That Changes Most
+
+```sh
+git log --format=format: --name-only --since="1 year ago" | sort | uniq -c | sort -nr | head -20
+```
