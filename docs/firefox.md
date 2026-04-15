@@ -37,3 +37,10 @@ video)
 Enable hardware decoding for WebRTC
 
     media.navigator.mediadatadecoder_vpx_enabled to true
+
+## Pdf Viewer Default Zoom
+
+Set default zoom to page fit.
+Go to `about:config`, search for `pdfjs.defaultZoomValue`.
+Set it to either `auto, page-actual, page-fit, page-width`.
+
