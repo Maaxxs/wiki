@@ -44,3 +44,10 @@ Set default zoom to page fit.
 Go to `about:config`, search for `pdfjs.defaultZoomValue`.
 Set it to either `auto, page-actual, page-fit, page-width`.
 
+## Adjust Scrollbar size
+
+In about:config, set
+
+```
+widget.non-native-theme.scrollbar.size.override = 20
+```
