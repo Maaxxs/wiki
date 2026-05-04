@@ -246,6 +246,12 @@ git clone --filter=tree:0 https://github.com/torvalds/linux.git
 git rebase -i --exec 'git commit --amend --reset-author --no-edit' HEAD~3
 ```
 
+If you want to include the very first commit (root):
+
+```sh
+git rebase -i --root --exec 'git commit --amend --no-edit --reset-author'
+```
+
 ## Find rule from gitignore that matches
 
 ```sh
