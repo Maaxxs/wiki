@@ -51,3 +51,11 @@ In about:config, set
 ```
 widget.non-native-theme.scrollbar.size.override = 20
 ```
+
+## Disable "Search this time with" dropdown thing in search bar
+
+Go to `about:config` and set this to False:
+
+```
+browser.urlbar.scotchBonnet.enableOverride
+```
