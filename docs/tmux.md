@@ -81,3 +81,10 @@ bind-key -N 'reload configuration'	-- R	{
 new-window -d -S -n hackint	-- catgirl	-- defaults hackint
 new-window -d -S -n efnet	-- catgirl	-- defaults efnet
 ```
+
+## Move Pane to Current Window
+
+1. Mark the pane: `$prefix+m`
+2. Go to the window where you want to move it.
+3. call `:join-pane`
+
